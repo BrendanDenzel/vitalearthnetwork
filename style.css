@@ -1,0 +1,9 @@
+.social-icons {
+  display: flex;
+  gap: 30px; /* make icons closer or farther */
+}
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+}
