@@ -324,18 +324,10 @@ body {
   background-color: transparent;
   padding-block: 18px;
   z-index: 4;
+  background-color: hsla(0, 0%, 8%, 0.5); /* same color, 85% opacity */
+  box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.8);
 }
 
-.header::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: calc(100% - 140px);
-  height: 1px;
-  background-color: var(--white_10);
-}
 
 .header.active {
   background-color: var(--eerie-black-1);
