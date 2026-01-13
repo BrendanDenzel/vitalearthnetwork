@@ -14,9 +14,54 @@
   #CUSTOM PROPERTY
 \*-----------------------------------*/
 
+#charities {
+  scroll-margin-top: 400px; /* height of your fixed header */
+}
+
 .undetermined {
   filter: blur(5px);
   opacity: 0.7;
+}
+
+.unseen {
+  filter: blur(1px);
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+.defunseen {
+  filter: blur(10px);
+  opacity: 1;
+  cursor: not-allowed;
+}
+
+.btn-undetermined {
+  background-color: var(--black); /* same as btn-secondary */
+  color: var(--white);
+  font-weight: var(--fw-600);
+  padding: 12px 32px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  cursor: not-allowed; /* looks inactive */
+  transition: none; /* disable background/text transition */
+}
+
+.btn-undetermined::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--black); /* same as background */
+  transform: translate(5px, 5px); /* keep that offset like the original */
+  transition: none; /* disable hover/focus animation */
+}
+
+/* Make sure hover/focus do nothing */
+.btn-undetermined:hover,
+.btn-undetermined:focus {
+  background-color: var(--black);
+  color: var(--white);
 }
 
 
@@ -687,11 +732,18 @@ body {
   margin-block: 10px 20px;
 }
 
-.progress {
-  height: 6px;
-  width: 83%;
-  background-color: var(--pistachio);
-  border-radius: inherit;
+.progress1 { 
+  height: 6px; 
+  width: 0%; 
+  background-color: var(--pistachio); 
+  border-radius: inherit; 
+}
+
+.progress2 { 
+  height: 6px; 
+  width: 0%; 
+  background-color: var(--pistachio); 
+  border-radius: inherit; 
 }
 
 .progress-value {
@@ -797,7 +849,7 @@ body {
   #EVENT
 \*-----------------------------------*/
 
-.event { padding-block-end: 120px; }
+.event { padding-block-end: 50px; }
 
 .event .section-subtitle { justify-content: center; }
 

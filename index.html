@@ -335,12 +335,16 @@
           <div class="cta-content">
             <h2 class="h2 section-title">2 Trusted Global Charities</h2>
 
-            <button class="btn btn-outline">
-              <span>See List of Charities</span>
-
-              <ion-icon name="card-outline" aria-hidden="true"></ion-icon>
-            </button>
+            <a href="#charities" 
+   class="btn btn-outline" 
+   style="display: inline-flex; align-items: center; width: auto; padding: 1.2rem 3.2rem;">
+  <span>See List of Charities</span>
+  <ion-icon name="card-outline" aria-hidden="true"></ion-icon>
+</a>
           </div>
+
+
+
 
           <figure class="cta-banner">
             <img src="./assets/images/cta-banner.jpg" width="520" height="228" loading="lazy" alt="Fox"
@@ -492,19 +496,19 @@
                 </figure>
 
                 <div class="card-content">
-
+                    <span style="color: rgb(46, 46, 46); font-size: 25px; font-weight: bold;">Current Project</span>
                   <div class="progress-wrapper">
                     <p class="progress-text">
                       <span>Raised</span>
 
-                      <data value="256">$256</data>
+                      <data value="0">$0</data>
                     </p>
 
-                    <data class="progress-value" value="83">83%</data>
+                    <data class="progress-value" value="0">0%</data>
                   </div>
 
                   <div class="progress-box">
-                    <div class="progress"></div>
+                    <div class="progress1"></div>
                   </div>
 
                   <h3 class="h3 card-title">Saving & Protecting Wildlife</h3>
@@ -514,19 +518,19 @@
                     <p class="card-wrapper-text">
                       <span>Goal</span>
 
-                      <data class="green" value="34562">$34562</data>
+                      <data class="green" value="1000">$1000</data>
                     </p>
 
                     <p class="card-wrapper-text">
-                      <span>Raise</span>
+                      <span>Raised</span>
 
-                      <data class="yellow" value="562">$562</data>
+                      <data class="yellow" value="0">$0</data>
                     </p>
 
                     <p class="card-wrapper-text">
                       <span>To Go</span>
 
-                      <data class="cyan" value="864">$864</data>
+                      <data class="cyan" value="1000">$1000</data>
                     </p>
 
                   </div>
@@ -546,24 +550,22 @@
               <div class="donate-card">
 
                 <figure class="card-banner">
-                  <img src="./assets/images/donate-2.jpg" width="520" height="325" loading="lazy" alt="Elephant"
+                  <img src="./assets/images/soon.png" width="520" height="325" loading="lazy" alt="Elephant"
                     class="img-cover">
                 </figure>
 
-                <div class="card-content">
+                <div class="card-content unseen">
 
                   <div class="progress-wrapper">
                     <p class="progress-text">
-                      <span>Raised</span>
-
-                      <data value="256">$256</data>
+                      <span>NEXT PROJECT</span>
                     </p>
 
-                    <data class="progress-value" value="83">83%</data>
+                    
                   </div>
 
                   <div class="progress-box">
-                    <div class="progress"></div>
+                    <div class="progress2"></div> <!-- 100% bar -->
                   </div>
 
                   <h3 class="h3 card-title undetermined">Undetermined</h3>
@@ -573,28 +575,26 @@
                     <p class="card-wrapper-text">
                       <span>Goal</span>
 
-                      <data class="green" value="34562">$34562</data>
+                      <data class="green undetermined" value="34562">$34562</data>
                     </p>
 
                     <p class="card-wrapper-text">
-                      <span>Raise</span>
+                      <span>Raised</span>
 
-                      <data class="yellow" value="562">$562</data>
+                      <data class="yellow undetermined" value="562">$562</data>
                     </p>
 
                     <p class="card-wrapper-text">
                       <span>To Go</span>
 
-                      <data class="cyan" value="864">$864</data>
+                      <data class="cyan undetermined" value="864">$864</data>
                     </p>
 
                   </div>
 
-                  <button class="btn btn-secondary">
-                    <span>Donate</span>
-
-                    <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
-                  </button>
+                  <button class="btn-undetermined">
+  <span>To Be Determined</span>
+</button>
 
                 </div>
 
@@ -617,7 +617,7 @@
       <!-- 
         - #TESTIMONIALS
       -->
-
+<!--
       <section class="testi">
 
         <div class="testi-content">
@@ -660,7 +660,7 @@
         </figure>
 
       </section>
-
+-->
 
 
 
@@ -669,47 +669,32 @@
         - #PARTNER
       -->
 
-      <section class="section partner">
+      <section class="section partner" id="charities">
         <div class="container">
 
-          <a href="#" class="partner-logo">
-            <img src="./assets/images/partner-1.png" width="157" height="55" loading="lazy" alt="Children Fund"
+          <a href="https://www.worldwildlife.org/" target="_blank" rel="noopener noreferrer" class="partner-logo">
+            <img src="./assets/images/partner-6.png" width="257" height="155" loading="lazy" alt="Children Fund"
               class="gray">
 
-            <img src="./assets/images/partner-1-active.png" width="157" height="55" loading="lazy" alt="Children Fund"
+            <img src="./assets/images/partner-6-active.png" width="257" height="155" loading="lazy" alt="Children Fund"
               class="color">
           </a>
 
-          <a href="#" class="partner-logo">
-            <img src="./assets/images/partner-2.png" width="163" height="55" loading="lazy" alt="Non Profit Agency"
-              class="gray">
+         <h3 style="
+  font-size: 2rem;
+  color: #2c2c2c;
+  font-weight: 300;
+  font-family: 'Oswald', sans-serif;
+  letter-spacing: 3px;
+   text-align: center;
+   margin-top: -3rem;
 
-            <img src="./assets/images/partner-2-active.png" width="163" height="55" loading="lazy"
-              alt="Non Profit Agency" class="color">
-          </a>
+  
+">
+  The World Wildlife Fund (WWF) is dedicated to conserving nature and reducing the most pressing threats to the diversity of life on Earth.
+</h3>
 
-          <a href="#" class="partner-logo">
-            <img src="./assets/images/partner-3.png" width="149" height="55" loading="lazy" alt="Rise Hand Help Us"
-              class="gray">
 
-            <img src="./assets/images/partner-3-active.png" width="149" height="55" loading="lazy"
-              alt="Rise Hand Help Us" class="color">
-          </a>
-
-          <a href="#" class="partner-logo">
-            <img src="./assets/images/partner-4.png" width="169" height="58" loading="lazy" alt="Helping" class="gray">
-
-            <img src="./assets/images/partner-4-active.png" width="169" height="58" loading="lazy" alt="Helping"
-              class="color">
-          </a>
-
-          <a href="#" class="partner-logo">
-            <img src="./assets/images/partner-5.png" width="211" height="55" loading="lazy" alt="Poor Fund Organization"
-              class="gray">
-
-            <img src="./assets/images/partner-5-active.png" width="211" height="55" loading="lazy"
-              alt="Poor Fund Organization" class="color">
-          </a>
 
         </div>
       </section>
@@ -728,13 +713,13 @@
           <p class="section-subtitle">
             <img src="./assets/images/subtitle-img-green.png" width="32" height="7" alt="Wavy line">
 
-            <span>Event & Program</span>
+            <span>Group Events</span>
 
             <img src="./assets/images/subtitle-img-green.png" width="32" height="7" alt="Wavy line">
           </p>
 
           <h2 class="h2 section-title">
-            Our Most Popular Causes For <strong>Building Fund</strong>
+            Events To Spread <strong>Awareness</strong>
           </h2>
 
           <ul class="event-list">
@@ -743,84 +728,22 @@
               <div class="event-card">
 
                 <time class="card-time" datetime="01-05">
-                  <span class="month">Jan</span>
+                  <div style="text-align: center;">
+                      <span class="month">Jan</span>
+                    </div>
 
-                  <span class="date">05</span>
+                  <span class="date">TBD</span>
                 </time>
 
                 <div class="wrapper">
 
                   <div class="card-content">
-                    <p class="card-subtitle">Ocean Water</p>
+                    <p class="card-subtitle">Shoveling</p>
 
-                    <h3 class="card-title">Far from the countries Vokalia and Consonantia 2022</h3>
-
-                    <p class="card-text">
-                      Sit amet consectetur adipiscing elit sed do eiusmod tempor
-                    </p>
-                  </div>
-
-                  <button class="btn btn-white">
-                    <span>View Events</span>
-
-                    <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
-                  </button>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="event-card">
-
-                <time class="card-time" datetime="02-23">
-                  <span class="month">Feb</span>
-
-                  <span class="date">23</span>
-                </time>
-
-                <div class="wrapper">
-
-                  <div class="card-content">
-                    <p class="card-subtitle">Ocean Water</p>
-
-                    <h3 class="card-title">Far from the countries Vokalia and Consonantia 2022</h3>
+                    <h3 class="card-title">Help spread awareness by shoveling others' driveways!</h3>
 
                     <p class="card-text">
-                      Sit amet consectetur adipiscing elit sed do eiusmod tempor
-                    </p>
-                  </div>
-
-                  <button class="btn btn-white">
-                    <span>View Events</span>
-
-                    <ion-icon name="arrow-forward" aria-hidden="true"></ion-icon>
-                  </button>
-
-                </div>
-
-              </div>
-            </li>
-
-            <li>
-              <div class="event-card">
-
-                <time class="card-time" datetime="03-27">
-                  <span class="month">Mar</span>
-
-                  <span class="date">27</span>
-                </time>
-
-                <div class="wrapper">
-
-                  <div class="card-content">
-                    <p class="card-subtitle">Ocean Water</p>
-
-                    <h3 class="card-title">Far from the countries Vokalia and Consonantia 2022</h3>
-
-                    <p class="card-text">
-                      Sit amet consectetur adipiscing elit sed do eiusmod tempor
+                      We will go out in large groups shoveling driveways for people in the community spreading awareness of our initiative.
                     </p>
                   </div>
 
@@ -836,12 +759,6 @@
             </li>
 
           </ul>
-
-          <button class="btn btn-secondary">
-            <span>Learn More Us</span>
-
-            <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
-          </button>
 
         </div>
       </section>
