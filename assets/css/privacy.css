@@ -1,0 +1,69 @@
+/* PRIVACY POLICY PAGE */
+
+
+
+
+.privacy-policy-section {
+  background-color: #fdfcf8;
+  padding: 120px 0px;
+}
+
+.privacy-container {
+  max-width: 860px;
+  margin: 0 300px;
+  
+}
+
+.legal-notice {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #0F0F0F;
+  margin-bottom: 42px;
+  margin-top: 30px;
+}
+
+.name {
+  font-size: 18px;
+  font-family: 'Inter', sans-serif;
+  color: #050505;
+  margin-bottom: 20px;
+  margin-top: 30px;
+  font-weight: 625;
+}
+
+.privacy-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 65px;
+  transform: scaleY(1.25);
+  transform-origin: left;
+  line-height:75px;
+  padding-left: 0;
+  font-weight: 750;
+  letter-spacing: -4px;
+  color: #0F0F0F;
+}
+
+.privacy-updated {
+  margin-top: 18px;
+  font-weight: 400;
+  font-size: 18px;
+  color: #6d6c6c;
+  margin-bottom: 60px;
+  font-style: italic;
+}
+
+.privacy-content p {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: #333;
+  margin-bottom: 24px;
+}
+
+.privacy-content h2 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.6rem;
+  margin-top: 60px;
+  margin-bottom: 16px;
+  color: #111;
+}

@@ -14,6 +14,7 @@
   #CUSTOM PROPERTY
 \*-----------------------------------*/
 
+
 #charities {
   scroll-margin-top: 400px; /* height of your fixed header */
 }
@@ -306,6 +307,17 @@ body {
   object-fit: cover;
 }
 
+
+
+.privacy-page .header {
+  background-color: var(--eerie-black-1);
+  box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.8);
+}
+
+.privacy-page .header.active{
+  background-color: var(--eerie-black-1);
+  box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.8);
+}
 
 
 
@@ -1412,19 +1424,6 @@ body {
   .navbar-link > ion-icon { display: none; }
 
   .header { padding-block: 25px; }
-
-  .lang-switch {
-    position: relative;
-    display: block;
-    background-color: transparent;
-    border: none;
-    color: var(--white);
-    font: inherit;
-    font-size: var(--fs-8);
-    font-weight: var(--fw-600);
-  }
-
-  .lang-switch option { color: var(--eerie-black-1); }
 
   .navbar {
     all: unset;
