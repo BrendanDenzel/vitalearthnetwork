@@ -310,13 +310,13 @@ body {
 
 
 .privacy-page .header {
-  background-color: var(--eerie-black-1);
-  box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.8);
+  background-color: var(--eerie-black-1) !important;
+  box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.8) !important;
 }
 
 .privacy-page .header.active{
-  background-color: var(--eerie-black-1);
-  box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.8);
+  background-color: var(--eerie-black-1) !important;
+  box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.8) !important;
 }
 
 
