@@ -9,8 +9,8 @@
 }
 
 .site-footer {
-  background: #104635;
-  color: #e8f1ef;
+  background: #2b2b2b;
+  color: hsl(167, 24%, 100%);
   padding: 4rem 2rem 0;
   position: relative;
   padding-bottom: 1rem;
@@ -33,7 +33,7 @@
 .footer-brand p {
   max-width: 420px;
   line-height: 1.6;
-  opacity: 0.9;
+  opacity: 1;
 }
 
 .footer-socials {
@@ -45,7 +45,7 @@
 .footer-socials a {
   font-size: 2.25rem;
   color: #ffffff;
-  opacity: 0.85;
+  opacity: .99;
   transition: 0.2s;
 }
 
@@ -57,8 +57,8 @@
 .back-to-top {
   background: transparent;
   margin-top: 4rem;
-  border: 1px solid #e8f1ef;
-  color: #e8f1ef;
+  border: 1px solid #ffffff;
+  color: #ffffff;
   padding: 0.6rem 1.2rem;
   text-transform: uppercase;
   font-size: 1.25rem;
@@ -73,8 +73,8 @@
 
 .footer-links a {
   display: block;
-  color: #e8f1ef;
-  opacity: 0.9;
+  color: #ffffff;
+  opacity: 1;
   margin-bottom: 0.6rem;
   text-decoration: none;
 }
@@ -86,7 +86,7 @@
 
 .footer-bottom {
   margin-top: 3rem;
-  background: #0c3226;
+  background: #2b2b2b;
   color: #ffffff;
   text-align: center;
   padding: 0.8rem;
