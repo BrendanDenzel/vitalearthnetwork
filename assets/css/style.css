@@ -726,7 +726,7 @@ body {
 
 .progress1 { 
   height: 6px; 
-  width: 0%; 
+  width: 7%; 
   background-color: var(--pistachio); 
   border-radius: inherit; 
 }
