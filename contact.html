@@ -138,18 +138,32 @@
     <h2>Contact Us</h2>
     <p>Have a question or want to get involved? Send us a message.</p>
 
-    <form id="contactForm">
-  <input type="text" name="name" placeholder="Yffour Name" required>
-  <input type="email" name="email" placeholder="gggYour Email" required>
-  <textarea name="message" placeholder="Your Message" required></textarea>
-  <button type="submit">Send</button>
-</form>
+    <form action="https://formsubmit.co/vitalearthnetwork@gmail.com" method="POST" class="contact-form">
 
-<p id="formStatus"></p>
+      <!-- Disable captcha -->
+      <input type="hidden" name="_captcha" value="false">
 
+      <!-- Email subject -->
+      <input type="hidden" name="_subject" value="New message from Vital Earth Network">
+
+      <!-- Prevent redirect -->
+      <input type="hidden" name="_next" value="thank-you.html">
+
+      <input type="text" name="name" placeholder="Your Name" required>
+
+      <input type="email" name="email" placeholder="Your Email" required>
+
+      <textarea name="message" placeholder="Your Message" rows="6" required></textarea>
+
+      <button type="submit" class="btn btn-primary">
+        Send Message
+      </button>
+
+    </form>
 
   </div>
 </section>
+
 
 
   <div class="footer-separator"></div>
