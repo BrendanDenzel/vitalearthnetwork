@@ -1,0 +1,91 @@
+/* ===== Reset some defaults ===== */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #f5f7f9;
+  color: #104635; /* Matches your site's green theme */
+}
+
+h1, p {
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== Main thank-you container ===== */
+/* ===== Main thank-you container ===== */
+#thanks, #details {
+  text-align: center;
+}
+
+/* Push everything down a bit more */
+#thanks {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-top: 15rem;  /* increased from 10rem to 15rem */
+  margin-bottom: 1.5rem; /* slightly more space below heading */
+  color: #104635;
+}
+
+#details {
+  max-width: 600px;
+  margin: 0 auto 4rem auto; /* increase bottom margin a bit */
+  background-color: #ffffff;
+  padding: 2.5rem; /* a little more padding inside the box */
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #333;
+  word-wrap: break-word;
+}
+
+
+/* ===== Optional: highlight the email ===== */
+#details strong {
+  color: #104635;
+}
+
+/* ===== Add subtle animation on load ===== */
+#thanks {
+  animation: fadeIn 0.8s ease-out;
+}
+
+#details {
+  animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0; transform: translateY(-10px);}
+  100% {opacity: 1; transform: translateY(0);}
+}
+
+/* ===== Responsive design ===== */
+@media (max-width: 768px) {
+  #details {
+    margin: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  #thanks {
+    font-size: 2rem;
+  }
+}
+
+/* ===== Optional button to return home ===== */
+.return-home {
+  display: inline-block;
+  background-color: #104635;
+  color: #fff;
+  padding: 0.8rem 2rem;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.return-home:hover {
+  background-color: #0c3927;
+  transform: translateY(-2px);
+}
