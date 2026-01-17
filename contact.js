@@ -4,22 +4,22 @@ const status = document.getElementById("formStatus");
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  fetch("https://script.google.com/macros/s/AKfycbyTJ0cTh1FJLs-7H1NKZpmGlJJ03bkcd40ItFMObHfzgKH3II9KoGB1RnxEgzSUCis/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbwWvbUuRGHufhpOgD5Lm59kuaBduSp7YG07XTPB2fFWm0Y08rWTCEQfafnI3Xw1reA/exec", {
     method: "POST",
     body: new FormData(form)
   })
-  .then(response => response.json())
+  .then(res => res.json())
   .then(data => {
     if (data.success) {
       status.textContent = "Message sent successfully!";
       form.reset();
     } else {
-      status.textContent = "Something went wrong.";
+      status.textContent = "Server error.";
     }
   })
-  .catch(error => {
-    console.error(error);
-    status.textContent = "Error sending message.";
+  .catch(err => {
+    console.error(err);
+    status.textContent = "Failed to send message.";
   });
 });
 
