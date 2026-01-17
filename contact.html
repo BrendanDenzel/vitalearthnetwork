@@ -8,8 +8,6 @@
   <title>Vital Earth Network</title>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="./assets/css/contact.css">
-<script src="script.js" defer></script>
-<script src="contact.js" defer></script>
 
   <!-- 
     - favicon
@@ -138,28 +136,26 @@
     <h2>Contact Us</h2>
     <p>Have a question or want to get involved? Send us a message.</p>
 
-    <form action="https://formsubmit.co/vitalearthnetwork@gmail.com" method="POST" class="contact-form">
+    <form
+  action="https://formsubmit.co/vitalearthnetwork@gmail.com"
+  method="POST"
+  class="contact-form"
+>
 
-      <!-- Disable captcha -->
-      <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_subject" value="New message from Vital Earth Network">
+  <input type="hidden" name="_next" value="thank-you.html">
 
-      <!-- Email subject -->
-      <input type="hidden" name="_subject" value="New message from Vital Earth Network">
+  <input type="text" name="name" placeholder="Your Name" required>
+  <input type="email" name="email" placeholder="Your Email" required>
+  <textarea name="message" placeholder="Your Message" required></textarea>
 
-      <!-- Prevent redirect -->
-      <input type="hidden" name="_next" value="thank-you.html">
+  <button type="submit" class="btn btn-primary">
+    Send Message
+  </button>
 
-      <input type="text" name="name" placeholder="Your Name" required>
+</form>
 
-      <input type="email" name="email" placeholder="Your Email" required>
-
-      <textarea name="message" placeholder="Your Message" rows="6" required></textarea>
-
-      <button type="submit" class="btn btn-primary">
-        Send Message
-      </button>
-
-    </form>
 
   </div>
 </section>
