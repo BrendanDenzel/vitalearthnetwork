@@ -4,7 +4,7 @@ const status = document.getElementById("formStatus");
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  fetch("https://script.google.com/macros/s/AKfycbxmKOnq3TDS2PjxGnpl4ryi8c18f1cvKTR4xs8jtJ3X7pTPqEHKp4yNtWlAIJm1PRM/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbyTJ0cTh1FJLs-7H1NKZpmGlJJ03bkcd40ItFMObHfzgKH3II9KoGB1RnxEgzSUCis/exec", {
     method: "POST",
     body: new FormData(form)
   })
