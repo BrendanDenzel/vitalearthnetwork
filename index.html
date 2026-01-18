@@ -18,6 +18,7 @@
     - custom css link
   -->
   <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/contact.css">
 
   <!-- 
     - google font link
@@ -97,7 +98,7 @@
           </li>
 
           <li>
-            <a href="#" class="navbar-link" data-nav-link>
+            <a onclick="openContactModal()" class="navbar-link" style="cursor: pointer;" data-nav-link>
               <span>Contact</span>
 
               <ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon>
@@ -129,7 +130,83 @@
     </div>
   </header>
 
+<div id="contactOverlay" class="modal-overlay">
+  <div class="modal-box">
+    <button class="modal-close" aria-label="Close">&times;</button>
 
+    <h2>Contact Us</h2>
+    <p>Have a question or want to get involved? Send us a message.</p>
+
+    <form
+      action="https://formsubmit.co/vitalearthnetwork@gmail.com"
+      method="POST"
+      class="contact-form"
+    >
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_subject" value="New message from Vital Earth Network">
+      <input type="hidden" name="_next" value="http://127.0.0.1:5500/thank-you.html">
+
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <textarea name="message" placeholder="Your Message" required></textarea>
+
+      <button type="submit" class="btn btn-primary">
+        Send Message
+      </button>
+    </form>
+  </div>
+
+
+<script>
+  const overlay = document.getElementById("contactOverlay");
+  const closeBtn = document.querySelector(".modal-close");
+
+  // Open modal (call this from a button)
+function openContactModal() {
+  document.body.classList.add("modal-open");
+  overlay.classList.add("active");
+}
+
+function closeContactModal() {
+  document.body.classList.remove("modal-open");
+  overlay.classList.remove("active");
+}
+
+
+  closeBtn.addEventListener("click", closeContactModal);
+
+  // Click outside modal closes it
+  let mouseDownOnOverlay = false;
+
+overlay.addEventListener("mousedown", (e) => {
+  // Only mark true if the click STARTS on the overlay itself
+  mouseDownOnOverlay = e.target === overlay;
+});
+
+overlay.addEventListener("mouseup", () => {
+  if (mouseDownOnOverlay) {
+    closeContactModal();
+  }
+  mouseDownOnOverlay = false;
+});
+
+
+  // Save form data (your existing logic)
+  const form = document.querySelector(".contact-form");
+  form.addEventListener("submit", () => {
+    localStorage.setItem("contact_name", form.name.value);
+    localStorage.setItem("contact_email", form.email.value);
+    localStorage.setItem("contact_message", form.message.value);
+  });
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && overlay.classList.contains("active")) {
+    closeContactModal();
+  }
+});
+
+</script>
+</div>
 
 
 

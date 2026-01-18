@@ -13,25 +13,23 @@ h1, p {
 }
 
 /* ===== Main thank-you container ===== */
-/* ===== Main thank-you container ===== */
 #thanks, #details {
   text-align: center;
 }
 
-/* Push everything down a bit more */
 #thanks {
   font-size: 2.5rem;
   font-weight: 700;
-  margin-top: 15rem;  /* increased from 10rem to 15rem */
-  margin-bottom: 1.5rem; /* slightly more space below heading */
+  margin-top: 10rem;
+  margin-bottom: 1rem;
   color: #104635;
 }
 
 #details {
   max-width: 600px;
-  margin: 0 auto 4rem auto; /* increase bottom margin a bit */
+  margin: 0 auto 3rem auto;
   background-color: #ffffff;
-  padding: 2.5rem; /* a little more padding inside the box */
+  padding: 2rem;
   border-radius: 16px;
   box-shadow: 0 6px 20px rgba(0,0,0,0.1);
   font-size: 1.1rem;
@@ -39,7 +37,6 @@ h1, p {
   color: #333;
   word-wrap: break-word;
 }
-
 
 /* ===== Optional: highlight the email ===== */
 #details strong {

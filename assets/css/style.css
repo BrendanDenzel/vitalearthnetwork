@@ -190,7 +190,10 @@ button { cursor: pointer; }
 
 :focus-visible { outline-offset: 4px; }
 
-::selection { background-color: var(--white_10); }
+::selection {
+  background-color: rgba(146, 255, 45, 0.35);
+  color: inherit;
+}
 
 html {
   font-family: var(--ff-roboto);
