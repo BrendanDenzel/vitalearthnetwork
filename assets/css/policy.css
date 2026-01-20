@@ -1,0 +1,178 @@
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9fafb;
+            color: #333;
+            line-height: 1.8;
+        }
+
+
+
+        .privacy-container {
+            max-width: 900px;
+            margin: 8% auto ;
+            background: #ffffff;
+            padding: 50px 60px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .legal-notice {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #6b7280;
+            margin-bottom: 6px;
+        }
+
+        .name {
+            font-size: 16px;
+            font-weight: 500;
+            color: #111827;
+            margin-bottom: 10px;
+        }
+
+        .privacy-title {
+            font-family: 'Inter', sans-serif;
+            letter-spacing: -2px;
+            font-size: 38px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #111827;
+        }
+
+        .privacy-updated {
+            font-size: 15px;
+            color: #6b7280;
+            margin-bottom: 35px;
+        }
+
+        .privacy-note {
+            font-size: 16px;
+            color: #374151;
+            background-color: #f1f5f9;
+            padding: 15px 18px;
+            border-left: 4px solid #22c55e;
+            border-radius: 6px;
+            margin-bottom: 35px;
+        }
+
+        .privacy-content {
+            font-size: 18px;
+        }
+
+        .privacy-content h3 {
+            font-size: 22px;
+            margin-top: 35px;
+            margin-bottom: 10px;
+            color: #111827;
+        }
+
+        .privacy-content p {
+            margin-bottom: 14px;
+        }
+
+        .privacy-content a {
+            display: inline;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+            text-decoration: underline;
+        }
+
+        .privacy-content strong {
+            display: inline;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+        }
+
+        .privacy-content ul {
+            margin-left: 22px;
+            margin-bottom: 14px;
+        }
+
+        .privacy-content li {
+            margin-bottom: 8px;
+        }
+
+        a {
+            color: #16a34a;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .privacy-container {
+                padding: 35px 25px;
+                margin: 30px 15px;
+            }
+
+            .privacy-title {
+                font-size: 30px;
+            }
+
+            .privacy-content {
+                font-size: 17px;
+            }
+
+            /* ===== HEADER STYLING ===== */
+            .header {
+                background-color: #2b2b2b;
+                padding: 28px 0;
+                /* thickness */
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            }
+
+            .header .container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            /* Logo */
+            .header .logo {
+                color: #ffffff;
+                font-size: 22px;
+                font-weight: 600;
+            }
+
+            /* Navbar links */
+            .navbar-link span {
+                color: #e5e7eb;
+            }
+
+            .navbar-link:hover span {
+                color: #ffffff;
+            }
+
+            /* Menu icons */
+            .nav-open-btn ion-icon,
+            .nav-close-btn ion-icon {
+                color: #ffffff;
+                font-size: 26px;
+            }
+
+            /* Social icons */
+            .header-action ion-icon {
+                color: #ffffff;
+            }
+
+            /* Donate button contrast */
+            .header .btn-primary {
+                background-color: #22c55e;
+                color: #ffffff;
+            }
+
+            .header .btn-primary:hover {
+                background-color: #16a34a;
+            }
+
+        }

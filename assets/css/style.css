@@ -312,12 +312,25 @@ body {
 
 
 
+/* ALL PAGES OTHER THAN MAIN PAGE */
+/* (fixes the transparent header)  */
+
 .privacy-page .header {
   background-color: var(--eerie-black-1) !important;
   box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.8) !important;
 }
 
 .privacy-page .header.active{
+  background-color: var(--eerie-black-1) !important;
+  box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.8) !important;
+}
+
+.tos-page .header {
+  background-color: var(--eerie-black-1) !important;
+  box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.8) !important;
+}
+
+.tos-page .header.active{
   background-color: var(--eerie-black-1) !important;
   box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.8) !important;
 }
@@ -741,7 +754,7 @@ body {
 
 .progress1 { 
   height: 6px; 
-  width: 9.6%; 
+  width: 0; 
   background-color: var(--pistachio); 
   border-radius: inherit; 
 }

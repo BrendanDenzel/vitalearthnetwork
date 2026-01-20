@@ -8,6 +8,7 @@
   <title>Vital Earth Network</title>
 <link rel="stylesheet" href="style.css">
 <script src="script.js" defer></script>
+<script src="donationprogress.js" defer></script>
 
   <!-- 
     - favicon
@@ -542,64 +543,71 @@ document.addEventListener("keydown", (e) => {
           <ul class="donate-list">
 
             <li>
-              <div class="donate-card">
 
-                <figure class="card-banner">
-                  <img src="./assets/images/donate-5.png" width="520" height="325" loading="lazy" alt="Elephant"
-                    class="img-cover">
-                </figure>
 
-                <div class="card-content">
-                    <span style="color: rgb(46, 46, 46); font-size: 25px; font-weight: bold;">Current Project</span>
-                  <div class="progress-wrapper">
-                    <p class="progress-text">
-                      <span>Raised</span>
 
-                      <data value="95.75">$95.75</data>
-                    </p>
+      <!--
+              ---ENTER THE MONEY RAISED AND GOAL HERE---
+      -->      
+  <div class="donate-card" data-raised="121.5" data-goal="1000">
+    <!--
+              ---ENTER THE MONEY RAISED AND GOAL HERE---
+      -->    
 
-                    <data class="progress-value" value="9.6">9.6%</data>
-                  </div>
 
-                  <div class="progress-box">
-                    <div class="progress1"></div>
-                  </div>
 
-                  <h3 class="h3 card-title">Saving & Protecting Wildlife</h3>
+    <figure class="card-banner">
+      <img src="./assets/images/donate-5.png" width="520" height="325" loading="lazy"
+        alt="Elephant" class="img-cover">
+    </figure>
 
-                  <div class="card-wrapper">
+    <div class="card-content">
+      <span style="color: rgb(46, 46, 46); font-size: 25px; font-weight: bold;">
+        Current Project
+      </span>
 
-                    <p class="card-wrapper-text">
-                      <span>Goal</span>
+      <div class="progress-wrapper">
+        <p class="progress-text">
+          <span>Raised</span>
+          <data class="raised-amount"></data>
+        </p>
 
-                      <data class="green" value="1000">$1000</data>
-                    </p>
+        <data class="progress-value"></data>
+      </div>
 
-                    <p class="card-wrapper-text">
-                      <span>Raised</span>
+      <div class="progress-box">
+        <div class="progress1"></div>
+      </div>
 
-                      <data class="yellow" value="95.75">$95.75</data>
-                    </p>
+      <h3 class="h3 card-title">Saving & Protecting Wildlife</h3>
 
-                    <p class="card-wrapper-text">
-                      <span>To Go</span>
+      <div class="card-wrapper">
+        <p class="card-wrapper-text">
+          <span>Goal</span>
+          <data class="green goal-amount"></data>
+        </p>
 
-                      <data class="cyan" value="904.25">$904.25</data>
-                    </p>
+        <p class="card-wrapper-text">
+          <span>Raised</span>
+          <data class="yellow raised-amount"></data>
+        </p>
 
-                  </div>
+        <p class="card-wrapper-text">
+          <span>To Go</span>
+          <data class="cyan to-go-amount"></data>
+        </p>
+      </div>
 
-                  <a href="https://fundraise.worldwildlife.org/p2p/site/NZSo9/page/17SoNj#/" 
-   target="_blank" rel="noopener noreferrer"
-   class="btn btn-secondary" style="display: inline-flex; align-items: center; width: auto; padding: 1.2rem 3.2rem;">
-  <span>Donate</span>
-  <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
-</a>
+      <a href="https://fundraise.worldwildlife.org/p2p/site/NZSo9/page/17SoNj#/"
+         target="_blank" rel="noopener noreferrer"
+         class="btn btn-secondary">
+        <span>Donate</span>
+        <ion-icon name="heart-outline"></ion-icon>
+      </a>
+    </div>
 
-                </div>
-
-              </div>
-            </li>
+  </div>
+</li>
 
             <li>
               <div class="donate-card">
@@ -920,8 +928,8 @@ document.addEventListener("keydown", (e) => {
     <!-- RIGHT -->
     <div class="footer-links">
       <h4>Legal</h4>
-      <a href="/privacy-policy.html">Privacy Policy</a>
-      <a href="#">Terms of Service</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms-of-service.html">Terms of Service</a>
       <a href="#">Legal Notice</a>
     </div>
 
