@@ -6,9 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vital Earth Network</title>
-<link rel="stylesheet" href="style.css">
-<script src="script.js" defer></script>
-<script src="donationprogress.js" defer></script>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+  <script src="donationprogress.js" defer></script>
 
   <!-- 
     - favicon
@@ -111,103 +111,99 @@
       </nav>
 
       <div class="header-action">
-<div class="social-icons">
-<a href="https://www.tiktok.com/@vitalearthnetwork" target="_blank" rel="noopener noreferrer">
-      <ion-icon name="logo-tiktok" size="large" color="light" padding="0px"></ion-icon>
-      </a>
+        <div class="social-icons">
+          <a href="https://www.tiktok.com/@vitalearthnetwork" target="_blank" rel="noopener noreferrer">
+            <ion-icon name="logo-tiktok" size="large" color="light" padding="0px"></ion-icon>
+          </a>
 
-      <a href="https://www.instagram.com/vitalearthnetwork/" target="_blank" rel="noopener noreferrer">
-      <ion-icon name="logo-instagram" size="large" color="light"></ion-icon>
-      </a>
+          <a href="https://www.instagram.com/vitalearthnetwork/" target="_blank" rel="noopener noreferrer">
+            <ion-icon name="logo-instagram" size="large" color="light"></ion-icon>
+          </a>
 
-      <a href="https://fundraise.worldwildlife.org/p2p/site/NZSo9/page/17SoNj#/" target="_blank" rel="noopener noreferrer"
-   class="btn btn-primary">
-  <span>Donate</span>
-  <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
-</a>
+          <a href="https://fundraise.worldwildlife.org/p2p/site/NZSo9/page/17SoNj#/" target="_blank"
+            rel="noopener noreferrer" class="btn btn-primary">
+            <span>Donate</span>
+            <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+          </a>
+
+        </div>
 
       </div>
-
-    </div>
   </header>
 
-<div id="contactOverlay" class="modal-overlay">
-  <div class="modal-box">
-    <button class="modal-close" aria-label="Close">&times;</button>
+  <div id="contactOverlay" class="modal-overlay">
+    <div class="modal-box">
+      <button class="modal-close" aria-label="Close">&times;</button>
 
-    <h2>Contact Us</h2>
-    <p>Have a question or want to get involved? Send us a message.</p>
+      <h2>Contact Us</h2>
+      <p>Have a question or want to get involved? Send us a message.</p>
 
-    <form
-      action="https://formsubmit.co/vitalearthnetwork@gmail.com"
-      method="POST"
-      class="contact-form"
-    >
-      <input type="hidden" name="_captcha" value="false">
-      <input type="hidden" name="_subject" value="New message from Vital Earth Network">
-      <input type="hidden" name="_next" value="http://127.0.0.1:5500/thank-you.html">
+      <form action="https://formsubmit.co/vitalearthnetwork@gmail.com" method="POST" class="contact-form">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_subject" value="New message from Vital Earth Network">
+        <input type="hidden" name="_next" value="http://127.0.0.1:5500/thank-you.html">
 
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <textarea name="message" placeholder="Your Message" required></textarea>
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" required></textarea>
 
-      <button type="submit" class="btn btn-primary">
-        Send Message
-      </button>
-    </form>
+        <button type="submit" class="btn btn-primary">
+          Send Message
+        </button>
+      </form>
+    </div>
+
+
+    <script>
+      const overlay = document.getElementById("contactOverlay");
+      const closeBtn = document.querySelector(".modal-close");
+
+      // Open modal (call this from a button)
+      function openContactModal() {
+        document.body.classList.add("modal-open");
+        overlay.classList.add("active");
+      }
+
+      function closeContactModal() {
+        document.body.classList.remove("modal-open");
+        overlay.classList.remove("active");
+      }
+
+
+      closeBtn.addEventListener("click", closeContactModal);
+
+      // Click outside modal closes it
+      let mouseDownOnOverlay = false;
+
+      overlay.addEventListener("mousedown", (e) => {
+        // Only mark true if the click STARTS on the overlay itself
+        mouseDownOnOverlay = e.target === overlay;
+      });
+
+      overlay.addEventListener("mouseup", () => {
+        if (mouseDownOnOverlay) {
+          closeContactModal();
+        }
+        mouseDownOnOverlay = false;
+      });
+
+
+      // Save form data (your existing logic)
+      const form = document.querySelector(".contact-form");
+      form.addEventListener("submit", () => {
+        localStorage.setItem("contact_name", form.name.value);
+        localStorage.setItem("contact_email", form.email.value);
+        localStorage.setItem("contact_message", form.message.value);
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && overlay.classList.contains("active")) {
+          closeContactModal();
+        }
+      });
+
+    </script>
   </div>
-
-
-<script>
-  const overlay = document.getElementById("contactOverlay");
-  const closeBtn = document.querySelector(".modal-close");
-
-  // Open modal (call this from a button)
-function openContactModal() {
-  document.body.classList.add("modal-open");
-  overlay.classList.add("active");
-}
-
-function closeContactModal() {
-  document.body.classList.remove("modal-open");
-  overlay.classList.remove("active");
-}
-
-
-  closeBtn.addEventListener("click", closeContactModal);
-
-  // Click outside modal closes it
-  let mouseDownOnOverlay = false;
-
-overlay.addEventListener("mousedown", (e) => {
-  // Only mark true if the click STARTS on the overlay itself
-  mouseDownOnOverlay = e.target === overlay;
-});
-
-overlay.addEventListener("mouseup", () => {
-  if (mouseDownOnOverlay) {
-    closeContactModal();
-  }
-  mouseDownOnOverlay = false;
-});
-
-
-  // Save form data (your existing logic)
-  const form = document.querySelector(".contact-form");
-  form.addEventListener("submit", () => {
-    localStorage.setItem("contact_name", form.name.value);
-    localStorage.setItem("contact_email", form.email.value);
-    localStorage.setItem("contact_message", form.message.value);
-  });
-
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && overlay.classList.contains("active")) {
-    closeContactModal();
-  }
-});
-
-</script>
-</div>
 
 
 
@@ -228,20 +224,23 @@ document.addEventListener("keydown", (e) => {
           </p>
 
           <h2 class="h1 hero-title">
-            <strong>Helping Protect The Environment</strong>
+            <strong>Small Actions.
+              <br> Big Impact.
+            </strong>
           </h2>
 
           <p class="hero-text">
-            Vital Earth Network is a student born initiative focused on contributing to various environmental charities and organizing volunteer activities.
+            Vital Earth Network is a student born initiative focused on contributing to various environmental charities
+            and organizing volunteer activities.
           </p>
 
-          
-        <a href="https://fundraise.worldwildlife.org/p2p/site/NZSo9/page/17SoNj#/" 
-   target="_blank" rel="noopener noreferrer"
-   class="btn btn-primary" style="display: inline-flex; align-items: center; width: auto; padding: 1.2rem 3.2rem;">
-  <span>Donate</span>
-  <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
-</a>
+
+          <a href="https://fundraise.worldwildlife.org/p2p/site/NZSo9/page/17SoNj#/" target="_blank"
+            rel="noopener noreferrer" class="btn btn-primary"
+            style="display: inline-flex; align-items: center; width: auto; padding: 1.2rem 3.2rem;">
+            <span>Donate</span>
+            <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+          </a>
 
 
 
@@ -270,7 +269,7 @@ document.addEventListener("keydown", (e) => {
                 <h3 class="h4 item-title">Support Animals</h3>
 
                 <p class="item-text">
-                  Our initiative focuses on lending aid to endangered species and supporting endangered ecoystems.
+                  Our initiative includes efforts to support endangered species and threatened ecosystems.
                 </p>
               </div>
             </li>
@@ -283,14 +282,14 @@ document.addEventListener("keydown", (e) => {
               <div>
                 <h3 class="h4 item-title">Volunteering</h3>
                 <p class="item-text">
-                  Our initiative focuses on organizing volunteer opportunities centered around benefitting the community.
+                  We work to organize volunteer opportunities that benefit our local community.
                 </p>
               </div>
             </li>
 
           </ul>
 
-          
+
 
         </div>
       </section>
@@ -345,52 +344,54 @@ document.addEventListener("keydown", (e) => {
             </h2>
 
             <ul class="tab-nav">
-  <li><button class="tab-btn active" data-tab="goal">Our Goal</button></li>
-  <li><button class="tab-btn" data-tab="current">Current Project</button></li>
-  <li><button class="tab-btn" data-tab="next">Next Project</button></li>
-</ul>
+              <li><button class="tab-btn active" data-tab="goal">Our Goal</button></li>
+              <li><button class="tab-btn" data-tab="current">Current Project</button></li>
+              <li><button class="tab-btn" data-tab="next">Next Project</button></li>
+            </ul>
 
-<div class="tab-content">
-  <p class="section-text tab-section" id="goal">
-    Our initiative aims to benefit a multitude of charities individually, starting with our first project and working toward a fundraising goal, after which we can then move on to the next project.
-  </p>
+            <div class="tab-content">
+              <p class="section-text tab-section" id="goal">
+                Our initiative aims to benefit a multitude of charities by starting fundraising projects that raise
+                awareness about endangered species.
+              </p>
 
-  <p class="section-text tab-section" id="current" style="display:none;">
-    Our current project focuses on ensuring wildlife safety across the globe. <a href="https://www.worldwildlife.org/about/" style="text-decoration: underline; color: #2a8be6">See more</a>
-  </p>
+              <p class="section-text tab-section" id="current" style="display:none;">
+                Our current project focuses on ensuring wildlife safety across the globe. <a
+                  href="https://www.worldwildlife.org/about/" style="text-decoration: underline; color: #2a8be6">See
+                  more</a>
+              </p>
 
-  <p class="section-text tab-section" id="next" style="display:none;">
-   Our next project is to be announced and is still in the development stage.
-  </p>
-</div>
-
-
-              <ul class="tab-list">
-
-                <li class="tab-item">
-                  <div class="item-icon">
-                    <ion-icon name="checkmark-circle"></ion-icon>
-                  </div>
-
-                  <p class="tab-text">World Wildlife Charity</p>
-                </li>
-
-
-              </ul>
-
-              <a href="#charities" 
-   class="btn btn-outline" 
-   style="display: inline-flex; align-items: center; width: auto; padding: 1.2rem 3.2rem; position: relative; top: -18px; left: -28px;">
-  <button class="btn btn-secondary">
-    <span>Learn About The Charities</span>
-    <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
-  </button>
-</a>
-
-
+              <p class="section-text tab-section" id="next" style="display:none;">
+                Our next project is to be announced and is still in the development stage.
+              </p>
             </div>
 
+
+            <ul class="tab-list">
+
+              <li class="tab-item">
+                <div class="item-icon">
+                  <ion-icon name="checkmark-circle"></ion-icon>
+                </div>
+
+                <p class="tab-text">World Wildlife Charity</p>
+              </li>
+
+
+            </ul>
+
+            <a href="#charities" class="btn btn-outline"
+              style="display: inline-flex; align-items: center; width: auto; padding: 1.2rem 3.2rem; position: relative; top: -18px; left: -28px;">
+              <button class="btn btn-secondary">
+                <span>Learn About The Charities</span>
+                <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+              </button>
+            </a>
+
+
           </div>
+
+        </div>
 
         </div>
       </section>
@@ -409,12 +410,11 @@ document.addEventListener("keydown", (e) => {
           <div class="cta-content">
             <h2 class="h2 section-title">Our Trusted Charities</h2>
 
-            <a href="#charities" 
-   class="btn btn-outline" 
-   style="display: inline-flex; align-items: center; width: auto; padding: 1.2rem 3.2rem;">
-  <span>See List of Charities</span>
-  <ion-icon name="card-outline" aria-hidden="true"></ion-icon>
-</a>
+            <a href="#charities" class="btn btn-outline"
+              style="display: inline-flex; align-items: center; width: auto; padding: 1.2rem 3.2rem;">
+              <span>See List of Charities</span>
+              <ion-icon name="card-outline" aria-hidden="true"></ion-icon>
+            </a>
           </div>
 
 
@@ -461,10 +461,11 @@ document.addEventListener("keydown", (e) => {
                 <h3 class="h3 card-title">Fundraise</h3>
 
                 <p class="card-text">
-                  Our many projects enable us to raise funds for a variety of charities dedicated to preserving the environment.
+                  Our many projects enable us to raise funds for a variety of charities dedicated to preserving the
+                  environment.
                 </p>
 
-                
+
 
               </div>
             </li>
@@ -482,7 +483,7 @@ document.addEventListener("keydown", (e) => {
                   Our numerous volunteering opportunities benefit our community, its members, and the initiative itself.
                 </p>
 
-                
+
 
               </div>
             </li>
@@ -500,7 +501,7 @@ document.addEventListener("keydown", (e) => {
                   By combining volunteer work with social media outreach, we amplify our cause and reach more people.
                 </p>
 
-                
+
 
               </div>
             </li>
@@ -518,8 +519,8 @@ document.addEventListener("keydown", (e) => {
                   We support not only the environment but also people through the events we organize.
                 </p>
 
-        
-                
+
+
 
               </div>
             </li>
@@ -546,68 +547,67 @@ document.addEventListener("keydown", (e) => {
 
 
 
-      <!--
+              <!--
               ---ENTER THE GOAL HERE---
-      -->      
-  <div class="donate-card" data-goal="1000">
-    <!--
+      -->
+              <div class="donate-card" data-goal="1000">
+                <!--
               ---ENTER THE GOAL HERE---
-      -->    
+      -->
 
 
 
-    <figure class="card-banner">
-      <img src="./assets/images/donate-5.png" width="520" height="325" loading="lazy"
-        alt="Elephant" class="img-cover">
-    </figure>
+                <figure class="card-banner">
+                  <img src="./assets/images/donate-5.png" width="520" height="325" loading="lazy" alt="Elephant"
+                    class="img-cover">
+                </figure>
 
-    <div class="card-content">
-      <span style="color: rgb(46, 46, 46); font-size: 25px; font-weight: bold;">
-        Current Project
-      </span>
+                <div class="card-content">
+                  <span style="color: rgb(46, 46, 46); font-size: 25px; font-weight: bold;">
+                    Current Project
+                  </span>
 
-      <div class="progress-wrapper">
-        <p class="progress-text">
-          <span>Raised</span>
-          <data class="raised-amount"></data>
-        </p>
+                  <div class="progress-wrapper">
+                    <p class="progress-text">
+                      <span>Raised</span>
+                      <data class="raised-amount"></data>
+                    </p>
 
-        <data class="progress-value"></data>
-      </div>
+                    <data class="progress-value"></data>
+                  </div>
 
-      <div class="progress-box">
-        <div class="progress1"></div>
-      </div>
+                  <div class="progress-box">
+                    <div class="progress1"></div>
+                  </div>
 
-      <h3 class="h3 card-title">Saving & Protecting Wildlife</h3>
+                  <h3 class="h3 card-title">Saving & Protecting Wildlife</h3>
 
-      <div class="card-wrapper">
-        <p class="card-wrapper-text">
-          <span>Goal</span>
-          <data class="green goal-amount"></data>
-        </p>
+                  <div class="card-wrapper">
+                    <p class="card-wrapper-text">
+                      <span>Goal</span>
+                      <data class="green goal-amount"></data>
+                    </p>
 
-        <p class="card-wrapper-text">
-          <span>Raised</span>
-          <data class="yellow raised-amount"></data>
-        </p>
+                    <p class="card-wrapper-text">
+                      <span>Raised</span>
+                      <data class="yellow raised-amount"></data>
+                    </p>
 
-        <p class="card-wrapper-text">
-          <span>To Go</span>
-          <data class="cyan to-go-amount"></data>
-        </p>
-      </div>
+                    <p class="card-wrapper-text">
+                      <span>To Go</span>
+                      <data class="cyan to-go-amount"></data>
+                    </p>
+                  </div>
 
-      <a href="https://fundraise.worldwildlife.org/p2p/site/NZSo9/page/17SoNj#/"
-         target="_blank" rel="noopener noreferrer"
-         class="btn btn-secondary">
-        <span>Donate</span>
-        <ion-icon name="heart-outline"></ion-icon>
-      </a>
-    </div>
+                  <a href="https://fundraise.worldwildlife.org/p2p/site/NZSo9/page/17SoNj#/" target="_blank"
+                    rel="noopener noreferrer" class="btn btn-secondary">
+                    <span>Donate</span>
+                    <ion-icon name="heart-outline"></ion-icon>
+                  </a>
+                </div>
 
-  </div>
-</li>
+              </div>
+            </li>
 
             <li>
               <div class="donate-card">
@@ -624,7 +624,7 @@ document.addEventListener("keydown", (e) => {
                       <span>NEXT PROJECT</span>
                     </p>
 
-                    
+
                   </div>
 
                   <div class="progress-box">
@@ -656,17 +656,17 @@ document.addEventListener("keydown", (e) => {
                   </div>
 
                   <button class="btn-undetermined">
-  <span>To Be Determined</span>
-</button>
+                    <span>To Be Determined</span>
+                  </button>
 
                 </div>
 
               </div>
             </li>
 
-            
 
-            
+
+
 
           </ul>
 
@@ -680,7 +680,7 @@ document.addEventListener("keydown", (e) => {
       <!-- 
         - #TESTIMONIALS
       -->
-<!--
+      <!--
       <section class="testi">
 
         <div class="testi-content">
@@ -743,7 +743,7 @@ document.addEventListener("keydown", (e) => {
               class="color">
           </a>
 
-         <h3 style="
+          <h3 style="
   font-size: 2rem;
   color: #2c2c2c;
   font-weight: 300;
@@ -754,8 +754,9 @@ document.addEventListener("keydown", (e) => {
 
   
 ">
-  The World Wildlife Fund (WWF) is dedicated to conserving nature and reducing the most pressing threats to the diversity of life on Earth.
-</h3>
+            The World Wildlife Fund (WWF) is dedicated to conserving nature and reducing the most pressing threats to
+            the diversity of life on Earth.
+          </h3>
 
 
 
@@ -792,8 +793,8 @@ document.addEventListener("keydown", (e) => {
 
                 <time class="card-time" datetime="01-05">
                   <div style="text-align: center;">
-                      <span class="month">Jan</span>
-                    </div>
+                    <span class="month">Jan</span>
+                  </div>
 
                   <span class="date">TBD</span>
                 </time>
@@ -806,7 +807,8 @@ document.addEventListener("keydown", (e) => {
                     <h3 class="card-title">Help spread awareness by shoveling others' driveways!</h3>
 
                     <p class="card-text">
-                      We organize large groups to shovel driveways for community members while raising awareness of the initiative.
+                      We organize large groups to shovel driveways for community members while raising awareness of the
+                      initiative.
                     </p>
                   </div>
 
@@ -891,7 +893,7 @@ document.addEventListener("keydown", (e) => {
   </main>
 
 
-<div class="footer-separator"></div>
+  <div class="footer-separator"></div>
 
 
 
@@ -899,46 +901,48 @@ document.addEventListener("keydown", (e) => {
     - #FOOTER
   -->
 
- <footer class="site-footer">
-  <div class="footer-inner">
+  <footer class="site-footer">
+    <div class="footer-inner">
 
-    <!-- LEFT -->
-    <div class="footer-brand">
-      <h2 class="footer-logo">Vital Earth Network</h2>
+      <!-- LEFT -->
+      <div class="footer-brand">
+        <h2 class="footer-logo">Vital Earth Network</h2>
 
-      <div class="footer-socials">
-        <a href="https://www.tiktok.com/@vitalearthnetwork" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-tiktok"></ion-icon></a>
-        <a href="https://www.instagram.com/vitalearthnetwork/" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-instagram"></ion-icon></a>
+        <div class="footer-socials">
+          <a href="https://www.tiktok.com/@vitalearthnetwork" target="_blank" rel="noopener noreferrer"><ion-icon
+              name="logo-tiktok"></ion-icon></a>
+          <a href="https://www.instagram.com/vitalearthnetwork/" target="_blank" rel="noopener noreferrer"><ion-icon
+              name="logo-instagram"></ion-icon></a>
+        </div>
+
+        <button class="back-to-top">↑ Back to top</button>
       </div>
 
-      <button class="back-to-top">↑ Back to top</button>
+
+
+
+      <!-- CENTER -->
+      <div class="footer-links">
+        <strong>Message or Email us at</strong><a></a>
+        <a href="mailto:vitalearthnetwork@gmail.com">vitalearthnetwork@gmail.com</a>
+        <a href="sms:+17162497659">+1 (716) 249-7650</a>
+
+      </div>
+
+      <!-- RIGHT -->
+      <div class="footer-links">
+        <h4>Legal</h4>
+        <a href="privacy-policy">Privacy Policy</a>
+        <a href="terms-of-service">Terms of Service</a>
+        <a href="return-policy">Return Policy</a>
+      </div>
+
     </div>
 
-
-
-
-    <!-- CENTER -->
-    <div class="footer-links">
-      <strong>Message or Email us at</strong><a></a>
-      <a href="mailto:vitalearthnetwork@gmail.com">vitalearthnetwork@gmail.com</a>
-       <a href="sms:+17162497659">+1 (716) 249-7650</a>
-    
+    <div class="footer-bottom">
+      © 2026 Vital Earth Network. All Rights Reserved.
     </div>
-
-    <!-- RIGHT -->
-    <div class="footer-links">
-      <h4>Legal</h4>
-      <a href="privacy-policy">Privacy Policy</a>
-      <a href="terms-of-service">Terms of Service</a>
-      <a href="return-policy">Return Policy</a>
-    </div>
-
-  </div>
-
-  <div class="footer-bottom">
-    © 2026 Vital Earth Network. All Rights Reserved.
-  </div>
-</footer>
+  </footer>
 
 
 
