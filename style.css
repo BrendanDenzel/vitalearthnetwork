@@ -1,6 +1,7 @@
 .social-icons {
   display: flex;
-  gap: 30px; /* make icons closer or farther */
+  gap: 30px;
+  /* make icons closer or farther */
 }
 
 .social-icons a {
@@ -96,9 +97,9 @@
 
 .footer-separator {
   height: 1px;
-  background: #104635; /* light gray line */
-  margin: 3rem auto 3rem; /* space above & below line */
+  background: #104635;
+  /* light gray line */
+  margin: 3rem auto 3rem;
+  /* space above & below line */
   width: 70%;
 }
-
-
