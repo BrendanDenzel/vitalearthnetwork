@@ -188,7 +188,6 @@ img,
 span,
 time,
 input,
-strong,
 button,
 ion-icon {
   display: block;
@@ -1750,3 +1749,62 @@ body {
   }
 
 }
+
+
+
+@media (max-width: 768px) {
+
+  .insta-post-list {
+    display: flex;
+    flex-wrap: nowrap;        /* stay in ONE row */
+    justify-content: center;  /* center the row */
+    gap: 8px;
+    overflow-x: hidden;       /* no scrollbar */
+    padding-inline: 8px;
+  }
+
+  .insta-post-item {
+    min-width: 0;             /* 🔴 THIS is the key line */
+    flex: 1 1 0;              /* allow shrinking */
+    max-width: 25%;           /* 4 posts fit */
+  }
+
+  .insta-post-link img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+  }
+
+
+  .event {
+  padding-block-end: -20px;
+}
+
+.event-list {
+  margin-block-end: -10px;
+}
+
+.logo {
+  color: var(--white);
+  font-family: var(--ff-oswald);
+  font-size: 2.8rem;
+  text-transform: uppercase;
+}
+
+  .hero {
+    padding-top: 120px; /* was 200px */
+    min-height: auto;
+    background-position: center;
+  }
+
+  .hero .section-subtitle {
+ margin-top: 25px;
+}
+
+
+
+
+}
+
+
