@@ -1,3 +1,15 @@
+/* =================================================================================
+    OVERRIDE NUMBERS IF NEEDED (ENTER "0" FOR BOTH FOR REGULAR AUTOMATIC FETCH)
+================================================================================= */
+
+// Set to > 0 to activate override
+const TEMP_RAISED = 198.75;
+
+// Auto-detect
+const USE_TEMP_TOTAL = TEMP_RAISED > 0;
+
+
+
 function easeOutCubic(t) {
   return 1 - Math.pow(1 - t, 3);
 }
@@ -46,11 +58,25 @@ function animateMobileDonation(raised, goal) {
 const SHEET_API_URL =
   "https://sheets.googleapis.com/v4/spreadsheets/1ui7pQWsbuua6XX2M44JYPyZM2sJNnj65bAnExIuyvBQ/values/DATA%20SHEET!E2?key=AIzaSyCRg9TGevbqT7CxFGuFQvRBaPcTk4aMpAk";
 
+
 /* ================================
    FETCH DONATION TOTAL
 ================================ */
 
 function loadRaisedAmountFromSheet() {
+
+  // 🧪 TEMP MODE (raised only)
+  if (USE_TEMP_TOTAL) {
+    document.querySelectorAll('.donate-card').forEach(card => {
+      card.dataset.raised = TEMP_RAISED;
+      // goal stays untouched
+    });
+
+    updateDonationCards();
+    return;
+  }
+
+  // REAL GOOGLE SHEETS PATH
   fetch(SHEET_API_URL)
     .then(res => res.json())
     .then(data => {
@@ -66,6 +92,7 @@ function loadRaisedAmountFromSheet() {
       console.error("Google Sheets fetch failed:", err);
     });
 }
+
 
 /* ================================
    UPDATE PROGRESS BARS
@@ -98,7 +125,6 @@ function updateDonationCards() {
 
     card.querySelector('.progress1').style.width = `${percentage}%`;
     animateMobileDonation(raised, goal);
-
     // ======= Mobile Footer 3 =======
     const mobileFill = document.querySelector('.mobile-donation-footer3 .progress-fill3');
     const mobileText = document.querySelector('.mobile-donation-footer3 .progress-text3');
