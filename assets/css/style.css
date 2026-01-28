@@ -1,18 +1,12 @@
-/*-----------------------------------*\
-  #style.css
-\*-----------------------------------*/
-
-/**
- * copyright 2022 codewithsadee
- */
-
-
-
 
 
 /*-----------------------------------*\
   #CUSTOM PROPERTY
 \*-----------------------------------*/
+
+.mobile-donation-footer3 {
+  display: none;
+}
 
 /* Mobile Only */
 @media (max-width: 768px) {
