@@ -514,20 +514,28 @@
       const lng = p[1] !== undefined ? parseFloat(p[1]) : p.lng;
       return `${lng},${lat}`;
     }).join(";");
-    try {
-      const response = await fetch(`${OSRM_BASE}/route/v1/driving/${coordString}?overview=full&geometries=geojson`);
-      if (!response.ok) throw new Error(`OSRM ${response.status}`);
-      const data = await response.json();
-      const coords = data?.routes?.[0]?.geometry?.coordinates;
-      if (!coords?.length) throw new Error("No route geometry");
-      return coords.map(([lng, lat]) => [lat, lng]);
-    } catch (err) {
-      console.warn("OSRM failed, straight-line fallback:", err.message);
-      return points.map(p => [
-        p[0] !== undefined ? parseFloat(p[0]) : p.lat,
-        p[1] !== undefined ? parseFloat(p[1]) : p.lng
-      ]);
+    const straightLine = points.map(p => [
+      p[0] !== undefined ? parseFloat(p[0]) : p.lat,
+      p[1] !== undefined ? parseFloat(p[1]) : p.lng
+    ]);
+    const servers = [
+      OSRM_BASE,
+      "https://router.project-osrm.org"
+    ];
+    for (const server of servers) {
+      try {
+        const response = await fetch(`${server}/route/v1/driving/${coordString}?overview=full&geometries=geojson`);
+        if (!response.ok) throw new Error(`OSRM ${response.status}`);
+        const data = await response.json();
+        const coords = data?.routes?.[0]?.geometry?.coordinates;
+        if (!coords?.length) throw new Error("No route geometry");
+        return coords.map(([lng, lat]) => [lat, lng]);
+      } catch (err) {
+        console.warn(`OSRM failed on ${server}, trying next:`, err.message);
+      }
     }
+    console.warn("All OSRM servers failed, straight-line fallback.");
+    return straightLine;
   }
 
   function refreshMapSize(delay = 120) { setTimeout(() => map.invalidateSize(), delay); }
