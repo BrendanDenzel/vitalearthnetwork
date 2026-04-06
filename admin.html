@@ -7,222 +7,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vital Earth Network | Admin Page</title>
 
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto:wght@400;500&display=swap"
-        rel="stylesheet">
-        <link rel="stylesheet" href="style.css">
-        <script src="script.js" defer></script>
-        <link rel="stylesheet" href="./assets/css/contact.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="./assets/css/contact.css">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto:wght@300;400;500;700&family=Oswald:wght@600&display=swap" rel="stylesheet">
+</head>
 
-        <!-- 
-    - favicon
-  -->
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-
-        <!-- 
-    - custom css link
-  -->
-        <link rel="stylesheet" href="./assets/css/style.css">
-
-        <!-- 
-    - google font link
-  -->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto:wght@300;400;500;700&family=Oswald:wght@600&display=swap"
-            rel="stylesheet">
-
-    </head>
-    <header class="header" data-header>
-    <div class="container">
-
-      <h1>
-        <a href="index.html" class="logo">Vital Earth Network</a>
-      </h1>
-
-      <button class="nav-open-btn" aria-label="Open Menu" data-nav-open-btn>
-        <ion-icon name="menu-outline"></ion-icon>
-      </button>
-
-      <nav class="navbar" data-navbar>
-
-        <button class="nav-close-btn" aria-label="Close Menu" data-nav-close-btn>
-          <ion-icon name="close-outline"></ion-icon>
-        </button>
-
-        <a href="index.html" class="logo">Vital Earth Network</a>
-
-        <ul class="navbar-list">
-
-          <li>
-            <a href="#home" class="navbar-link" data-nav-link>
-              <span>Home</span>
-
-              <ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon>
-            </a>
-          </li>
-
-          <li>
-            <a href="#about" class="navbar-link" data-nav-link>
-              <span>About</span>
-
-              <ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon>
-            </a>
-          </li>
-
-          <li>
-            <a href="#service" class="navbar-link" data-nav-link>
-              <span>Service</span>
-
-              <ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon>
-            </a>
-          </li>
-
-          <li>
-            <a href="#donate" class="navbar-link" data-nav-link>
-              <span>Donate</span>
-
-              <ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon>
-            </a>
-          </li>
-
-          <li>
-            <a href="#event" class="navbar-link" data-nav-link>
-              <span>Event</span>
-
-              <ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon>
-            </a>
-          </li>
-
-          <li>
-            <a onclick="openContactModal()" class="navbar-link" style="cursor: pointer;" data-nav-link>
-              <span>Contact</span>
-
-              <ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon>
-            </a>
-          </li>
-
-        </ul>
-
-      </nav>
-
-      <div class="header-action">
-  <span class="admin-label">ADMIN DASHBOARD</span>
-</div>
-  </header>
+<header class="header" data-header>
+  <div class="container">
+    <h1><a href="index.html" class="logo">Vital Earth Network</a></h1>
+    <button class="nav-open-btn" aria-label="Open Menu" data-nav-open-btn><ion-icon name="menu-outline"></ion-icon></button>
+    <nav class="navbar" data-navbar>
+      <button class="nav-close-btn" aria-label="Close Menu" data-nav-close-btn><ion-icon name="close-outline"></ion-icon></button>
+      <a href="index.html" class="logo">Vital Earth Network</a>
+      <ul class="navbar-list">
+        <li><a href="#home" class="navbar-link" data-nav-link><span>Home</span><ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></a></li>
+        <li><a href="#about" class="navbar-link" data-nav-link><span>About</span><ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></a></li>
+        <li><a href="#service" class="navbar-link" data-nav-link><span>Service</span><ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></a></li>
+        <li><a href="#donate" class="navbar-link" data-nav-link><span>Donate</span><ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></a></li>
+        <li><a href="#event" class="navbar-link" data-nav-link><span>Event</span><ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></a></li>
+        <li><a onclick="openContactModal()" class="navbar-link" style="cursor: pointer;" data-nav-link><span>Contact</span><ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></a></li>
+      </ul>
+    </nav>
+    <div class="header-action"><span class="admin-label">ADMIN DASHBOARD</span></div>
+  </div>
+</header>
 
 <div id="contactOverlay" class="modal-overlay">
   <div class="modal-box">
     <button class="modal-close" aria-label="Close">&times;</button>
-
     <h2>Contact Us</h2>
     <p>Have a question or want to get involved? Send us a message.</p>
-
-    <form
-      action="https://formsubmit.co/vitalearthnetwork@gmail.com"
-      method="POST"
-      class="contact-form"
-    >
+    <form action="https://formsubmit.co/vitalearthnetwork@gmail.com" method="POST" class="contact-form">
       <input type="hidden" name="_captcha" value="false">
       <input type="hidden" name="_subject" value="New message from Vital Earth Network">
       <input type="hidden" name="_next" value="http://127.0.0.1:5500/thank-you.html">
-
       <input type="text" name="name" placeholder="Your Name" required>
       <input type="email" name="email" placeholder="Your Email" required>
       <textarea name="message" placeholder="Your Message" required></textarea>
-
-      <button type="submit" class="btn btn-primary">
-        Send Message
-      </button>
+      <button type="submit" class="btn btn-primary">Send Message</button>
     </form>
   </div>
-
-<style>
-
-    .header {
-  background-color: var(--eerie-black-1) !important;
-  box-shadow: 0 0 10px hsla(0, 0%, 0%, 0.8) !important
-}
-
-.admin-label {
-  color: var(--white);
-  font-family: var(--ff-oswald);
-  font-size: 1.6rem;
-  letter-spacing: 2px;
-  padding: 6px 14px;
-  border: 2px solid var(--pistachio);
-  border-radius: 4px;
-}
-</style>
-
-
-<script>
-  const overlay = document.getElementById("contactOverlay");
-  const closeBtn = document.querySelector(".modal-close");
-
-  // Open modal (call this from a button)
-function openContactModal() {
-  document.body.classList.add("modal-open");
-  overlay.classList.add("active");
-}
-
-function closeContactModal() {
-  document.body.classList.remove("modal-open");
-  overlay.classList.remove("active");
-}
-
-
-  closeBtn.addEventListener("click", closeContactModal);
-
-  // Click outside modal closes it
-  let mouseDownOnOverlay = false;
-
-overlay.addEventListener("mousedown", (e) => {
-  // Only mark true if the click STARTS on the overlay itself
-  mouseDownOnOverlay = e.target === overlay;
-});
-
-overlay.addEventListener("mouseup", () => {
-  if (mouseDownOnOverlay) {
-    closeContactModal();
-  }
-  mouseDownOnOverlay = false;
-});
-
-
-  // Save form data (your existing logic)
-  const form = document.querySelector(".contact-form");
-  form.addEventListener("submit", () => {
-    localStorage.setItem("contact_name", form.name.value);
-    localStorage.setItem("contact_email", form.email.value);
-    localStorage.setItem("contact_message", form.message.value);
-  });
-
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && overlay.classList.contains("active")) {
-    closeContactModal();
-  }
-});
-
-</script>
+  <style>
+    .header { background-color: var(--eerie-black-1) !important; box-shadow: 0 0 10px hsla(0,0%,0%,.8) !important }
+    .admin-label { color: var(--white); font-family: var(--ff-oswald); font-size: 1.6rem; letter-spacing: 2px; padding: 6px 14px; border: 2px solid var(--pistachio); border-radius: 4px; }
+  </style>
+  <script>
+    const overlay = document.getElementById("contactOverlay");
+    const closeBtn = document.querySelector(".modal-close");
+    function openContactModal() { document.body.classList.add("modal-open"); overlay.classList.add("active"); }
+    function closeContactModal() { document.body.classList.remove("modal-open"); overlay.classList.remove("active"); }
+    closeBtn.addEventListener("click", closeContactModal);
+    let mouseDownOnOverlay = false;
+    overlay.addEventListener("mousedown", (e) => { mouseDownOnOverlay = e.target === overlay; });
+    overlay.addEventListener("mouseup", () => { if (mouseDownOnOverlay) closeContactModal(); mouseDownOnOverlay = false; });
+    const form = document.querySelector(".contact-form");
+    form.addEventListener("submit", () => { localStorage.setItem("contact_name", form.name.value); localStorage.setItem("contact_email", form.email.value); localStorage.setItem("contact_message", form.message.value); });
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && overlay.classList.contains("active")) closeContactModal(); });
+  </script>
 </div>
+
 <body>
-
-
 <div id="cleanupAdminApp"></div>
 
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-  crossorigin=""
-/>
-<script
-  src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-  crossorigin=""
-></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 
 <script>
@@ -230,705 +86,138 @@ document.addEventListener("keydown", (e) => {
   const root = document.getElementById("cleanupAdminApp");
   if (!root) return;
 
+  const SUPABASE_URL = "https://rgnthnpusmzsdjksxcns.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJnbnRobnB1c216c2Rqa3N4Y25zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5NjYwODcsImV4cCI6MjA4ODU0MjA4N30.R7gyp_D51Nhs16TMUDhu43mNChjDi7fLw0aZUVkh02s";
+  const PHOTO_BUCKET = "cleanup-photos";
+  const OSRM_BASE = "http://129.213.114.56:5000";
+
+  // Zoom thresholds for route weight and label visibility
+  const LABEL_MIN_ZOOM = 15; // labels disappear below this zoom
+
+  if (!window.supabase) { alert("Supabase library failed to load."); return; }
+  if (!window.L) { alert("Leaflet failed to load."); return; }
+
+  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
   root.innerHTML = `
     <style>
       #cleanupAdminApp, #cleanupAdminApp * { box-sizing: border-box; }
-      #cleanupAdminApp {
-        position: relative;
-        width: 100%;
-        height: 100vh;
-        overflow: hidden;
-        font-family: Arial, sans-serif;
-        background: #0f1115;
-        color: #fff;
-      }
-
-      #cleanupAdminApp {
-      margin-top: 100px;
-      height: calc(100vh - 90px) !important;
-      }
-
-      
-
-      
-
-      #cleanupAdminApp .map-layout {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        overflow: hidden;
-      }
-
-      #cleanupAdminApp .map-host {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-      }
-
-      #cleanupAdminApp .sidebar {
-        width: 410px;
-        max-width: 100%;
-        background: #171b22;
-        border-left: 1px solid #2b313c;
-        padding: 18px;
-        overflow-y: auto;
-        transition: transform 0.25s ease;
-        z-index: 1200;
-        position: absolute;
-        right: 0;
-        top: 0;
-        height: 100%;
-        box-shadow: -8px 0 30px rgba(0,0,0,.28);
-      }
-
+      #cleanupAdminApp { position: relative; width: 100%; overflow: hidden; font-family: Arial, sans-serif; background: #0f1115; color: #fff; margin-top: 100px; height: calc(100vh - 90px); }
+      #cleanupAdminApp .map-layout { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; }
+      #cleanupAdminApp .map-host { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+      #cleanupAdminApp .sidebar { width: 410px; max-width: 100%; background: #171b22; border-left: 1px solid #2b313c; padding: 18px; overflow-y: auto; transition: transform 0.25s ease; z-index: 1200; position: absolute; right: 0; top: 0; height: 100%; box-shadow: -8px 0 30px rgba(0,0,0,.28); }
       #cleanupAdminApp .sidebar.hidden { transform: translateX(100%); }
-
-      #cleanupAdminApp .panel {
-        width: 430px;
-        max-width: 100%;
-        background: #171b22;
-        border-left: 1px solid #2b313c;
-        padding: 18px;
-        overflow-y: auto;
-        transition: transform 0.25s ease;
-        z-index: 1250;
-        position: absolute;
-        right: 0;
-        top: 0;
-        height: 100%;
-        box-shadow: -8px 0 30px rgba(0,0,0,.28);
-        transform: translateX(100%);
-      }
-
+      #cleanupAdminApp .panel { width: 430px; max-width: 100%; background: #171b22; border-left: 1px solid #2b313c; padding: 18px; overflow-y: auto; transition: transform 0.25s ease; z-index: 1250; position: absolute; right: 0; top: 0; height: 100%; box-shadow: -8px 0 30px rgba(0,0,0,.28); transform: translateX(100%); }
       #cleanupAdminApp .panel.open { transform: translateX(0); }
-
-      #cleanupAdminApp .sidebar-header,
-      #cleanupAdminApp .panel-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 10px;
-        margin-bottom: 14px;
-      }
-
-      #cleanupAdminApp .sidebar-title,
-      #cleanupAdminApp .panel-title {
-        font-size: 1.35rem;
-        font-weight: 700;
-        line-height: 1.2;
-        margin: 0;
-      }
-
-      #cleanupAdminApp .close-btn,
-      #cleanupAdminApp .icon-btn {
-        border: none;
-        background: #2b313c;
-        color: #fff;
-        width: 34px;
-        height: 34px;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 1rem;
-        flex-shrink: 0;
-      }
-
-      #cleanupAdminApp .close-btn:hover,
-      #cleanupAdminApp .icon-btn:hover { background: #3b4351; }
-
-      #cleanupAdminApp .info-card,
-      #cleanupAdminApp .section {
-        background: #202632;
-        border: 1px solid #2d3646;
-        border-radius: 14px;
-        padding: 14px;
-        margin-bottom: 14px;
-      }
-
-      #cleanupAdminApp .info-title {
-        font-size: 1.15rem;
-        font-weight: 800;
-        margin: 0 0 12px 0;
-      }
-
-      #cleanupAdminApp .summary-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
-
-      #cleanupAdminApp .summary-box {
-        background: #171d27;
-        border: 1px solid #2c3646;
-        border-radius: 14px;
-        padding: 14px;
-        text-align: center;
-      }
-
-      #cleanupAdminApp .summary-label {
-        font-size: .8rem;
-        color: #9eb0ca;
-        margin-bottom: 7px;
-        text-transform: uppercase;
-        letter-spacing: .4px;
-      }
-
-      #cleanupAdminApp .summary-value {
-        font-size: 1.25rem;
-        font-weight: 800;
-        color: #fff;
-        word-break: break-word;
-      }
-
-      #cleanupAdminApp .summary-value.big-trash {
-        font-size: 1.7rem;
-        color: #ffd166;
-      }
-
-      #cleanupAdminApp .action-row {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        flex-wrap: wrap;
-        margin-top: 12px;
-      }
-
-      #cleanupAdminApp .action-btn {
-        background: #3b80cf;
-        color: #fff;
-        padding: 10px 12px;
-        border-radius: 10px;
-        cursor: pointer;
-        font-weight: 700;
-        min-width: 180px;
-        border: none;
-      }
-
-      #cleanupAdminApp .timeline-list {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      #cleanupAdminApp .timeline-item {
-        border: 1px solid #344055;
-        background: #1b212b;
-        border-radius: 12px;
-        overflow: hidden;
-      }
-
-      #cleanupAdminApp .timeline-trigger {
-        width: 100%;
-        border: none;
-        background: transparent;
-        color: #fff;
-        padding: 14px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        cursor: pointer;
-        text-align: left;
-      }
-
-      #cleanupAdminApp .timeline-trigger:hover {
-        background: rgba(255,255,255,.03);
-      }
-
+      #cleanupAdminApp .sidebar-header, #cleanupAdminApp .panel-header { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 14px; }
+      #cleanupAdminApp .sidebar-title, #cleanupAdminApp .panel-title { font-size: 1.35rem; font-weight: 700; line-height: 1.2; margin: 0; }
+      #cleanupAdminApp .close-btn, #cleanupAdminApp .icon-btn { border: none; background: #2b313c; color: #fff; width: 34px; height: 34px; border-radius: 8px; cursor: pointer; font-size: 1rem; flex-shrink: 0; }
+      #cleanupAdminApp .close-btn:hover, #cleanupAdminApp .icon-btn:hover { background: #3b4351; }
+      #cleanupAdminApp .info-card, #cleanupAdminApp .section { background: #202632; border: 1px solid #2d3646; border-radius: 14px; padding: 14px; margin-bottom: 14px; }
+      #cleanupAdminApp .info-title { font-size: 1.25rem; font-weight: 800; margin: 0 0 12px 0; }
+      #cleanupAdminApp .summary-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+      #cleanupAdminApp .summary-box { background: #171d27; border: 1px solid #2c3646; border-radius: 14px; padding: 14px; text-align: center; }
+      #cleanupAdminApp .summary-label { font-size: 1rem; color: #9eb0ca; margin-bottom: 7px; text-transform: uppercase; letter-spacing: .4px; }
+      #cleanupAdminApp .summary-value { font-size: 1.6rem; font-weight: 800; color: #fff; word-break: break-word; }
+      #cleanupAdminApp .summary-value.big-trash { font-size: 2.4rem; color: #ffd166; }
+      #cleanupAdminApp .action-btn { background: #3b80cf; color: #fff; padding: 10px 12px; border-radius: 10px; cursor: pointer; font-weight: 700; min-width: 0; flex: 1; border: none; font-size: 0.95rem; }
+#cleanupAdminApp .delete-btn { background: #8b2020; color: #fff; padding: 10px 12px; border-radius: 10px; cursor: pointer; font-weight: 700; min-width: 0; flex: 1; border: none; font-size: 0.95rem; }
+      #cleanupAdminApp .delete-btn:hover { background: #b02828; }
+      #cleanupAdminApp .timeline-list { display: flex; flex-direction: column; gap: 10px; }
+      #cleanupAdminApp .timeline-item { border: 1px solid #344055; background: #1b212b; border-radius: 12px; overflow: hidden; }
+      #cleanupAdminApp .timeline-trigger { width: 100%; border: none; background: transparent; color: #fff; padding: 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; cursor: pointer; text-align: left; }
+      #cleanupAdminApp .timeline-trigger:hover { background: rgba(255,255,255,.03); }
       #cleanupAdminApp .timeline-left { min-width: 0; flex: 1; }
-      #cleanupAdminApp .timeline-date {
-        font-weight: 800;
-        font-size: .98rem;
-        color: #fff;
-        margin-bottom: 3px;
-      }
-
-      #cleanupAdminApp .timeline-arrow {
-        font-size: 1rem;
-        color: #b8c7db;
-        transition: transform .2s ease;
-        flex-shrink: 0;
-      }
-
-      #cleanupAdminApp .timeline-item.open .timeline-arrow {
-        transform: rotate(180deg);
-      }
-
-      #cleanupAdminApp .timeline-content {
-        display: none;
-        padding: 0 14px 14px 14px;
-        border-top: 1px solid #2c3646;
-      }
-
+      #cleanupAdminApp .timeline-date { font-weight: 800; font-size: 1.25rem; color: #fff; margin-bottom: 3px; }
+      #cleanupAdminApp .timeline-arrow { font-size: 1rem; color: #b8c7db; transition: transform .2s ease; flex-shrink: 0; }
+      #cleanupAdminApp .timeline-item.open .timeline-arrow { transform: rotate(180deg); }
+      #cleanupAdminApp .timeline-content { display: none; padding: 0 14px 14px 14px; border-top: 1px solid #2c3646; }
       #cleanupAdminApp .timeline-item.open .timeline-content { display: block; }
-
-      #cleanupAdminApp .grid,
-      #cleanupAdminApp .detail-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-      }
-
-      #cleanupAdminApp .detail-grid {
-        margin-top: 12px;
-        margin-bottom: 12px;
-      }
-
-      #cleanupAdminApp .grid-1 {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 10px;
-      }
-
-      #cleanupAdminApp .detail-box {
-        background: #161c25;
-        border: 1px solid #2c3646;
-        border-radius: 10px;
-        padding: 10px;
-      }
-
-      #cleanupAdminApp .detail-label {
-        font-size: .76rem;
-        color: #9fb0c8;
-        margin-bottom: 4px;
-      }
-
-      #cleanupAdminApp .detail-value {
-        font-size: .95rem;
-        font-weight: 700;
-        color: #fff;
-        word-break: break-word;
-      }
-
-      #cleanupAdminApp .timeline-notes {
-        background: #161c25;
-        border: 1px solid #2c3646;
-        border-radius: 10px;
-        padding: 12px;
-        color: #d4d9e3;
-        line-height: 1.5;
-        margin-bottom: 12px;
-        white-space: pre-wrap;
-      }
-
-      #cleanupAdminApp .gallery {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-        margin-top: 10px;
-      }
-
-      #cleanupAdminApp .gallery img {
-        width: 100%;
-        height: 120px;
-        object-fit: cover;
-        border-radius: 10px;
-        border: 1px solid #364055;
-        cursor: pointer;
-        display: block;
-      }
-
-      #cleanupAdminApp .top-bar {
-  position: absolute;
-  top: 18px;
-  left: 14px;
-  z-index: 1000;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  background: rgba(23,27,34,.92);
-  border: 1px solid #2b313c;
-  padding: 10px;
-  border-radius: 12px;
-  backdrop-filter: blur(6px);
-  max-width: calc(100% - 28px);
-  font-size: 13.3333333333px;
-}
-
-
-
-#cleanupAdminApp .top-auth-badge {
-  position: absolute;
-  top: 18px;
-  right: 14px;
-  z-index: 1001;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  background: rgba(23,27,34,.92);
-  border: 1px solid #2b313c;
-  padding: 10px 12px;
-  border-radius: 12px;
-  font-size: 14px;
-}
-
-      #cleanupAdminApp .top-bar button,
-      #cleanupAdminApp .floating-action-btn,
-      #cleanupAdminApp .subrow button,
-      #cleanupAdminApp .save-btn,
-      #cleanupAdminApp .auth-card button {
-        border: none;
-        cursor: pointer;
-      }
-
-      #cleanupAdminApp .top-bar button {
-        background: #2b313c;
-        color: #fff;
-        padding: 5px 12px;
-        border-radius: 10px;
-        font-weight: 600;
-        font-size: 13.3333333333px;
-      }
-
+      #cleanupAdminApp .grid, #cleanupAdminApp .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+      #cleanupAdminApp .detail-grid { margin-top: 12px; margin-bottom: 12px; }
+      #cleanupAdminApp .grid-1 { display: grid; grid-template-columns: 1fr; gap: 10px; }
+      #cleanupAdminApp .detail-box { background: #161c25; border: 1px solid #2c3646; border-radius: 10px; padding: 12px; }
+      #cleanupAdminApp .detail-label { font-size: .85rem; color: #9fb0c8; margin-bottom: 5px; }
+      #cleanupAdminApp .detail-label { font-size: 1rem; color: #9fb0c8; margin-bottom: 5px; }
+      #cleanupAdminApp .detail-value { font-size: 1.35rem; font-weight: 700; color: #fff; word-break: break-word; }
+      #cleanupAdminApp .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 10px; }
+      #cleanupAdminApp .gallery img { width: 100%; height: 120px; object-fit: cover; border-radius: 10px; border: 1px solid #364055; cursor: pointer; display: block; }
+      #cleanupAdminApp .top-bar { position: absolute; top: 18px; left: 14px; z-index: 1000; display: flex; flex-wrap: wrap; gap: 10px; background: rgba(23,27,34,.92); border: 1px solid #2b313c; padding: 10px; border-radius: 12px; backdrop-filter: blur(6px); max-width: calc(100% - 28px); font-size: 13px; }
+      #cleanupAdminApp .top-auth-badge { position: absolute; top: 18px; right: 14px; z-index: 1001; display: flex; gap: 8px; align-items: center; background: rgba(23,27,34,.92); border: 1px solid #2b313c; padding: 10px 12px; border-radius: 12px; font-size: 14px; }
+      #cleanupAdminApp .top-bar button, #cleanupAdminApp .floating-action-btn, #cleanupAdminApp .subrow button, #cleanupAdminApp .save-btn, #cleanupAdminApp .auth-card button { border: none; cursor: pointer; }
+      #cleanupAdminApp .top-bar button { background: #2b313c; color: #fff; padding: 5px 12px; border-radius: 10px; font-weight: 600; font-size: 13px; }
       #cleanupAdminApp .top-bar button.active { background: #4ea1ff; }
-
-      #cleanupAdminApp .legend {
-        position: absolute;
-        bottom: 22px;
-        left: 14px;
-        z-index: 1000;
-        background: rgba(23,27,34,.92);
-        border: 1px solid #2b313c;
-        padding-right: 12px;
-        padding-left: 12px;
-        padding-top: 8px;
-        padding-bottom: 8px;
-        border-radius: 12px;
-        min-width: 180px;
-        backdrop-filter: blur(6px);
-      }
-
-      #cleanupAdminApp .legend h4 {
-        margin: 0 0 -2px 0;
-        font-size: 15px;
-      }
-
-      #cleanupAdminApp .legend-item {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: -2px;
-        font-size: 14px;
-        color: #d5dbea;
-      }
-
-      #cleanupAdminApp .legend-line {
-        width: 26px;
-        height: 0;
-        border-top: 8px solid #4ea1ff;
-        border-radius: 999px;
-      }
-
-      #cleanupAdminApp .legend-circle {
-        width: 16px;
-        height: 16px;
-        border-radius: 50%;
-        background: rgba(46,204,113,.3);
-        border: 3px solid #2ecc71;
-      }
-
-      #cleanupAdminApp .map-note {
-        font-size: 14px;
-        color: #aab6c9;
-        margin-top: -2px;
-      }
-
-      #cleanupAdminApp .loading-badge {
-        position: absolute;
-        top: 14px;
-        right: 14px;
-        z-index: 1000;
-        background: rgba(23,27,34,.92);
-        border: 1px solid #2b313c;
-        padding: 10px 14px;
-        border-radius: 12px;
-        font-size: .9rem;
-        color: #d7e3ff;
-        display: none;
-      }
-
+      #cleanupAdminApp .legend { position: absolute; bottom: 22px; left: 14px; z-index: 1000; background: rgba(23,27,34,.92); border: 1px solid #2b313c; padding: 8px 12px; border-radius: 12px; min-width: 180px; backdrop-filter: blur(6px); }
+      #cleanupAdminApp .legend h4 { margin: 0 0 4px 0; font-size: 15px; }
+      #cleanupAdminApp .legend-item { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; font-size: 14px; color: #d5dbea; }
+      #cleanupAdminApp .legend-line { width: 26px; height: 0; border-top: 8px solid #4ea1ff; border-radius: 999px; }
+      #cleanupAdminApp .legend-circle { width: 16px; height: 16px; border-radius: 50%; background: rgba(46,204,113,.3); border: 3px solid #2ecc71; }
+      #cleanupAdminApp .map-note { font-size: 14px; color: #aab6c9; margin-top: 2px; }
+      #cleanupAdminApp .loading-badge { position: absolute; top: 14px; right: 14px; z-index: 1000; background: rgba(23,27,34,.92); border: 1px solid #2b313c; padding: 10px 14px; border-radius: 12px; font-size: .9rem; color: #d7e3ff; display: none; }
       #cleanupAdminApp .loading-badge.show { display: block; }
-
-      #cleanupAdminApp .leaflet-popup-content-wrapper,
-      #cleanupAdminApp .leaflet-popup-tip {
-        background: #1b212b;
-        color: #fff;
-      }
-
-      #cleanupAdminApp .popup-sub {
-        font-size: .85rem;
-        color: #cad5e6;
-      }
-
-      #cleanupAdminApp .lightbox {
-        position: fixed;
-        inset: 0;
-        background: rgba(0,0,0,.85);
-        display: none;
-        align-items: center;
-        justify-content: center;
-        z-index: 5000;
-        padding: 20px;
-      }
-
+      #cleanupAdminApp .leaflet-popup-content-wrapper, #cleanupAdminApp .leaflet-popup-tip { background: #1b212b; color: #fff; }
+      #cleanupAdminApp .popup-sub { font-size: .85rem; color: #cad5e6; }
+      #cleanupAdminApp .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.85); display: none; align-items: center; justify-content: center; z-index: 5000; padding: 20px; }
       #cleanupAdminApp .lightbox.open { display: flex; }
-      #cleanupAdminApp .lightbox img {
-        max-width: 92vw;
-        max-height: 88vh;
-        border-radius: 12px;
-      }
-
-      #cleanupAdminApp .lightbox-close {
-        position: absolute;
-        top: 18px;
-        right: 18px;
-        border: none;
-        background: rgba(255,255,255,.14);
-        color: #fff;
-        width: 42px;
-        height: 42px;
-        border-radius: 10px;
-        font-size: 1.1rem;
-        cursor: pointer;
-      }
-
-      #cleanupAdminApp .page-loading {
-        position: absolute;
-        inset: 0;
-        z-index: 2000;
-        background: rgba(15,17,21,.7);
-        display: none;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-weight: 700;
-      }
-
+      #cleanupAdminApp .lightbox img { max-width: 92vw; max-height: 88vh; border-radius: 12px; }
+      #cleanupAdminApp .lightbox-close { position: absolute; top: 18px; right: 18px; border: none; background: rgba(255,255,255,.14); color: #fff; width: 42px; height: 42px; border-radius: 10px; font-size: 1.1rem; cursor: pointer; }
+      #cleanupAdminApp .page-loading { position: absolute; inset: 0; z-index: 2000; background: rgba(15,17,21,.7); display: none; align-items: center; justify-content: center; color: white; font-weight: 700; }
       #cleanupAdminApp .page-loading.show { display: flex; }
-
-      #cleanupAdminApp .mode-banner {
-        background: #161c25;
-        border: 1px solid #2c3646;
-        border-radius: 12px;
-        padding: 12px;
-        color: #d7e3ff;
-        margin-bottom: 14px;
-        line-height: 1.45;
-      }
-
+      #cleanupAdminApp .mode-banner { background: #161c25; border: 1px solid #2c3646; border-radius: 12px; padding: 12px; color: #d7e3ff; margin-bottom: 14px; line-height: 1.45; }
       #cleanupAdminApp .mode-banner strong { color: #ffd166; }
-
-      #cleanupAdminApp label {
-        display: block;
-        font-size: 13px;
-        color: #b9c7db;
-        margin-bottom: 6px;
-      }
-
-      #cleanupAdminApp input,
-      #cleanupAdminApp select,
-      #cleanupAdminApp textarea {
-        width: 100%;
-        border: 1px solid #3a4557;
-        background: #0f141b;
-        color: #fff;
-        border-radius: 10px;
-        padding: 10px 12px;
-      }
-
-      #cleanupAdminApp textarea {
-        min-height: 90px;
-        resize: vertical;
-      }
-
-      #cleanupAdminApp .subrow {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-        flex-wrap: wrap;
-      }
-
-      #cleanupAdminApp .subrow button {
-        background: #2c3645;
-        color: #fff;
-        border-radius: 10px;
-        padding: 10px 12px;
-      }
-
-      #cleanupAdminApp .subrow button.primary {
-        background: #4ea1ff;
-        color: #08111d;
-        font-weight: 700;
-      }
-
-      #cleanupAdminApp .subrow button.warn {
-        background: #d35454;
-        color: #fff;
-      }
-
-      #cleanupAdminApp .hint,
-      #cleanupAdminApp .preview-note {
-        font-size: 12px;
-        color: #aab9cd;
-        margin-top: 6px;
-      }
-
-      #cleanupAdminApp .coords-box {
-        background: #0f141b;
-        border: 1px solid #364253;
-        border-radius: 10px;
-        padding: 10px;
-        font-size: 12px;
-        color: #d1dbeb;
-        line-height: 1.45;
-        max-height: 140px;
-        overflow: auto;
-        white-space: pre-wrap;
-      }
-
-      #cleanupAdminApp .range-wrap {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-      }
-
-      #cleanupAdminApp .range-wrap input[type="range"] {
-        flex: 1;
-        padding: 0;
-        background: transparent;
-        border: none;
-      }
-
-      #cleanupAdminApp .save-btn {
-        width: 100%;
-        background: #39c172;
-        color: #fff;
-        font-size: 20px;
-        font-weight: 600;
-        padding: 14px;
-        border-radius: 12px;
-      }
-
+      #cleanupAdminApp label { display: block; font-size: 13px; color: #b9c7db; margin-bottom: 6px; }
+      #cleanupAdminApp input, #cleanupAdminApp select, #cleanupAdminApp textarea { width: 100%; border: 1px solid #3a4557; background: #0f141b; color: #fff; border-radius: 10px; padding: 10px 12px; }
+      #cleanupAdminApp textarea { min-height: 90px; resize: vertical; }
+      #cleanupAdminApp .subrow { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+      #cleanupAdminApp .subrow button { background: #2c3645; color: #fff; border-radius: 10px; padding: 10px 12px; }
+      #cleanupAdminApp .subrow button.primary { background: #4ea1ff; color: #08111d; font-weight: 700; }
+      #cleanupAdminApp .subrow button.warn { background: #d35454; color: #fff; }
+      #cleanupAdminApp .hint, #cleanupAdminApp .preview-note { font-size: 12px; color: #aab9cd; margin-top: 6px; }
+      #cleanupAdminApp .coords-box { background: #0f141b; border: 1px solid #364253; border-radius: 10px; padding: 10px; font-size: 12px; color: #d1dbeb; line-height: 1.45; max-height: 140px; overflow: auto; white-space: pre-wrap; }
+      #cleanupAdminApp .range-wrap { display: flex; gap: 10px; align-items: center; }
+      #cleanupAdminApp .range-wrap input[type="range"] { flex: 1; padding: 0; background: transparent; border: none; }
+      #cleanupAdminApp .save-btn { width: 100%; background: #39c172; color: #fff; font-size: 20px; font-weight: 600; padding: 14px; border-radius: 12px; }
       #cleanupAdminApp .save-btn:disabled { opacity: .7; cursor: not-allowed; }
-
-      #cleanupAdminApp .status {
-        font-size: 13px;
-        color: #d6e4ff;
-        margin-top: 8px;
-        min-height: 18px;
-        line-height: 1.35;
-      }
-
-      #cleanupAdminApp .floating-action-btn {
-        position: absolute;
-        right: 30px;
-        bottom: 30px;
-        z-index: 1100;
-        border-radius: 999px;
-        padding: 9px 18px;
-        background: #4594ee;
-        color: #fff;
-        font-size: 20px;
-        font-weight: 700;
-      }
-
-      #cleanupAdminApp .auth-overlay {
-        position: absolute;
-        inset: 0;
-        z-index: 10000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: linear-gradient(rgba(10,12,16,.92), rgba(10,12,16,.92));
-        padding: 20px;
-      }
-
+      #cleanupAdminApp .status { font-size: 13px; color: #d6e4ff; margin-top: 8px; min-height: 18px; line-height: 1.35; }
+      #cleanupAdminApp .floating-action-btn { position: absolute; right: 30px; bottom: 30px; z-index: 1100; border-radius: 999px; padding: 9px 18px; background: #4594ee; color: #fff; font-size: 20px; font-weight: 700; }
+      #cleanupAdminApp .auth-overlay { position: absolute; inset: 0; z-index: 10000; display: flex; align-items: center; justify-content: center; background: linear-gradient(rgba(10,12,16,.92), rgba(10,12,16,.92)); padding: 20px; }
       #cleanupAdminApp .auth-overlay.hidden { display: none; }
+      #cleanupAdminApp .auth-card { width: min(420px, 100%); background: #171b22; border: 1px solid #2b313c; border-radius: 18px; padding: 22px; box-shadow: 0 20px 50px rgba(0,0,0,.35); }
+      #cleanupAdminApp .auth-card h2 { margin: 0 0 8px; font-size: 1.5rem; }
+      #cleanupAdminApp .auth-card p { margin: 0 0 16px; color: #b9c7db; line-height: 1.45; }
+      #cleanupAdminApp .auth-actions { display: flex; gap: 10px; margin-top: 12px; }
+      #cleanupAdminApp .auth-actions button { flex: 1; padding: 12px 14px; border-radius: 12px; font-weight: 700; }
+      #cleanupAdminApp .auth-login-btn { background: #4ea1ff; color: #08111d; }
+      #cleanupAdminApp .auth-status { min-height: 18px; margin-top: 12px; font-size: 13px; color: #d6e4ff; }
+      #cleanupAdminApp .top-auth-badge button { background: #2b313c; color: #fff; padding: 8px 10px; border-radius: 10px; }
+      /* Trash label tooltip on map */
+      .cleanup-trash-label-wrapper {
+  background: rgba(20, 26, 36, 0.88);
+  border: 1.5px solid #4ea1ff;
+  border-radius: 5px;
+  color: #ffd166;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 2px 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 1px 5px rgba(0,0,0,.4);
+  letter-spacing: 0.2px;
+  display: inline-block;
+  line-height: 1.3;
+}
 
-      #cleanupAdminApp .auth-card {
-        width: min(420px, 100%);
-        background: #171b22;
-        border: 1px solid #2b313c;
-        border-radius: 18px;
-        padding: 22px;
-        box-shadow: 0 20px 50px rgba(0,0,0,.35);
-      }
-
-      #cleanupAdminApp .auth-card h2 {
-        margin: 0 0 8px;
-        font-size: 1.5rem;
-      }
-
-      #cleanupAdminApp .auth-card p {
-        margin: 0 0 16px;
-        color: #b9c7db;
-        line-height: 1.45;
-      }
-
-      #cleanupAdminApp .auth-actions {
-        display: flex;
-        gap: 10px;
-        margin-top: 12px;
-      }
-
-      #cleanupAdminApp .auth-actions button {
-        flex: 1;
-        padding: 12px 14px;
-        border-radius: 12px;
-        font-weight: 700;
-      }
-
-      #cleanupAdminApp .auth-login-btn {
-        background: #4ea1ff;
-        color: #08111d;
-      }
-
-      #cleanupAdminApp .auth-logout-btn {
-        background: #2b313c;
-        color: #fff;
-      }
-
-      #cleanupAdminApp .auth-status {
-        min-height: 18px;
-        margin-top: 12px;
-        font-size: 13px;
-        color: #d6e4ff;
-      }
-
-
-      #cleanupAdminApp .top-auth-badge button {
-        background: #2b313c;
-        color: #fff;
-        padding: 8px 10px;
-        border-radius: 10px;
-      }
-
-      @media (max-width: 900px) {
-        #cleanupAdminApp .sidebar,
-        #cleanupAdminApp .panel {
-          width: min(94vw, 430px);
-        }
-      }
-
-      @media (max-width: 700px) {
-        #cleanupAdminApp .sidebar,
-        #cleanupAdminApp .panel {
-          width: 100vw;
-          max-width: 100vw;
-        }
-
-        #cleanupAdminApp .detail-grid,
-        #cleanupAdminApp .grid {
-          grid-template-columns: 1fr;
-        }
-      }
+.cleanup-trash-label-icon {
+  font-size: 11px;
+  margin-right: 3px;
+  color: #aac9ff;
+}
+      @media (max-width: 900px) { #cleanupAdminApp .sidebar, #cleanupAdminApp .panel { width: min(94vw, 430px); } }
+      @media (max-width: 700px) { #cleanupAdminApp .sidebar, #cleanupAdminApp .panel { width: 100vw; max-width: 100vw; } #cleanupAdminApp .detail-grid, #cleanupAdminApp .grid { grid-template-columns: 1fr; } }
     </style>
 
     <div class="map-layout">
       <div id="cleanupAdminMap" class="map-host"></div>
-
       <div class="top-bar">
         <button id="showAllBtn" class="active" type="button">Show All</button>
         <button id="showRoutesBtn" type="button">Routes</button>
@@ -936,29 +225,18 @@ document.addEventListener("keydown", (e) => {
         <button id="fitBtn" type="button">Fit Map</button>
         <button id="refreshBtn" type="button">Refresh</button>
       </div>
-
       <div class="top-auth-badge">
         <span id="authUserText">Not signed in</span>
         <button id="logoutBtn" type="button">Log Out</button>
       </div>
-
       <button id="newCleanupBtn" class="floating-action-btn" type="button">Add New Cleanup</button>
-
       <div class="legend">
         <h4>Admin Map</h4>
-        <div class="legend-item">
-          <span class="legend-line"></span>
-          <span>Roads cleaned</span>
-        </div>
-        <div class="legend-item">
-          <span class="legend-circle"></span>
-          <span>Cleanup areas</span>
-        </div>
+        <div class="legend-item"><span class="legend-line"></span><span>Roads cleaned</span></div>
+        <div class="legend-item"><span class="legend-circle"></span><span>Cleanup areas</span></div>
         <div class="map-note">Click a route or area to manage cleanup history.</div>
       </div>
-
       <div id="loadingBadge" class="loading-badge">Loading cleanups...</div>
-
       <aside id="sidebar" class="sidebar hidden">
         <div class="sidebar-header">
           <h2 class="sidebar-title">Cleanup History</h2>
@@ -966,66 +244,30 @@ document.addEventListener("keydown", (e) => {
         </div>
         <div id="sidebarContent"></div>
       </aside>
-
       <aside id="formPanel" class="panel">
         <div class="panel-header">
           <h2 class="panel-title" id="formPanelTitle">Log Cleanup</h2>
           <button id="closeFormPanelBtn" class="icon-btn" type="button">✕</button>
         </div>
-
         <div id="modeBanner" class="mode-banner" style="display:none;"></div>
-
         <div class="section">
           <h3>Cleanup Info</h3>
           <div class="grid">
-            <div>
-              <label for="cleanupType">Type</label>
-              <select id="cleanupType">
-                <option value="route">Route</option>
-                <option value="area">Area</option>
-              </select>
-            </div>
-            <div>
-              <label for="areaName">Street / Area Name</label>
-              <input id="areaName" type="text" placeholder="Klein Rd / Basset Park" />
-            </div>
-            <div>
-              <label for="cleanupDate">Date</label>
-              <input id="cleanupDate" type="date" />
-            </div>
-            <div>
-              <label for="cleanupTime">Time</label>
-              <input id="cleanupTime" type="text" placeholder="3:30 PM" />
-            </div>
-            <div>
-              <label for="duration">Duration</label>
-              <input id="duration" type="text" placeholder="1 hr 30 min" />
-            </div>
-            <div>
-              <label for="peopleCount">People</label>
-              <input id="peopleCount" type="number" step="0.1" placeholder="4" />
-            </div>
-            <div>
-              <label for="amountCollected">Trash Collected</label>
-              <input id="amountCollected" type="number" step="0.1" placeholder="325" />
-            </div>
+            <div><label for="cleanupType">Type</label><select id="cleanupType"><option value="route">Route</option><option value="area">Area</option></select></div>
+            <div><label for="areaName">Street / Area Name</label><input id="areaName" type="text" placeholder="Klein Rd / Basset Park" /></div>
+            <div><label for="cleanupDate">Date</label><input id="cleanupDate" type="date" /></div>
+            <div><label for="cleanupTime">Time</label><input id="cleanupTime" type="text" placeholder="3:30 PM" /></div>
+            <div><label for="duration">Duration</label><input id="duration" type="text" placeholder="1 hr 30 min" /></div>
+            <div><label for="peopleCount">People</label><input id="peopleCount" type="number" step="0.1" placeholder="4" /></div>
+            <div><label for="amountCollected">Trash Collected</label><input id="amountCollected" type="number" step="0.1" placeholder="325" /></div>
           </div>
-
           <div class="grid-1" style="margin-top:10px;">
-            <div>
-              <label for="notes">Notes</label>
-              <textarea id="notes" placeholder="What was picked up, conditions, details..."></textarea>
-            </div>
-            <div>
-              <label for="photos">Photos</label>
-              <input id="photos" type="file" accept="image/*" multiple />
-            </div>
+            <div><label for="notes">Notes</label><textarea id="notes" placeholder="What was picked up, conditions, details..."></textarea></div>
+            <div><label for="photos">Photos</label><input id="photos" type="file" accept="image/*" multiple /></div>
           </div>
         </div>
-
         <div id="geometrySection" class="section">
           <h3>Geometry Builder</h3>
-
           <div id="routeControls">
             <div class="subrow" style="margin-bottom:10px;">
               <button id="startRouteBtn" class="primary" type="button">Select Route Points</button>
@@ -1035,7 +277,6 @@ document.addEventListener("keydown", (e) => {
             <div class="hint">Route mode: click the map to place points in order.</div>
             <div class="preview-note" id="routePointCount">Points: 0</div>
           </div>
-
           <div id="areaControls" style="display:none;">
             <div class="subrow" style="margin-bottom:10px;">
               <button id="setAreaCenterBtn" class="primary" type="button">Select Area Center</button>
@@ -1050,66 +291,35 @@ document.addEventListener("keydown", (e) => {
               </div>
             </div>
           </div>
-
           <div style="margin-top:12px;">
             <label>Geometry Preview</label>
             <div id="geometryPreviewText" class="coords-box">Nothing drawn yet.</div>
           </div>
         </div>
-
         <button id="saveCleanupBtn" class="save-btn" type="button">Save Cleanup</button>
         <div id="statusText" class="status"></div>
       </aside>
     </div>
-
     <div id="pageLoading" class="page-loading">Loading…</div>
-
     <div id="lightbox" class="lightbox">
       <button class="lightbox-close" id="lightboxClose" type="button">✕</button>
       <img id="lightboxImg" src="" alt="Expanded cleanup photo" />
     </div>
-
     <div id="authOverlay" class="auth-overlay">
       <div class="auth-card">
         <h2>Admin Login</h2>
         <p>Sign in before viewing the cleanup admin map.</p>
-
         <label for="loginEmail">Email</label>
         <input id="loginEmail" type="email" autocomplete="username" placeholder="you@example.com" />
-
         <label for="loginPassword" style="margin-top:12px;">Password</label>
         <input id="loginPassword" type="password" autocomplete="current-password" placeholder="Password" />
-
-        <div class="auth-actions">
-          <button id="loginBtn" class="auth-login-btn" type="button">Log In</button>
-        </div>
-
+        <div class="auth-actions"><button id="loginBtn" class="auth-login-btn" type="button">Log In</button></div>
         <div id="authStatus" class="auth-status"></div>
       </div>
     </div>
   `;
 
-  // -------------------------------------------------
-  // CONFIG
-  // -------------------------------------------------
-  const SUPABASE_URL = "https://rgnthnpusmzsdjksxcns.supabase.co";
-  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJnbnRobnB1c216c2Rqa3N4Y25zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5NjYwODcsImV4cCI6MjA4ODU0MjA4N30.R7gyp_D51Nhs16TMUDhu43mNChjDi7fLw0aZUVkh02s";
-  const PHOTO_BUCKET = "cleanup-photos";
-
-  if (!window.supabase) {
-    alert("Supabase library failed to load.");
-    return;
-  }
-  if (!window.L) {
-    alert("Leaflet failed to load.");
-    return;
-  }
-
-  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-  // -------------------------------------------------
-  // ELEMENTS
-  // -------------------------------------------------
+  // Elements
   const mapEl = root.querySelector("#cleanupAdminMap");
   const sidebar = root.querySelector("#sidebar");
   const sidebarContent = root.querySelector("#sidebarContent");
@@ -1160,22 +370,14 @@ document.addEventListener("keydown", (e) => {
   const showRoutesBtn = root.querySelector("#showRoutesBtn");
   const showAreasBtn = root.querySelector("#showAreasBtn");
 
-  // -------------------------------------------------
-  // MAP
-  // -------------------------------------------------
-  const map = L.map(mapEl, {
-    zoomControl: true,
-    preferCanvas: true
-  }).setView([42.9770, -78.8000], 14);
-
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-    attribution: "&copy; OpenStreetMap contributors"
-  }).addTo(map);
+  // Map
+  const map = L.map(mapEl, { zoomControl: true, preferCanvas: false, updateWhenIdle: false, updateWhenZooming: false }).setView([42.9770, -78.8000], 14);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "&copy; OpenStreetMap contributors", keepBuffer: 8 }).addTo(map);
 
   const routeLayerGroup = L.layerGroup().addTo(map);
   const areaLayerGroup = L.layerGroup().addTo(map);
-
+  // Separate layer group for trash labels so we can show/hide them
+  const trashLabelGroup = L.layerGroup().addTo(map);
   const allLayers = [];
   let preparedCleanupData = [];
   let groupedCleanupData = [];
@@ -1193,755 +395,461 @@ document.addEventListener("keydown", (e) => {
   let appendTargetGroup = null;
   let appendGeometry = null;
 
-  function refreshMapSize(delay = 120) {
-    setTimeout(() => map.invalidateSize(), delay);
+  const routeCoordCache = new Map();
+
+  function geometryFingerprint(geometry) {
+    const pts = [geometry.start, ...(Array.isArray(geometry.via) ? geometry.via : []), geometry.end];
+    return pts.map(p => `${parseFloat(p[0]).toFixed(6)},${parseFloat(p[1]).toFixed(6)}`).join("|");
   }
 
-  function showLoading(show) {
-    loadingBadge.classList.toggle("show", show);
+  // -------------------------------------------------------
+  // Dynamic route weight based on zoom
+  // Returns a weight so the polyline sits just wider than
+  // the OSM road tile at the current zoom level.
+  // OSM road tile widths are roughly: z14=4px, z15=7px,
+  // z16=10px, z17=14px, z18=18px, z19=22px.
+  // We add ~4px on top so the blue line frames the road.
+  // -------------------------------------------------------
+  function getRouteWeight(zoom) {
+    const z = zoom !== undefined ? zoom : map.getZoom();
+    if (z >= 19) return 26;
+    if (z >= 18) return 22;
+    if (z >= 17) return 18;
+    if (z >= 16) return 14;
+    if (z >= 15) return 11;
+    if (z >= 14) return 8;
+    if (z >= 13) return 6;
+    return 5;
   }
 
-  function setStatus(message, isError = false) {
-    statusText.textContent = message;
-    statusText.style.color = isError ? "#ff9d9d" : "#d6e4ff";
+  // -------------------------------------------------------
+  // Update all route/area layer weights when zoom changes
+  // -------------------------------------------------------
+  function updateAllWeights() {
+    const z = map.getZoom();
+    const rw = getRouteWeight(z);
+    allLayers.forEach(entry => {
+      if (!entry.layer) return;
+      if (entry.type === "route") {
+        entry.style.weight = rw;
+        entry.layer.setStyle({ weight: rw });
+      }
+    });
+    // Show/hide trash labels based on zoom
+    updateTrashLabelVisibility(z);
   }
 
-  function setAuthStatus(message, isError = false) {
-    authStatus.textContent = message;
-    authStatus.style.color = isError ? "#ff9d9d" : "#d6e4ff";
-  }
+  // -------------------------------------------------------
+  // Trash label management
+  // -------------------------------------------------------
+  // We store { label: L.marker, groupKey } for each label
+  const trashLabels = [];
 
-  function setPageLoading(show, text = "Loading…") {
-    pageLoading.textContent = text;
-    pageLoading.classList.toggle("show", show);
-  }
-
-  function setPickingCursor(active) {
-    root.classList.toggle("map-picking", active);
-    map.dragging[active ? "disable" : "enable"]();
-    map.doubleClickZoom[active ? "disable" : "enable"]();
-    map.scrollWheelZoom[active ? "disable" : "enable"]();
-    map.boxZoom[active ? "disable" : "enable"]();
-    map.keyboard[active ? "disable" : "enable"]();
-  }
-
-  function stopPickingMode() {
-    mapClickMode = null;
-    setPickingCursor(false);
-  }
-
-  function openLightbox(src) {
-    lightboxImg.src = src;
-    lightbox.classList.add("open");
-  }
-
-  function closeLightbox() {
-    lightbox.classList.remove("open");
-    lightboxImg.src = "";
-  }
-
-  lightboxClose.addEventListener("click", closeLightbox);
-  lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox) closeLightbox();
+  function createTrashLabel(groupKey, latlng, trashAmount) {
+  const icon = L.divIcon({
+    className: "cleanup-trash-label-wrapper",
+    html: `${trashAmount}`,
+    iconAnchor: [22, 14],
+    iconSize: null
   });
+  const marker = L.marker(latlng, { icon, interactive: false, zIndexOffset: 500 });
+  return marker;
+}
 
-  function getRouteWeight() {
-    const zoom = map.getZoom();
-    if (zoom >= 19) return 44;
-    if (zoom >= 18) return 40;
-    if (zoom >= 17) return 34;
-    if (zoom >= 16) return 26;
-    if (zoom >= 15) return 18;
-    if (zoom >= 14) return 12;
-    if (zoom >= 13) return 8;
-    return 4;
+  function getMidpoint(coords) {
+    if (!coords || coords.length === 0) return null;
+    const mid = coords[Math.floor(coords.length / 2)];
+    return L.latLng(mid[0], mid[1]);
   }
 
-  function latLngToOsrmPair([lat, lng]) {
-    return `${lng},${lat}`;
+  function getAreaCenter(item) {
+    if (item.center && item.center.length === 2) return L.latLng(item.center[0], item.center[1]);
+    return null;
   }
 
-  async function getRoadRouteCoords(geometry) {
-    const points = [
-      geometry.start,
-      ...(Array.isArray(geometry.via) ? geometry.via : []),
-      geometry.end
-    ];
+  function buildTrashLabels(data, grouped) {
+    trashLabelGroup.clearLayers();
+    trashLabels.length = 0;
 
-    if (!geometry.start || !geometry.end || points.length < 2) return [];
+    // One label per group, placed at the midpoint of the first item's geometry
+    grouped.forEach(group => {
+      const firstItem = group.items[0];
+      if (!firstItem) return;
+      let latlng = null;
+      if (group.type === "route") {
+        const fullItem = data.find(d => d.id === firstItem.id);
+        if (fullItem && fullItem.coords && fullItem.coords.length >= 2) {
+          latlng = getMidpoint(fullItem.coords);
+        }
+      } else if (group.type === "area") {
+        const fullItem = data.find(d => d.id === firstItem.id);
+        if (fullItem) latlng = getAreaCenter(fullItem);
+      }
+      if (!latlng) return;
+      const label = createTrashLabel(group.key, latlng, String(group.totalTrash));
+      trashLabels.push({ label, groupKey: group.key });
+      trashLabelGroup.addLayer(label);
+    });
 
-    const coordString = points.map(latLngToOsrmPair).join(";");
-    const url = `https://router.project-osrm.org/route/v1/driving/${coordString}?overview=full&geometries=geojson`;
+    updateTrashLabelVisibility(map.getZoom());
+  }
 
+  function updateTrashLabelVisibility(zoom) {
+    const show = zoom >= LABEL_MIN_ZOOM;
+    trashLabels.forEach(({ label }) => {
+      const el = label.getElement();
+      if (el) el.style.display = show ? "" : "none";
+    });
+  }
+
+  async function getRoadRouteCoords(points) {
+    if (!points || points.length < 2) return (points || []).map(p => [
+      p[0] !== undefined ? parseFloat(p[0]) : p.lat,
+      p[1] !== undefined ? parseFloat(p[1]) : p.lng
+    ]);
+    const coordString = points.map(p => {
+      const lat = p[0] !== undefined ? parseFloat(p[0]) : p.lat;
+      const lng = p[1] !== undefined ? parseFloat(p[1]) : p.lng;
+      return `${lng},${lat}`;
+    }).join(";");
     try {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error(`Routing request failed: ${response.status}`);
+      const response = await fetch(`${OSRM_BASE}/route/v1/driving/${coordString}?overview=full&geometries=geojson`);
+      if (!response.ok) throw new Error(`OSRM ${response.status}`);
       const data = await response.json();
       const coords = data?.routes?.[0]?.geometry?.coordinates;
-      if (!coords?.length) throw new Error("No route");
+      if (!coords?.length) throw new Error("No route geometry");
       return coords.map(([lng, lat]) => [lat, lng]);
-    } catch {
-      return points;
+    } catch (err) {
+      console.warn("OSRM failed, straight-line fallback:", err.message);
+      return points.map(p => [
+        p[0] !== undefined ? parseFloat(p[0]) : p.lat,
+        p[1] !== undefined ? parseFloat(p[1]) : p.lng
+      ]);
     }
   }
 
-  function normalizePhotos(value) {
-    if (Array.isArray(value)) return value;
-    if (!value) return [];
-    try {
-      const parsed = typeof value === "string" ? JSON.parse(value) : value;
-      return Array.isArray(parsed) ? parsed : [];
-    } catch {
-      return [];
-    }
+  function refreshMapSize(delay = 120) { setTimeout(() => map.invalidateSize(), delay); }
+  function showLoading(show) { loadingBadge.classList.toggle("show", show); }
+  function setStatus(msg, isError = false) { statusText.textContent = msg; statusText.style.color = isError ? "#ff9d9d" : "#d6e4ff"; }
+  function setAuthStatus(msg, isError = false) { authStatus.textContent = msg; authStatus.style.color = isError ? "#ff9d9d" : "#d6e4ff"; }
+  function setPageLoading(show, text = "Loading…") { pageLoading.textContent = text; pageLoading.classList.toggle("show", show); }
+  function setPickingCursor(active) {
+    root.classList.toggle("map-picking", active);
+    ["dragging","doubleClickZoom","scrollWheelZoom","boxZoom","keyboard"].forEach(ctrl => map[ctrl][active ? "disable" : "enable"]());
   }
+  function stopPickingMode() { mapClickMode = null; setPickingCursor(false); }
+  function openLightbox(src) { lightboxImg.src = src; lightbox.classList.add("open"); }
+  function closeLightbox() { lightbox.classList.remove("open"); lightboxImg.src = ""; }
+  lightboxClose.addEventListener("click", closeLightbox);
+  lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
 
-  function parseTrashAmount(value) {
-    if (value === null || value === undefined || value === "") return 0;
-    if (typeof value === "number") return value;
-    const cleaned = String(value).replace(/,/g, "").trim();
-    const num = parseFloat(cleaned);
-    return Number.isFinite(num) ? num : 0;
+  function normalizePhotos(v) {
+    if (Array.isArray(v)) return v; if (!v) return [];
+    try { const p = typeof v === "string" ? JSON.parse(v) : v; return Array.isArray(p) ? p : []; } catch { return []; }
   }
-
-  function formatTrashAmount(value) {
-    const num = parseTrashAmount(value);
-    return Number.isFinite(num) ? String(num) : "-";
+  function parseTrashAmount(v) {
+    if (v === null || v === undefined || v === "") return 0;
+    if (typeof v === "number") return v;
+    const n = parseFloat(String(v).replace(/,/g, "").trim());
+    return Number.isFinite(n) ? n : 0;
   }
-
+  function formatTrashAmount(v) { const n = parseTrashAmount(v); return Number.isFinite(n) ? String(n) : "-"; }
   function getComparableTimestamp(item) {
-    const datePart = item.date ? String(item.date) : "1900-01-01";
-    const timePart = item.time ? String(item.time) : "";
-    const combined = new Date(timePart ? `${datePart} ${timePart}` : `${datePart}T00:00:00`);
-    const millis = combined.getTime();
-    if (!Number.isNaN(millis)) return millis;
-    const createdMillis = item.createdAt ? new Date(item.createdAt).getTime() : 0;
-    return Number.isNaN(createdMillis) ? 0 : createdMillis;
+    const d = new Date(item.time ? `${item.date || "1900-01-01"} ${item.time}` : `${item.date || "1900-01-01"}T00:00:00`);
+    if (!Number.isNaN(d.getTime())) return d.getTime();
+    const c = item.createdAt ? new Date(item.createdAt).getTime() : 0;
+    return Number.isNaN(c) ? 0 : c;
   }
-
   function formatDisplayTimestamp(item) {
-    let dateObj = null;
-    if (item.date && item.time) dateObj = new Date(`${item.date} ${item.time}`);
-    else if (item.date) dateObj = new Date(`${item.date}T00:00:00`);
-    else if (item.createdAt) dateObj = new Date(item.createdAt);
-
-    if (!dateObj || Number.isNaN(dateObj.getTime())) return "No timestamp";
-
-    const mm = String(dateObj.getMonth() + 1).padStart(2, "0");
-    const dd = String(dateObj.getDate()).padStart(2, "0");
-    const yy = String(dateObj.getFullYear()).slice(-2);
-
-    let hours = dateObj.getHours();
-    const minutes = String(dateObj.getMinutes()).padStart(2, "0");
-    const ampm = hours >= 12 ? "PM" : "AM";
-    hours = hours % 12;
-    if (hours === 0) hours = 12;
-
-    return `${mm}/${dd}/${yy} ${String(hours).padStart(2, "0")}:${minutes} ${ampm}`;
+    let d = null;
+    if (item.date && item.time) d = new Date(`${item.date} ${item.time}`);
+    else if (item.date) d = new Date(`${item.date}T00:00:00`);
+    else if (item.createdAt) d = new Date(item.createdAt);
+    if (!d || Number.isNaN(d.getTime())) return "No timestamp";
+    const mm = String(d.getMonth()+1).padStart(2,"0"), dd = String(d.getDate()).padStart(2,"0"), yy = String(d.getFullYear()).slice(-2);
+    let h = d.getHours(); const min = String(d.getMinutes()).padStart(2,"0"), ampm = h >= 12 ? "PM" : "AM";
+    h = h % 12; if (h === 0) h = 12;
+    return `${mm}/${dd}/${yy} ${String(h).padStart(2,"0")}:${min} ${ampm}`;
   }
-
-  function getGroupKey(item) {
-    const typePart = (item.type || "unknown").trim().toLowerCase();
-    const areaPart = (item.areaName || "").trim().toLowerCase();
-    return `${typePart}__${areaPart || "untitled"}`;
-  }
-
-  function getGroupDisplayName(group) {
-    return group.areaName || group.title || "Cleanup";
-  }
-
-  function makePopupHtml(item) {
-    return `<div class="popup-sub">${formatDisplayTimestamp(item)}</div>`;
-  }
+  function getGroupKey(item) { return `${(item.type||"unknown").trim().toLowerCase()}__${(item.areaName||"").trim().toLowerCase()||"untitled"}`; }
+  function getGroupDisplayName(group) { return group.areaName || group.title || "Cleanup"; }
+  function makePopupHtml(item) { return `<div class="popup-sub">${formatDisplayTimestamp(item)}</div>`; }
 
   async function fetchCleanupsFromDb() {
-    const { data, error } = await supabaseClient
-      .from("cleanups")
-      .select("*")
+    const { data, error } = await supabaseClient.from("cleanups").select("*")
       .order("cleanup_date", { ascending: false, nullsFirst: false })
       .order("created_at", { ascending: false });
-
     if (error) throw error;
     return data || [];
   }
 
   async function prepareCleanupData(rawRows) {
+    const routeRows = rawRows.filter(r => r.cleanup_type === "route" && r.geometry?.type === "route");
+    const areaRows = rawRows.filter(r => r.cleanup_type === "area" && r.geometry?.type === "area");
+
+    const uniqueGeoms = new Map();
+    routeRows.forEach(r => { const k = geometryFingerprint(r.geometry); if (!uniqueGeoms.has(k)) uniqueGeoms.set(k, r.geometry); });
+
+    await Promise.all(Array.from(uniqueGeoms.entries()).map(async ([key, geom]) => {
+      if (routeCoordCache.has(key)) return;
+      const pts = [geom.start, ...(Array.isArray(geom.via) ? geom.via : []), geom.end];
+      routeCoordCache.set(key, await getRoadRouteCoords(pts));
+    }));
+
     const prepared = [];
-
-    for (const row of rawRows) {
-      const geometry = row.geometry || {};
-      const commonItem = {
-        id: row.id,
-        title: row.title,
-        type: row.cleanup_type,
-        date: row.cleanup_date,
-        time: row.cleanup_time,
-        duration: row.duration,
-        people: row.people_count,
-        amount: row.amount_collected,
-        areaName: row.area_name,
-        notes: row.notes,
-        photos: normalizePhotos(row.photos),
-        createdAt: row.created_at,
-        geometry
-      };
-
-      if (row.cleanup_type === "route" && geometry.type === "route") {
-        const coords = await getRoadRouteCoords(geometry);
-        prepared.push({ ...commonItem, coords });
-      }
-
-      if (row.cleanup_type === "area" && geometry.type === "area") {
-        prepared.push({
-          ...commonItem,
-          center: geometry.center,
-          radius: geometry.radius
-        });
-      }
+    for (const row of routeRows) {
+      prepared.push({ id: row.id, title: row.title, type: row.cleanup_type, date: row.cleanup_date, time: row.cleanup_time, duration: row.duration, people: row.people_count, amount: row.amount_collected, areaName: row.area_name, notes: row.notes, photos: normalizePhotos(row.photos), createdAt: row.created_at, geometry: row.geometry, coords: routeCoordCache.get(geometryFingerprint(row.geometry)) || [] });
     }
-
+    for (const row of areaRows) {
+      prepared.push({ id: row.id, title: row.title, type: row.cleanup_type, date: row.cleanup_date, time: row.cleanup_time, duration: row.duration, people: row.people_count, amount: row.amount_collected, areaName: row.area_name, notes: row.notes, photos: normalizePhotos(row.photos), createdAt: row.created_at, geometry: row.geometry, center: row.geometry.center, radius: row.geometry.radius });
+    }
     return prepared;
   }
 
   function buildGroupedCleanupData(items) {
     const groupMap = new Map();
-
     items.forEach(item => {
-      const groupKey = getGroupKey(item);
-
-      if (!groupMap.has(groupKey)) {
-        groupMap.set(groupKey, {
-          key: groupKey,
-          title: item.title || item.areaName || "Cleanup",
-          areaName: item.areaName || "-",
-          type: item.type,
-          items: [],
-          totalTrash: 0,
-          lastCleanedText: "-",
-          latestGeometry: item.geometry || null
-        });
-      }
-
-      const group = groupMap.get(groupKey);
-      group.items.push(item);
-      group.totalTrash += parseTrashAmount(item.amount);
+      const gk = getGroupKey(item);
+      if (!groupMap.has(gk)) groupMap.set(gk, { key: gk, title: item.title||item.areaName||"Cleanup", areaName: item.areaName||"-", type: item.type, items: [], totalTrash: 0, lastCleanedText: "-", latestGeometry: item.geometry||null });
+      const g = groupMap.get(gk); g.items.push(item); g.totalTrash += parseTrashAmount(item.amount);
     });
-
-    return Array.from(groupMap.values()).map(group => {
-      group.items.sort((a, b) => getComparableTimestamp(b) - getComparableTimestamp(a));
-      const latest = group.items[0] || null;
-      group.lastCleanedText = latest ? formatDisplayTimestamp(latest) : "-";
-      if (latest?.geometry) group.latestGeometry = latest.geometry;
-      if ((!group.title || group.title === "Cleanup") && latest) {
-        group.title = latest.title || latest.areaName || "Cleanup";
-      }
-      return group;
+    return Array.from(groupMap.values()).map(g => {
+      g.items.sort((a,b) => getComparableTimestamp(b)-getComparableTimestamp(a));
+      const latest = g.items[0]||null;
+      g.lastCleanedText = latest ? formatDisplayTimestamp(latest) : "-";
+      if (latest?.geometry) g.latestGeometry = latest.geometry;
+      if ((!g.title||g.title==="Cleanup")&&latest) g.title = latest.title||latest.areaName||"Cleanup";
+      return g;
     });
   }
 
-  function resetSelectedVisuals() {
-    selectedVisuals.forEach(entry => {
-      if (entry.layer && entry.originalStyle) entry.layer.setStyle(entry.originalStyle);
-    });
-    selectedVisuals = [];
-  }
-
-  function clearSelection() {
-    selectedGroupKey = null;
-    resetSelectedVisuals();
-    sidebar.classList.add("hidden");
-    refreshMapSize();
-  }
-
+  function resetSelectedVisuals() { selectedVisuals.forEach(e => { if (e.layer&&e.originalStyle) e.layer.setStyle(e.originalStyle); }); selectedVisuals = []; }
+  function clearSelection() { selectedGroupKey = null; resetSelectedVisuals(); sidebar.classList.add("hidden"); refreshMapSize(); }
   function applySelection(groupKey) {
-    resetSelectedVisuals();
-    selectedGroupKey = groupKey;
-
+    resetSelectedVisuals(); selectedGroupKey = groupKey;
+    const rw = getRouteWeight();
     allLayers.forEach(entry => {
       if (entry.groupKey !== groupKey) return;
-
-      const originalStyle = { ...entry.style };
-
-      if (entry.type === "route") {
-        entry.layer.setStyle({
-          color: "#ff9f43",
-          weight: entry.style.weight,
-          opacity: 1
-        });
-      } else {
-        entry.layer.setStyle({
-          color: "#ff9f43",
-          fillColor: "#ff9f43",
-          weight: entry.style.weight,
-          fillOpacity: 0.28,
-          opacity: 1
-        });
-      }
-
-      selectedVisuals.push({ layer: entry.layer, originalStyle });
+      const orig = { ...entry.style };
+      if (entry.type === "route") entry.layer.setStyle({ color: "#ff9f43", weight: rw, opacity: 1 });
+      else entry.layer.setStyle({ color: "#ff9f43", fillColor: "#ff9f43", weight: entry.style.weight, fillOpacity: 0.28, opacity: 1 });
+      selectedVisuals.push({ layer: entry.layer, originalStyle: orig });
     });
   }
+
+  // -------------------------------------------------------
+  // Delete a group (all entries sharing same area name+type)
+  // -------------------------------------------------------
+async function deleteGroup(groupKey) {
+  const group = groupedCleanupData.find(g => g.key === groupKey);
+  if (!group) return;
+  const label = getGroupDisplayName(group);
+  if (!confirm(`Delete ALL cleanup entries for "${label}"?\n\nThis will permanently delete ${group.items.length} record(s) and cannot be undone.`)) return;
+
+  setPageLoading(true, "Deleting...");
+  try {
+    const ids = group.items.map(i => i.id);
+    console.log("Deleting IDs:", ids);
+    const { data, error } = await supabaseClient.from("cleanups").delete().in("id", ids).select();
+    console.log("Delete result:", data, error);
+    if (error) throw error;
+
+    // Clear the coord cache for this group's geometry so it doesn't re-render
+    group.items.forEach(item => {
+      if (item.geometry) {
+        const key = geometryFingerprint(item.geometry);
+        routeCoordCache.delete(key);
+      }
+    });
+
+    clearAllFeatures();
+    clearSelection();
+    sidebar.classList.add("hidden");
+    await loadAndRenderCleanups(false);
+  } catch (err) {
+    alert("Delete failed: " + err.message);
+    console.error("Delete error:", err);
+  } finally {
+    setPageLoading(false);
+  }
+}
 
   function openGroupSidebar(groupKey) {
     const group = groupedCleanupData.find(g => g.key === groupKey);
     if (!group) return;
-
     applySelection(groupKey);
     sidebar.classList.remove("hidden");
-
     sidebarContent.innerHTML = `
       <div class="info-card">
         <h3 class="info-title">${getGroupDisplayName(group)}</h3>
         <div class="summary-grid">
-          <div class="summary-box">
-            <div class="summary-label">Total Trash Collected</div>
-            <div class="summary-value big-trash">${String(group.totalTrash)}</div>
-          </div>
-          <div class="summary-box">
-            <div class="summary-label">Last Cleaned</div>
-            <div class="summary-value">${group.lastCleanedText}</div>
-          </div>
+          <div class="summary-box"><div class="summary-label">Total Trash Collected</div><div class="summary-value big-trash">${String(group.totalTrash)} pieces</div></div>
+          <div class="summary-box"><div class="summary-label">Last Cleaned</div><div class="summary-value">${group.lastCleanedText}</div></div>
+          <div class="summary-box"><div class="summary-label">Total Cleanups</div><div class="summary-value">${group.items.length}</div></div>
         </div>
-        <div class="action-row">
-          <button class="action-btn" id="appendTimestampBtn" type="button">Add Another Entry</button>
-        </div>
+        <div style="display:flex;flex-direction:row;gap:10px;margin-top:12px;">
+  <button class="action-btn" id="appendTimestampBtn" type="button" style="flex:1;min-width:0;">+ Add Another Entry</button>
+  <button class="delete-btn" id="deleteGroupBtn" type="button" style="flex:1;min-width:0;">🗑 Delete All</button>
+</div>
       </div>
-      <div id="timelineList" class="timeline-list"></div>
-    `;
-
-    root.querySelector("#appendTimestampBtn").addEventListener("click", () => {
-      openAppendTimestampPanel(group);
-    });
-
+      <div id="timelineList" class="timeline-list"></div>`;
+    root.querySelector("#appendTimestampBtn").addEventListener("click", () => openAppendTimestampPanel(group));
+    root.querySelector("#deleteGroupBtn").addEventListener("click", () => deleteGroup(groupKey));
     const timelineList = root.querySelector("#timelineList");
-
     group.items.forEach((item, index) => {
       const itemEl = document.createElement("div");
       itemEl.className = `timeline-item${index === 0 ? " open" : ""}`;
-
       const photosHtml = Array.isArray(item.photos) && item.photos.length
-        ? `<div class="gallery">
-            ${item.photos.map((src, i) => `
-              <img src="${src}" alt="Cleanup photo ${i + 1}" data-photo-src="${src}">
-            `).join("")}
-           </div>`
-        : `<p style="color:#aab6c9;margin:0;">No photos yet.</p>`;
-
+        ? `<div class="gallery">${item.photos.map((src,i) => `<img src="${src}" alt="Cleanup photo ${i+1}" data-photo-src="${src}">`).join("")}</div>`
+        : `<p style="color:#aab6c9;margin:0;font-size:0.95rem;">No photos yet.</p>`;
       itemEl.innerHTML = `
         <button class="timeline-trigger" type="button">
-          <div class="timeline-left">
-            <div class="timeline-date">${formatDisplayTimestamp(item)}</div>
-          </div>
+          <div class="timeline-left"><div class="timeline-date">${formatDisplayTimestamp(item)}</div></div>
           <div class="timeline-arrow">⌄</div>
         </button>
         <div class="timeline-content">
           <div class="detail-grid">
-            <div class="detail-box">
-              <div class="detail-label">Trash Collected</div>
-              <div class="detail-value">${formatTrashAmount(item.amount)}</div>
-            </div>
-            <div class="detail-box">
-              <div class="detail-label">Time Spent</div>
-              <div class="detail-value">${item.duration || "-"}</div>
-            </div>
-            <div class="detail-box">
-              <div class="detail-label">People</div>
-              <div class="detail-value">${item.people ?? "-"}</div>
-            </div>
-            <div class="detail-box">
-              <div class="detail-label">Timestamp</div>
-              <div class="detail-value">${formatDisplayTimestamp(item)}</div>
-            </div>
+            <div class="detail-box"><div class="detail-label">Trash Collected</div><div class="detail-value">${formatTrashAmount(item.amount)} lbs</div></div>
+            <div class="detail-box"><div class="detail-label">Time Spent</div><div class="detail-value">${item.duration||"-"}</div></div>
+            <div class="detail-box"><div class="detail-label">People</div><div class="detail-value">${item.people??"-"}</div></div>
+            <div class="detail-box"><div class="detail-label">Timestamp</div><div class="detail-value">${formatDisplayTimestamp(item)}</div></div>
           </div>
-          <div class="timeline-notes">${item.notes || "No notes added."}</div>
+          <div class="timeline-notes">${item.notes||"No notes added."}</div>
           ${photosHtml}
-        </div>
-      `;
-
+        </div>`;
       timelineList.appendChild(itemEl);
     });
-
-    timelineList.querySelectorAll(".timeline-trigger").forEach((trigger) => {
+    timelineList.querySelectorAll(".timeline-trigger").forEach(trigger => {
       trigger.addEventListener("click", () => {
-        const item = trigger.closest(".timeline-item");
-        const isOpen = item.classList.contains("open");
+        const it = trigger.closest(".timeline-item"), isOpen = it.classList.contains("open");
         timelineList.querySelectorAll(".timeline-item").forEach(el => el.classList.remove("open"));
-        if (!isOpen) item.classList.add("open");
+        if (!isOpen) it.classList.add("open");
       });
     });
-
-    timelineList.querySelectorAll("[data-photo-src]").forEach(img => {
-      img.addEventListener("click", () => openLightbox(img.getAttribute("data-photo-src")));
-    });
-
+    timelineList.querySelectorAll("[data-photo-src]").forEach(img => img.addEventListener("click", () => openLightbox(img.getAttribute("data-photo-src"))));
     refreshMapSize(180);
   }
 
-  function syncTypeUI() {
-    currentMode = cleanupTypeEl.value;
-    routeControls.style.display = currentMode === "route" ? "" : "none";
-    areaControls.style.display = currentMode === "area" ? "" : "none";
-    updateGeometryPreviewText();
-  }
-
-  function resetFormFields() {
-    areaNameEl.value = "";
-    cleanupDateEl.value = "";
-    cleanupTimeEl.value = "";
-    durationEl.value = "";
-    peopleCountEl.value = "";
-    amountCollectedEl.value = "";
-    notesEl.value = "";
-    photosEl.value = "";
-    areaRadiusEl.value = 120;
-    areaRadiusNumberEl.value = 120;
-  }
-
-  function clearPreviewRoute() {
-    if (previewRouteLayer) map.removeLayer(previewRouteLayer);
-    previewRouteLayer = null;
-    previewPointMarkers.forEach(marker => map.removeLayer(marker));
-    previewPointMarkers = [];
-  }
-
-  function clearPreviewArea() {
-    if (previewAreaLayer) map.removeLayer(previewAreaLayer);
-    if (previewAreaCenterMarker) map.removeLayer(previewAreaCenterMarker);
-    previewAreaLayer = null;
-    previewAreaCenterMarker = null;
-  }
-
-  function clearAllGeometry() {
-    routePoints = [];
-    areaCenter = null;
-    clearPreviewRoute();
-    clearPreviewArea();
-    routePointCount.textContent = "Points: 0";
-    updateGeometryPreviewText();
-    stopPickingMode();
-    setStatus("Geometry cleared.");
-  }
+  function syncTypeUI() { currentMode = cleanupTypeEl.value; routeControls.style.display = currentMode === "route" ? "" : "none"; areaControls.style.display = currentMode === "area" ? "" : "none"; updateGeometryPreviewText(); }
+  function resetFormFields() { [areaNameEl,cleanupDateEl,cleanupTimeEl,durationEl,peopleCountEl,amountCollectedEl,notesEl].forEach(el => el.value=""); photosEl.value=""; areaRadiusEl.value=120; areaRadiusNumberEl.value=120; }
+  function clearPreviewRoute() { if (previewRouteLayer) map.removeLayer(previewRouteLayer); previewRouteLayer=null; previewPointMarkers.forEach(m=>map.removeLayer(m)); previewPointMarkers=[]; }
+  function clearPreviewArea() { if (previewAreaLayer) map.removeLayer(previewAreaLayer); if (previewAreaCenterMarker) map.removeLayer(previewAreaCenterMarker); previewAreaLayer=null; previewAreaCenterMarker=null; }
+  function clearAllGeometry() { routePoints=[]; areaCenter=null; clearPreviewRoute(); clearPreviewArea(); routePointCount.textContent="Points: 0"; updateGeometryPreviewText(); stopPickingMode(); setStatus("Geometry cleared."); }
 
   function updateGeometryPreviewText() {
-    if (formMode === "append" && appendGeometry) {
-      if (appendGeometry.type === "route") {
-        const pts = [appendGeometry.start, ...(appendGeometry.via || []), appendGeometry.end];
-        geometryPreviewText.textContent = `Using existing route geometry\nPoints: ${pts.length}`;
-      } else {
-        geometryPreviewText.textContent =
-          `Using existing area geometry\nCenter: ${appendGeometry.center[0].toFixed(6)}, ${appendGeometry.center[1].toFixed(6)}\nRadius: ${appendGeometry.radius} meters`;
-      }
+    if (formMode==="append"&&appendGeometry) {
+      if (appendGeometry.type==="route") { const pts=[appendGeometry.start,...(appendGeometry.via||[]),appendGeometry.end]; geometryPreviewText.textContent=`Using existing route geometry\nPoints: ${pts.length}`; }
+      else geometryPreviewText.textContent=`Using existing area geometry\nCenter: ${appendGeometry.center[0].toFixed(6)}, ${appendGeometry.center[1].toFixed(6)}\nRadius: ${appendGeometry.radius} meters`;
       return;
     }
-
-    if (currentMode === "route") {
-      if (!routePoints.length) {
-        geometryPreviewText.textContent = "Nothing drawn yet.";
-        return;
-      }
-      const start = routePoints[0];
-      const end = routePoints[routePoints.length - 1];
-      const via = routePoints.slice(1, -1);
-      geometryPreviewText.textContent =
-        `Type: route\nStart: ${start.lat.toFixed(6)}, ${start.lng.toFixed(6)}\nEnd: ${end.lat.toFixed(6)}, ${end.lng.toFixed(6)}\nVia points: ${via.length}`;
+    if (currentMode==="route") {
+      if (!routePoints.length) { geometryPreviewText.textContent="Nothing drawn yet."; return; }
+      const s=routePoints[0],e=routePoints[routePoints.length-1],v=routePoints.slice(1,-1);
+      geometryPreviewText.textContent=`Type: route\nStart: ${s.lat.toFixed(6)}, ${s.lng.toFixed(6)}\nEnd: ${e.lat.toFixed(6)}, ${e.lng.toFixed(6)}\nVia points: ${v.length}`;
     } else {
-      if (!areaCenter) {
-        geometryPreviewText.textContent = "Nothing drawn yet.";
-        return;
-      }
-      geometryPreviewText.textContent =
-        `Type: area\nCenter: ${areaCenter.lat.toFixed(6)}, ${areaCenter.lng.toFixed(6)}\nRadius: ${Number(areaRadiusEl.value)} meters`;
+      if (!areaCenter) { geometryPreviewText.textContent="Nothing drawn yet."; return; }
+      geometryPreviewText.textContent=`Type: area\nCenter: ${areaCenter.lat.toFixed(6)}, ${areaCenter.lng.toFixed(6)}\nRadius: ${Number(areaRadiusEl.value)} meters`;
     }
   }
 
-  function openNewCleanupPanel() {
-    formMode = "new";
-    appendTargetGroup = null;
-    appendGeometry = null;
-    formPanelTitle.textContent = "Add New Cleanup";
-    modeBanner.style.display = "none";
-    geometrySection.style.display = "";
-    cleanupTypeEl.disabled = false;
-    areaNameEl.disabled = false;
-    resetFormFields();
-    clearAllGeometry();
-    cleanupTypeEl.value = "route";
-    syncTypeUI();
-    setStatus("Ready to add a new cleanup.");
-    formPanel.classList.add("open");
-    refreshMapSize(220);
-  }
-
+  function openNewCleanupPanel() { formMode="new"; appendTargetGroup=null; appendGeometry=null; formPanelTitle.textContent="Add New Cleanup"; modeBanner.style.display="none"; geometrySection.style.display=""; cleanupTypeEl.disabled=false; areaNameEl.disabled=false; resetFormFields(); clearAllGeometry(); cleanupTypeEl.value="route"; syncTypeUI(); setStatus("Ready to add a new cleanup."); formPanel.classList.add("open"); refreshMapSize(220); }
   function openAppendTimestampPanel(group) {
-    if (!group || !group.latestGeometry) return;
-    formMode = "append";
-    appendTargetGroup = group;
-    appendGeometry = structuredClone(group.latestGeometry);
-    formPanelTitle.textContent = "Add Another Entry";
-    modeBanner.style.display = "";
-    modeBanner.innerHTML = `<strong>Appending to:</strong> ${getGroupDisplayName(group)}`;
-    geometrySection.style.display = "";
-    cleanupTypeEl.value = group.type;
-    cleanupTypeEl.disabled = true;
-    areaNameEl.value = group.areaName === "-" ? "" : group.areaName;
-    areaNameEl.disabled = true;
-    cleanupDateEl.value = "";
-    cleanupTimeEl.value = "";
-    durationEl.value = "";
-    peopleCountEl.value = "";
-    amountCollectedEl.value = "";
-    notesEl.value = "";
-    photosEl.value = "";
-    clearAllGeometry();
-    currentMode = group.type;
-    routeControls.style.display = currentMode === "route" ? "" : "none";
-    areaControls.style.display = currentMode === "area" ? "" : "none";
-    updateGeometryPreviewText();
-    setStatus(`Adding a new timestamp entry for ${getGroupDisplayName(group)}.`);
-    formPanel.classList.add("open");
-    refreshMapSize(220);
+    if (!group||!group.latestGeometry) return;
+    formMode="append"; appendTargetGroup=group; appendGeometry=structuredClone(group.latestGeometry);
+    formPanelTitle.textContent="Add Another Entry"; modeBanner.style.display=""; modeBanner.innerHTML=`<strong>Appending to:</strong> ${getGroupDisplayName(group)}`;
+    geometrySection.style.display=""; cleanupTypeEl.value=group.type; cleanupTypeEl.disabled=true;
+    areaNameEl.value=group.areaName==="-"?"":group.areaName; areaNameEl.disabled=true;
+    [cleanupDateEl,cleanupTimeEl,durationEl,peopleCountEl,amountCollectedEl,notesEl].forEach(el=>el.value=""); photosEl.value="";
+    clearAllGeometry(); currentMode=group.type;
+    routeControls.style.display=currentMode==="route"?"":"none"; areaControls.style.display=currentMode==="area"?"":"none";
+    updateGeometryPreviewText(); setStatus(`Adding a new timestamp entry for ${getGroupDisplayName(group)}.`); formPanel.classList.add("open"); refreshMapSize(220);
   }
-
-  function closeFormPanel() {
-    formPanel.classList.remove("open");
-    stopPickingMode();
-    cleanupTypeEl.disabled = false;
-    areaNameEl.disabled = false;
-    refreshMapSize(220);
-  }
-
-  async function fetchRoadRoute(points) {
-    if (points.length < 2) return points.map(p => [p.lat, p.lng]);
-    const coordString = points.map(p => `${p.lng},${p.lat}`).join(";");
-    const url = `https://router.project-osrm.org/route/v1/driving/${coordString}?overview=full&geometries=geojson`;
-
-    try {
-      const res = await fetch(url);
-      if (!res.ok) throw new Error("Routing failed");
-      const data = await res.json();
-      const coords = data?.routes?.[0]?.geometry?.coordinates;
-      if (!coords?.length) throw new Error("No route geometry returned");
-      return coords.map(([lng, lat]) => [lat, lng]);
-    } catch {
-      return points.map(p => [p.lat, p.lng]);
-    }
-  }
+  function closeFormPanel() { formPanel.classList.remove("open"); stopPickingMode(); cleanupTypeEl.disabled=false; areaNameEl.disabled=false; refreshMapSize(220); }
 
   async function updateRoutePreview() {
-    clearPreviewRoute();
-    routePointCount.textContent = `Points: ${routePoints.length}`;
-    updateGeometryPreviewText();
+    clearPreviewRoute(); routePointCount.textContent=`Points: ${routePoints.length}`; updateGeometryPreviewText();
     if (!routePoints.length) return;
-
-    routePoints.forEach((point, index) => {
-      const marker = L.circleMarker(point, {
-        radius: 6,
-        color: "#ffffff",
-        weight: 2,
-        fillColor: index === 0 ? "#39c172" : index === routePoints.length - 1 ? "#ff9f43" : "#4ea1ff",
-        fillOpacity: 1
-      }).addTo(map);
-      previewPointMarkers.push(marker);
+    routePoints.forEach((point,index) => {
+      previewPointMarkers.push(L.circleMarker(point, { radius:6, color:"#ffffff", weight:2, fillColor: index===0?"#39c172":index===routePoints.length-1?"#ff9f43":"#4ea1ff", fillOpacity:1 }).addTo(map));
     });
-
     if (routePoints.length < 2) return;
-
-    const latLngs = await fetchRoadRoute(routePoints);
-    previewRouteLayer = L.polyline(latLngs, {
-      color: "#FFD04D",
-      weight: getRouteWeight(),
-      opacity: 0.95,
-      lineCap: "round",
-      lineJoin: "round"
-    }).addTo(map);
+    const latLngs = await getRoadRouteCoords(routePoints);
+    previewRouteLayer = L.polyline(latLngs, { color:"#FFD04D", weight:getRouteWeight(), opacity:0.95, lineCap:"round", lineJoin:"round" }).addTo(map);
   }
 
   function updateAreaPreview() {
-    clearPreviewArea();
-    updateGeometryPreviewText();
-    if (!areaCenter) return;
-
-    previewAreaCenterMarker = L.circleMarker(areaCenter, {
-      radius: 6,
-      color: "#fff",
-      weight: 2,
-      fillColor: "#FFD04D",
-      fillOpacity: 1
-    }).addTo(map);
-
-    previewAreaLayer = L.circle(areaCenter, {
-      radius: Number(areaRadiusEl.value),
-      color: "#ffd84d",
-      weight: 4,
-      fillColor: "#ffd84d",
-      fillOpacity: 0.18
-    }).addTo(map);
+    clearPreviewArea(); updateGeometryPreviewText(); if (!areaCenter) return;
+    previewAreaCenterMarker = L.circleMarker(areaCenter, { radius:6, color:"#fff", weight:2, fillColor:"#FFD04D", fillOpacity:1 }).addTo(map);
+    previewAreaLayer = L.circle(areaCenter, { radius:Number(areaRadiusEl.value), color:"#ffd84d", weight:4, fillColor:"#ffd84d", fillOpacity:0.18 }).addTo(map);
   }
 
   function buildGeometryPayload() {
-    if (formMode === "append" && appendGeometry) return structuredClone(appendGeometry);
-
-    if (currentMode === "route") {
-      if (routePoints.length < 2) throw new Error("Route needs at least 2 points.");
-      return {
-        type: "route",
-        start: [routePoints[0].lat, routePoints[0].lng],
-        end: [routePoints[routePoints.length - 1].lat, routePoints[routePoints.length - 1].lng],
-        via: routePoints.slice(1, -1).map(p => [p.lat, p.lng])
-      };
-    }
-
+    if (formMode==="append"&&appendGeometry) return structuredClone(appendGeometry);
+    if (currentMode==="route") { if (routePoints.length<2) throw new Error("Route needs at least 2 points."); return { type:"route", start:[routePoints[0].lat,routePoints[0].lng], end:[routePoints[routePoints.length-1].lat,routePoints[routePoints.length-1].lng], via:routePoints.slice(1,-1).map(p=>[p.lat,p.lng]) }; }
     if (!areaCenter) throw new Error("Area needs a center point.");
-
-    return {
-      type: "area",
-      center: [areaCenter.lat, areaCenter.lng],
-      radius: Number(areaRadiusEl.value)
-    };
+    return { type:"area", center:[areaCenter.lat,areaCenter.lng], radius:Number(areaRadiusEl.value) };
   }
 
   async function uploadPhotos(files) {
     const uploaded = [];
-
     for (const file of files) {
-      const fileExt = file.name.split(".").pop() || "jpg";
+      const fileExt = file.name.split(".").pop()||"jpg";
       const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
-
-      const { error: uploadError } = await supabaseClient.storage
-        .from(PHOTO_BUCKET)
-        .upload(fileName, file, {
-          upsert: false,
-          contentType: file.type
-        });
-
+      const { error: uploadError } = await supabaseClient.storage.from(PHOTO_BUCKET).upload(fileName, file, { upsert:false, contentType:file.type });
       if (uploadError) throw uploadError;
-
-      const { data: publicUrlData } = supabaseClient.storage
-        .from(PHOTO_BUCKET)
-        .getPublicUrl(fileName);
-
+      const { data: publicUrlData } = supabaseClient.storage.from(PHOTO_BUCKET).getPublicUrl(fileName);
       uploaded.push(publicUrlData.publicUrl);
     }
-
     return uploaded;
   }
 
   async function saveCleanup() {
     try {
-      setStatus("Saving...");
-      saveCleanupBtn.disabled = true;
-      setPageLoading(true, "Saving cleanup...");
-
+      setStatus("Saving..."); saveCleanupBtn.disabled=true; setPageLoading(true,"Saving cleanup...");
       const geometry = buildGeometryPayload();
-      const photoUrls = await uploadPhotos(Array.from(photosEl.files || []));
-
-      const payload = {
-        title: areaNameEl.value.trim(),
-        cleanup_type: cleanupTypeEl.value,
-        area_name: areaNameEl.value.trim() || null,
-        cleanup_date: cleanupDateEl.value || null,
-        cleanup_time: cleanupTimeEl.value.trim() || null,
-        duration: durationEl.value.trim() || null,
-        people_count: peopleCountEl.value ? Number(peopleCountEl.value) : null,
-        amount_collected: amountCollectedEl.value ? Number(amountCollectedEl.value) : null,
-        notes: notesEl.value.trim() || null,
-        geometry,
-        photos: photoUrls
-      };
-
+      const photoUrls = await uploadPhotos(Array.from(photosEl.files||[]));
+      const payload = { title:areaNameEl.value.trim(), cleanup_type:cleanupTypeEl.value, area_name:areaNameEl.value.trim()||null, cleanup_date:cleanupDateEl.value||null, cleanup_time:cleanupTimeEl.value.trim()||null, duration:durationEl.value.trim()||null, people_count:peopleCountEl.value?Number(peopleCountEl.value):null, amount_collected:amountCollectedEl.value?Number(amountCollectedEl.value):null, notes:notesEl.value.trim()||null, geometry, photos:photoUrls };
       const { error } = await supabaseClient.from("cleanups").insert(payload);
       if (error) throw error;
-
-      setStatus("Cleanup saved.");
-      clearAllGeometry();
-      stopPickingMode();
-      closeFormPanel();
-      await loadAndRenderCleanups(false);
-      fitAllFeatures();
-
-      if (appendTargetGroup) {
-        const refreshedGroupKey =
-          `${payload.cleanup_type.toLowerCase()}__${(payload.area_name || payload.title || "untitled").trim().toLowerCase()}`;
-        openGroupSidebar(refreshedGroupKey);
-      }
-    } catch (err) {
-      setStatus(err.message || "Save failed.", true);
-    } finally {
-      saveCleanupBtn.disabled = false;
-      setPageLoading(false);
-    }
+      setStatus("Cleanup saved."); clearAllGeometry(); stopPickingMode(); closeFormPanel();
+      await loadAndRenderCleanups(false); fitAllFeatures();
+      if (appendTargetGroup) { const rk=`${payload.cleanup_type.toLowerCase()}__${(payload.area_name||payload.title||"untitled").trim().toLowerCase()}`; openGroupSidebar(rk); }
+    } catch (err) { setStatus(err.message||"Save failed.",true); }
+    finally { saveCleanupBtn.disabled=false; setPageLoading(false); }
   }
 
   function clearAllFeatures() {
     routeLayerGroup.clearLayers();
     areaLayerGroup.clearLayers();
+    trashLabelGroup.clearLayers();
+    trashLabels.length = 0;
     allLayers.length = 0;
     selectedVisuals = [];
   }
 
   function addCleanupFeatures(data) {
     clearAllFeatures();
-    const groupLookup = new Map(groupedCleanupData.map(group => [group.key, group]));
-
+    const rw = getRouteWeight();
     data.forEach(item => {
       let layer = null;
       const groupKey = getGroupKey(item);
-      const group = groupLookup.get(groupKey);
-
-      if (item.type === "route" && Array.isArray(item.coords) && item.coords.length >= 2) {
-        layer = L.polyline(item.coords, {
-          color: "#4ea1ff",
-          weight: getRouteWeight(),
-          opacity: 0.9,
-          lineCap: "round",
-          lineJoin: "round"
-        });
-
+      if (item.type==="route"&&Array.isArray(item.coords)&&item.coords.length>=2) {
+        layer = L.polyline(item.coords, { color:"#4ea1ff", weight:rw, opacity:0.9, lineCap:"round", lineJoin:"round" });
         layer.bindPopup(makePopupHtml(item));
-        layer.on("click", (e) => {
-          L.DomEvent.stopPropagation(e);
-          openGroupSidebar(groupKey);
-        });
-
+        layer.on("click", (e) => { L.DomEvent.stopPropagation(e); openGroupSidebar(groupKey); });
         layer.addTo(routeLayerGroup);
       }
-
-      if (item.type === "area" && Array.isArray(item.center) && item.center.length === 2 && Number(item.radius) > 0) {
-        layer = L.circle(item.center, {
-          radius: Number(item.radius),
-          color: "#2ecc71",
-          weight: 4,
-          fillColor: "#2ecc71",
-          fillOpacity: 0.22
-        });
-
+      if (item.type==="area"&&Array.isArray(item.center)&&item.center.length===2&&Number(item.radius)>0) {
+        layer = L.circle(item.center, { radius:Number(item.radius), color:"#2ecc71", weight:4, fillColor:"#2ecc71", fillOpacity:0.22 });
         layer.bindPopup(makePopupHtml(item));
-        layer.on("click", (e) => {
-          L.DomEvent.stopPropagation(e);
-          openGroupSidebar(groupKey);
-        });
-
+        layer.on("click", (e) => { L.DomEvent.stopPropagation(e); openGroupSidebar(groupKey); });
         layer.addTo(areaLayerGroup);
       }
-
-      if (layer) {
-        allLayers.push({
-          layer,
-          type: item.type,
-          groupKey,
-          style: item.type === "route"
-            ? { color: "#4ea1ff", weight: getRouteWeight(), opacity: 0.9 }
-            : { color: "#2ecc71", fillColor: "#2ecc71", weight: 4, fillOpacity: 0.22, opacity: 1 }
-        });
-      }
+      if (layer) allLayers.push({ layer, type:item.type, groupKey, style: item.type==="route" ? { color:"#4ea1ff", weight:rw, opacity:0.9 } : { color:"#2ecc71", fillColor:"#2ecc71", weight:4, fillOpacity:0.22, opacity:1 } });
     });
   }
 
-  function fitAllFeatures() {
-    if (!allLayers.length) return;
-    const featureGroup = L.featureGroup(allLayers.map(entry => entry.layer));
-    map.fitBounds(featureGroup.getBounds().pad(0.15));
-  }
+  function fitAllFeatures() { if (!allLayers.length) return; map.fitBounds(L.featureGroup(allLayers.map(e=>e.layer)).getBounds().pad(0.15)); }
 
   async function loadAndRenderCleanups(refit = true) {
     try {
@@ -1950,269 +858,111 @@ document.addEventListener("keydown", (e) => {
       preparedCleanupData = await prepareCleanupData(rawRows);
       groupedCleanupData = buildGroupedCleanupData(preparedCleanupData);
       addCleanupFeatures(preparedCleanupData);
+      buildTrashLabels(preparedCleanupData, groupedCleanupData);
       if (preparedCleanupData.length && refit) fitAllFeatures();
     } catch (error) {
-      alert("Failed to load cleanups.");
+      alert("Failed to load cleanups: " + error.message);
       console.error(error);
-    } finally {
-      showLoading(false);
-      refreshMapSize(refit ? 250 : 120);
-    }
+    } finally { showLoading(false); refreshMapSize(refit?250:120); }
   }
 
   function setLayerMode(mode) {
-    showAllBtn.classList.remove("active");
-    showRoutesBtn.classList.remove("active");
-    showAreasBtn.classList.remove("active");
-
-    if (mode === "all") {
-      if (!map.hasLayer(routeLayerGroup)) map.addLayer(routeLayerGroup);
-      if (!map.hasLayer(areaLayerGroup)) map.addLayer(areaLayerGroup);
-      showAllBtn.classList.add("active");
-    } else if (mode === "routes") {
-      if (!map.hasLayer(routeLayerGroup)) map.addLayer(routeLayerGroup);
-      if (map.hasLayer(areaLayerGroup)) map.removeLayer(areaLayerGroup);
-      showRoutesBtn.classList.add("active");
-    } else if (mode === "areas") {
-      if (map.hasLayer(routeLayerGroup)) map.removeLayer(routeLayerGroup);
-      if (!map.hasLayer(areaLayerGroup)) map.addLayer(areaLayerGroup);
-      showAreasBtn.classList.add("active");
-    }
+    [showAllBtn,showRoutesBtn,showAreasBtn].forEach(b=>b.classList.remove("active"));
+    if (mode==="all") { if(!map.hasLayer(routeLayerGroup))map.addLayer(routeLayerGroup); if(!map.hasLayer(areaLayerGroup))map.addLayer(areaLayerGroup); if(!map.hasLayer(trashLabelGroup))map.addLayer(trashLabelGroup); showAllBtn.classList.add("active"); }
+    else if (mode==="routes") { if(!map.hasLayer(routeLayerGroup))map.addLayer(routeLayerGroup); if(map.hasLayer(areaLayerGroup))map.removeLayer(areaLayerGroup); if(!map.hasLayer(trashLabelGroup))map.addLayer(trashLabelGroup); showRoutesBtn.classList.add("active"); }
+    else if (mode==="areas") { if(map.hasLayer(routeLayerGroup))map.removeLayer(routeLayerGroup); if(!map.hasLayer(areaLayerGroup))map.addLayer(areaLayerGroup); if(!map.hasLayer(trashLabelGroup))map.addLayer(trashLabelGroup); showAreasBtn.classList.add("active"); }
   }
 
   async function handleLogin() {
     try {
       setAuthStatus("Signing in...");
       let email = loginEmail.value.trim();
-
-if (email === "admin") {
-  email = "vitalearthnetwork@gmail.com";
-}
-      const password = loginPassword.value;
-
-      const { data, error } = await supabaseClient.auth.signInWithPassword({
-        email,
-        password
-      });
-
+      if (email==="admin") email="vitalearthnetwork@gmail.com";
+      const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password:loginPassword.value });
       if (error) throw error;
-
-      authOverlay.classList.add("hidden");
-      authUserText.textContent = data.user?.email || "Signed in";
-      setAuthStatus("");
-      await loadAndRenderCleanups(true);
-      refreshMapSize(250);
-    } catch (err) {
-      setAuthStatus(err.message || "Login failed.", true);
-    }
+      authOverlay.classList.add("hidden"); authUserText.textContent=data.user?.email||"Signed in"; setAuthStatus("");
+      await loadAndRenderCleanups(true); refreshMapSize(250);
+    } catch (err) { setAuthStatus(err.message||"Login failed.",true); }
   }
 
-  async function handleLogout() {
-    await supabaseClient.auth.signOut();
-    authUserText.textContent = "Not signed in";
-    authOverlay.classList.remove("hidden");
-    clearAllFeatures();
-    clearSelection();
-    closeFormPanel();
-  }
+  async function handleLogout() { await supabaseClient.auth.signOut(); authUserText.textContent="Not signed in"; authOverlay.classList.remove("hidden"); clearAllFeatures(); clearSelection(); closeFormPanel(); }
 
   async function checkSessionAndStart() {
     const { data } = await supabaseClient.auth.getSession();
     const session = data?.session;
-
-    if (session?.user) {
-      authOverlay.classList.add("hidden");
-      authUserText.textContent = session.user.email || "Signed in";
-      await loadAndRenderCleanups(true);
-    } else {
-      authOverlay.classList.remove("hidden");
-      authUserText.textContent = "Not signed in";
-    }
-
+    if (session?.user) { authOverlay.classList.add("hidden"); authUserText.textContent=session.user.email||"Signed in"; await loadAndRenderCleanups(true); }
+    else { authOverlay.classList.remove("hidden"); authUserText.textContent="Not signed in"; }
     refreshMapSize(200);
   }
 
   map.on("click", async (e) => {
-    if (formMode === "new" && currentMode === "route" && mapClickMode === "route") {
-      routePoints.push(e.latlng);
-      await updateRoutePreview();
-      setStatus(`Added route point ${routePoints.length}.`);
-      return;
-    }
-
-    if (formMode === "new" && currentMode === "area" && mapClickMode === "area-center") {
-      areaCenter = e.latlng;
-      updateAreaPreview();
-      stopPickingMode();
-      setStatus("Area center placed.");
-      return;
-    }
-
-    map.closePopup();
-    clearSelection();
+    if (formMode==="new"&&currentMode==="route"&&mapClickMode==="route") { routePoints.push(e.latlng); await updateRoutePreview(); setStatus(`Added route point ${routePoints.length}.`); return; }
+    if (formMode==="new"&&currentMode==="area"&&mapClickMode==="area-center") { areaCenter=e.latlng; updateAreaPreview(); stopPickingMode(); setStatus("Area center placed."); return; }
+    map.closePopup(); clearSelection();
   });
 
-  map.on("zoomend", async () => {
-    if (preparedCleanupData.length) addCleanupFeatures(preparedCleanupData);
-    if (previewRouteLayer && routePoints.length >= 2) await updateRoutePreview();
-  });
+  // Update route weights and label visibility on every zoom change
+  map.on("zoomend", () => { updateAllWeights(); });
 
-  closeSidebarBtn.addEventListener("click", () => {
-    clearSelection();
-    map.closePopup();
-  });
-
+  closeSidebarBtn.addEventListener("click", () => { clearSelection(); map.closePopup(); });
   newCleanupBtn.addEventListener("click", openNewCleanupPanel);
   refreshBtn.addEventListener("click", () => loadAndRenderCleanups(false));
   fitBtn.addEventListener("click", fitAllFeatures);
   closeFormPanelBtn.addEventListener("click", closeFormPanel);
-  cleanupTypeEl.addEventListener("change", () => {
-    if (formMode === "append") return;
-    stopPickingMode();
-    syncTypeUI();
-    clearAllGeometry();
-  });
-
-  startRouteBtn.addEventListener("click", () => {
-    if (formMode === "append") return;
-    cleanupTypeEl.value = "route";
-    syncTypeUI();
-    mapClickMode = "route";
-    setPickingCursor(true);
-    setStatus("Route point selection active.");
-  });
-
-  undoRoutePointBtn.addEventListener("click", async () => {
-    if (formMode === "append") return;
-    routePoints.pop();
-    await updateRoutePreview();
-    setStatus("Removed last route point.");
-  });
-
-  clearGeometryBtn.addEventListener("click", () => {
-    if (formMode === "append") return;
-    clearAllGeometry();
-  });
-
-  setAreaCenterBtn.addEventListener("click", () => {
-    if (formMode === "append") return;
-    cleanupTypeEl.value = "area";
-    syncTypeUI();
-    mapClickMode = "area-center";
-    setPickingCursor(true);
-    setStatus("Area center selection active.");
-  });
-
-  clearAreaBtn.addEventListener("click", () => {
-    if (formMode === "append") return;
-    areaCenter = null;
-    clearPreviewArea();
-    updateGeometryPreviewText();
-    stopPickingMode();
-    setStatus("Area cleared.");
-  });
-
-  areaRadiusEl.addEventListener("input", () => {
-    if (formMode === "append") return;
-    areaRadiusNumberEl.value = areaRadiusEl.value;
-    updateAreaPreview();
-  });
-
-  areaRadiusNumberEl.addEventListener("input", () => {
-    if (formMode === "append") return;
-    let value = Number(areaRadiusNumberEl.value || 10);
-    value = Math.max(10, Math.min(1000, value));
-    areaRadiusEl.value = value;
-    areaRadiusNumberEl.value = value;
-    updateAreaPreview();
-  });
-
+  cleanupTypeEl.addEventListener("change", () => { if(formMode==="append")return; stopPickingMode(); syncTypeUI(); clearAllGeometry(); });
+  startRouteBtn.addEventListener("click", () => { if(formMode==="append")return; cleanupTypeEl.value="route"; syncTypeUI(); mapClickMode="route"; setPickingCursor(true); setStatus("Route point selection active."); });
+  undoRoutePointBtn.addEventListener("click", async () => { if(formMode==="append")return; routePoints.pop(); await updateRoutePreview(); setStatus("Removed last route point."); });
+  clearGeometryBtn.addEventListener("click", () => { if(formMode==="append")return; clearAllGeometry(); });
+  setAreaCenterBtn.addEventListener("click", () => { if(formMode==="append")return; cleanupTypeEl.value="area"; syncTypeUI(); mapClickMode="area-center"; setPickingCursor(true); setStatus("Area center selection active."); });
+  clearAreaBtn.addEventListener("click", () => { if(formMode==="append")return; areaCenter=null; clearPreviewArea(); updateGeometryPreviewText(); stopPickingMode(); setStatus("Area cleared."); });
+  areaRadiusEl.addEventListener("input", () => { if(formMode==="append")return; areaRadiusNumberEl.value=areaRadiusEl.value; updateAreaPreview(); });
+  areaRadiusNumberEl.addEventListener("input", () => { if(formMode==="append")return; const v=Math.max(10,Math.min(1000,Number(areaRadiusNumberEl.value||10))); areaRadiusEl.value=v; areaRadiusNumberEl.value=v; updateAreaPreview(); });
   saveCleanupBtn.addEventListener("click", saveCleanup);
   loginBtn.addEventListener("click", handleLogin);
   logoutBtn.addEventListener("click", handleLogout);
-  loginPassword.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") handleLogin();
-  });
+  loginPassword.addEventListener("keydown", (e) => { if(e.key==="Enter") handleLogin(); });
   showAllBtn.addEventListener("click", () => setLayerMode("all"));
   showRoutesBtn.addEventListener("click", () => setLayerMode("routes"));
   showAreasBtn.addEventListener("click", () => setLayerMode("areas"));
-
   window.addEventListener("resize", () => refreshMapSize(50));
 
   supabaseClient.auth.onAuthStateChange((_event, session) => {
-    if (session?.user) {
-      authOverlay.classList.add("hidden");
-      authUserText.textContent = session.user.email || "Signed in";
-    } else {
-      authOverlay.classList.remove("hidden");
-      authUserText.textContent = "Not signed in";
-    }
+    if (session?.user) { authOverlay.classList.add("hidden"); authUserText.textContent=session.user.email||"Signed in"; }
+    else { authOverlay.classList.remove("hidden"); authUserText.textContent="Not signed in"; }
   });
 
   syncTypeUI();
   setStatus("Ready.");
-  sidebarContent.innerHTML = `
-    <div class="info-card">
-      <h3 class="info-title">Nothing selected</h3>
-      <div class="summary-grid">
-        <div class="summary-box">
-          <div class="summary-label">Click a route or area</div>
-          <div class="summary-value">to manage it.</div>
-        </div>
-      </div>
-    </div>
-  `;
-
+  sidebarContent.innerHTML = `<div class="info-card"><h3 class="info-title">Nothing selected</h3><div class="summary-grid"><div class="summary-box"><div class="summary-label">Click a route or area</div><div class="summary-value">to manage it.</div></div></div></div>`;
   setLayerMode("all");
   checkSessionAndStart();
 })();
 </script>
 
-
-
 <footer class="site-footer">
-        <div class="footer-inner">
-
-            <!-- LEFT -->
-            <div class="footer-brand">
-                <h2 class="footer-logo">Vital Earth Network</h2>
-
-                <div class="footer-socials">
-                    <a href="https://www.tiktok.com/@vitalearthnetwork" target="_blank"
-                        rel="noopener noreferrer"><ion-icon name="logo-tiktok"></ion-icon></a>
-                    <a href="https://www.instagram.com/vitalearthnetwork/" target="_blank"
-                        rel="noopener noreferrer"><ion-icon name="logo-instagram"></ion-icon></a>
-                </div>
-
-                <button class="back-to-top">↑ Back to top</button>
-            </div>
-
-
-
-
-            <!-- CENTER -->
-            <div class="footer-links">
-                <strong>Message or Email us at</strong><a></a>
-                <a href="mailto:vitalearthnetwork@gmail.com">vitalearthnetwork@gmail.com</a>
-                <a href="sms:+17162497659">+1 (716) 249-7650</a>
-
-            </div>
-
-            <!-- RIGHT -->
-            <div class="footer-links">
-                <h4>Legal</h4>
-                <a href="privacy-policy">Privacy Policy</a>
-                <a href="terms-of-service">Terms of Service</a>
-                <a href="return-policy">Return Policy</a>
-            </div>
-
-        </div>
-
-
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <h2 class="footer-logo">Vital Earth Network</h2>
+      <div class="footer-socials">
+        <a href="https://www.tiktok.com/@vitalearthnetwork" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-tiktok"></ion-icon></a>
+        <a href="https://www.instagram.com/vitalearthnetwork/" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-instagram"></ion-icon></a>
+      </div>
+      <button class="back-to-top">↑ Back to top</button>
+    </div>
+    <div class="footer-links">
+      <strong>Message or Email us at</strong>
+      <a href="mailto:vitalearthnetwork@gmail.com">vitalearthnetwork@gmail.com</a>
+      <a href="sms:+17162497659">+1 (716) 249-7650</a>
+    </div>
+    <div class="footer-links">
+      <h4>Legal</h4>
+      <a href="privacy-policy">Privacy Policy</a>
+      <a href="terms-of-service">Terms of Service</a>
+      <a href="return-policy">Return Policy</a>
+    </div>
+  </div>
 </footer>
 </body>
-
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </html>
