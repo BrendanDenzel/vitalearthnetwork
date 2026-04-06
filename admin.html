@@ -89,7 +89,7 @@
   const SUPABASE_URL = "https://rgnthnpusmzsdjksxcns.supabase.co";
   const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJnbnRobnB1c216c2Rqa3N4Y25zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5NjYwODcsImV4cCI6MjA4ODU0MjA4N30.R7gyp_D51Nhs16TMUDhu43mNChjDi7fLw0aZUVkh02s";
   const PHOTO_BUCKET = "cleanup-photos";
-  const OSRM_BASE = "http://129.213.114.56:5000";
+  const OSRM_BASE = (location.protocol === "https:" ? "https" : "http") + "://129.213.114.56:5000";
 
   // Zoom thresholds for route weight and label visibility
   const LABEL_MIN_ZOOM = 15; // labels disappear below this zoom
