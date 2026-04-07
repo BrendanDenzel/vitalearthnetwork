@@ -2354,3 +2354,51 @@ body {
   }
 
 }
+
+
+/* ============================================================
+   style.css — ADD these rules at the bottom of your file
+   (or replace the matching @media (max-width: 768px) block
+   inside your cleanup-map-styles if you already pasted it)
+
+   Fixes: stats pill + View Full Screen button centered on mobile
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+  /* Center the entire left text column */
+  .cleanup-map-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Keep the subtitle (wavy line + text) left-aligned internally
+     but centered as a block */
+  .cleanup-map-subtitle {
+    justify-content: center;
+  }
+
+  /* Description stays readable */
+  .cleanup-map-desc {
+    text-align: center;
+    max-width: 100%;
+  }
+
+  /* Stats pill — full width, centered */
+  .cleanup-stats-row {
+    width: 100%;
+    justify-content: center;
+    margin-inline: auto;
+  }
+
+  /* View Full Screen button — centered */
+  .cleanup-fullscreen-btn {
+    align-self: center;
+    margin-inline: auto;
+  }
+
+}
+
+
