@@ -17,6 +17,8 @@
   display: none; /* hidden on desktop */
 }
 
+
+
 @media (max-width: 768px) {
 
   /* ── Container ─────────────────────────────────────────── */
@@ -2227,4 +2229,128 @@ body {
     opacity: 0;
     transform: translateY(30px);
   }
+}
+
+/* ============================================================
+   style.css — ADD these rules at the bottom of your file.
+   These fix the cleanup map section and mobile footer
+   bar labels for mobile screens.
+   ============================================================ */
+
+
+/* ── Cleanup map section — mobile ─────────────────────────── */
+
+@media (max-width: 768px) {
+
+  .cleanup-map-section {
+    padding-block: 40px 20px; /* less vertical breathing room on mobile */
+  }
+
+  .cleanup-map-inner {
+    grid-template-columns: 1fr; /* already 1-col at 1024px, but enforce here too */
+    gap: 24px;
+    padding-inline: 16px;
+  }
+
+  /* Shrink heading on small screens */
+  .cleanup-map-heading {
+    font-size: clamp(2rem, 7vw, 3rem);
+    margin-bottom: 12px;
+  }
+
+  .cleanup-map-desc {
+    font-size: 1.35rem;
+    margin-bottom: 24px;
+  }
+
+  /* Stats pill: stack into 3 equal columns inside the pill */
+  .cleanup-stats-row {
+    width: 100%;
+    justify-content: space-between;
+    padding: 14px 10px;
+    border-radius: 12px;
+    gap: 0;
+  }
+
+  .cleanup-stat {
+    padding-inline: 8px;
+    flex: 1;
+  }
+
+  .cleanup-stat-value {
+    font-size: 1.8rem;
+  }
+
+  .cleanup-stat-label {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .cleanup-stat-divider {
+    height: 30px;
+  }
+
+  /* Full-screen button */
+  .cleanup-fullscreen-btn {
+    font-size: 1.3rem;
+    padding: 10px 18px;
+  }
+
+  /* Map iframe */
+  .cleanup-map-frame {
+    height: 280px; /* tighter on mobile */
+  }
+
+  .cleanup-map-frame-border {
+    border-radius: 12px;
+    clip-path: polygon(
+      0 0,
+      calc(100% - 10px) 0,
+      100% 10px,
+      100% 100%,
+      10px 100%,
+      0 calc(100% - 10px)
+    );
+  }
+
+}
+
+/* Extra small (under 400px) — phones like SE */
+@media (max-width: 400px) {
+
+  .cleanup-map-heading {
+    font-size: 2rem;
+  }
+
+  .cleanup-stat-value {
+    font-size: 1.5rem;
+  }
+
+  .cleanup-stat-label {
+    font-size: 0.8rem;
+    letter-spacing: 0.2px;
+  }
+
+  .cleanup-map-frame {
+    height: 240px;
+  }
+
+}
+
+
+/* ── Mobile footer bar 2 — pieces label fix ─────────────────
+   The bar2-label no longer has a $ so make sure the font
+   weight / size stays readable at 0-decimals integer display.
+   ──────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+
+  /* Slightly larger amount text for the pieces bar
+     since integers are shorter strings than $X.XX */
+  .mf-bar2-fill ~ .mf-bar-amount,
+  .mf-bar-row:last-of-type .mf-bar-amount {
+    font-size: 12px;
+    letter-spacing: 0.5px;
+  }
+
 }
