@@ -1,154 +1,145 @@
-/* =================================================================================
-    OVERRIDE NUMBERS IF NEEDED (ENTER "0" FOR BOTH FOR REGULAR AUTOMATIC FETCH)
-================================================================================= */
+/* ============================================================
+   donationprogress.js
+   Handles BOTH progress bars:
+     Bar 1 – Wildlife fundraise  (existing, from Google Sheets)
+     Bar 2 – Cleanup / garbage   (hardcoded goal: $100,000)
+   ============================================================ */
 
-// Set to > 0 to activate override
+/* ── CONFIG ─────────────────────────────────────────────── */
+
+// Set > 0 to override the wildlife raised amount (dev/testing)
 const TEMP_RAISED = 198.75;
-
-// Auto-detect
 const USE_TEMP_TOTAL = TEMP_RAISED > 0;
 
+const SHEET_API_URL =
+  "https://sheets.googleapis.com/v4/spreadsheets/1ui7pQWsbuua6XX2M44JYPyZM2sJNnj65bAnExIuyvBQ/values/DATA%20SHEET!E2?key=AIzaSyCRg9TGevbqT7CxFGuFQvRBaPcTk4aMpAk";
 
+// Cleanup / garbage bar — update this value as you collect more
+const CLEANUP_RAISED  = 4200;   // ← change this number whenever you want
+const CLEANUP_GOAL    = 100000;
+
+
+/* ── EASING ─────────────────────────────────────────────── */
 
 function easeOutCubic(t) {
   return 1 - Math.pow(1 - t, 3);
 }
 
-function animateMobileDonation(raised, goal) {
-  const mobileFill = document.querySelector('.mobile-donation-footer3 .progress-fill3');
-  const mobileText = document.querySelector('.mobile-donation-footer3 .progress-text3');
 
-  if (!mobileFill || !mobileText) return;
+/* ── ANIMATED COUNTER ───────────────────────────────────── */
 
-  const percentage = Math.min((raised / goal) * 100, 100);
-
-  // Animate the progress bar
-  mobileFill.style.width = '0%';
-  setTimeout(() => {
-    mobileFill.style.width = percentage + '%';
-  }, 50);
-
-  const duration = 2000; // match CSS transition
-  const start = 0;
+/**
+ * Animate a number from 0 → target inside an element.
+ * @param {Element} el        – the element whose textContent to update
+ * @param {number}  target    – final value
+ * @param {string}  prefix    – e.g. "$"
+ * @param {number}  decimals  – decimal places
+ * @param {number}  duration  – ms
+ */
+function animateCounter(el, target, prefix = "$", decimals = 2, duration = 1800) {
+  if (!el) return;
   const startTime = performance.now();
 
-  function updateNumber(currentTime) {
-    const elapsed = currentTime - startTime;
-    let progress = Math.min(elapsed / duration, 1);
-    progress = easeOutCubic(progress); // apply easing
-    const currentAmount = start + progress * (raised - start);
-    mobileText.textContent = `$${currentAmount.toFixed(2)} / $${goal.toLocaleString()}`;
+  function tick(now) {
+    const elapsed  = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased    = easeOutCubic(progress);
+    const current  = eased * target;
 
-    if (progress < 1) {
-      requestAnimationFrame(updateNumber);
-    }
+    el.textContent = prefix + current.toLocaleString("en-US", {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals,
+    });
+
+    if (progress < 1) requestAnimationFrame(tick);
   }
 
-  requestAnimationFrame(updateNumber);
+  requestAnimationFrame(tick);
 }
 
 
+/* ── ANIMATE A SINGLE BAR ───────────────────────────────── */
 
-
-
-/* ================================
-   CONFIG
-================================ */
-
-const SHEET_API_URL =
-  "https://sheets.googleapis.com/v4/spreadsheets/1ui7pQWsbuua6XX2M44JYPyZM2sJNnj65bAnExIuyvBQ/values/DATA%20SHEET!E2?key=AIzaSyCRg9TGevbqT7CxFGuFQvRBaPcTk4aMpAk";
-
-
-/* ================================
-   FETCH DONATION TOTAL
-================================ */
-
-function loadRaisedAmountFromSheet() {
-
-  // 🧪 TEMP MODE (raised only)
-  if (USE_TEMP_TOTAL) {
-    document.querySelectorAll('.donate-card').forEach(card => {
-      card.dataset.raised = TEMP_RAISED;
-      // goal stays untouched
-    });
-
-    updateDonationCards();
-    return;
-  }
-
-  // REAL GOOGLE SHEETS PATH
-  fetch(SHEET_API_URL)
-    .then(res => res.json())
-    .then(data => {
-      const raised = parseFloat(data.values?.[0]?.[0]) || 0;
-
-      document.querySelectorAll('.donate-card').forEach(card => {
-        card.dataset.raised = raised;
-      });
-
-      updateDonationCards();
-    })
-    .catch(err => {
-      console.error("Google Sheets fetch failed:", err);
-    });
+function animateBar(fillEl, targetPct, delay = 80) {
+  if (!fillEl) return;
+  fillEl.style.width = "0%";
+  setTimeout(() => { fillEl.style.width = targetPct + "%"; }, delay);
 }
 
 
-/* ================================
-   UPDATE PROGRESS BARS
-================================ */
+/* ── WILDLIFE BAR (bar 1, existing donate-card on page) ─── */
 
-function updateDonationCards() {
-  document.querySelectorAll('.donate-card').forEach(card => {
-    const raised = parseFloat(card.dataset.raised) || 0;
-    const goal = Math.round(parseFloat(card.dataset.goal) || 1);
-
+function updateDonationCards(raised) {
+  document.querySelectorAll(".donate-card").forEach(card => {
+    const goal       = Math.round(parseFloat(card.dataset.goal) || 1);
     const percentage = Math.min((raised / goal) * 100, 100);
-    const toGo = Math.max(goal - raised, 0);
+    const toGo       = Math.max(goal - raised, 0);
 
-    card.querySelectorAll('.raised-amount').forEach(el => {
+    card.querySelectorAll(".raised-amount").forEach(el => {
       el.textContent = `$${raised.toFixed(2)}`;
       el.value = raised.toFixed(2);
     });
 
-    const goalEl = card.querySelector('.goal-amount');
-    goalEl.textContent = `$${goal.toLocaleString()}`;
-    goalEl.value = goal;
+    const goalEl = card.querySelector(".goal-amount");
+    if (goalEl) { goalEl.textContent = `$${goal.toLocaleString()}`; goalEl.value = goal; }
 
-    const toGoEl = card.querySelector('.to-go-amount');
-    toGoEl.textContent = `$${toGo.toFixed(2)}`;
-    toGoEl.value = toGo.toFixed(2);
+    const toGoEl = card.querySelector(".to-go-amount");
+    if (toGoEl) { toGoEl.textContent = `$${toGo.toFixed(2)}`; toGoEl.value = toGo.toFixed(2); }
 
-    const percentEl = card.querySelector('.progress-value');
-    percentEl.textContent = `${percentage.toFixed(2)}%`;
-    percentEl.value = percentage.toFixed(2);
+    const pctEl = card.querySelector(".progress-value");
+    if (pctEl) { pctEl.textContent = `${percentage.toFixed(2)}%`; }
 
-    card.querySelector('.progress1').style.width = `${percentage}%`;
-    animateMobileDonation(raised, goal);
-    // ======= Mobile Footer 3 =======
-    const mobileFill = document.querySelector('.mobile-donation-footer3 .progress-fill3');
-    const mobileText = document.querySelector('.mobile-donation-footer3 .progress-text3');
-
-    if (mobileFill && mobileText) {
-      // Animate progress bar
-      mobileFill.style.width = percentage + '%';
-
-      // Update the text
-      mobileText.textContent = `$${raised.toFixed(2)} / $${goal.toLocaleString()}`;
-    }
+    const bar = card.querySelector(".progress1");
+    if (bar) animateBar(bar, percentage, 200);
   });
 }
 
-/* ================================
-   INIT
-================================ */
 
-document.addEventListener('DOMContentLoaded', () => {
-  // Run immediately on page load / refresh
+/* ── MOBILE FOOTER – BOTH BARS ──────────────────────────── */
+
+function updateMobileFooter(wildlifeRaised, wildlifeGoal) {
+  // ── Bar 1: Wildlife ──
+  const fill1  = document.querySelector(".mf-bar1-fill");
+  const label1 = document.querySelector(".mf-bar1-label");
+  const pct1   = Math.min((wildlifeRaised / wildlifeGoal) * 100, 100);
+
+  animateBar(fill1, pct1, 300);
+  animateCounter(label1, wildlifeRaised, "$", 2, 1800);
+
+  // ── Bar 2: Cleanup ──
+  const fill2  = document.querySelector(".mf-bar2-fill");
+  const label2 = document.querySelector(".mf-bar2-label");
+  const pct2   = Math.min((CLEANUP_RAISED / CLEANUP_GOAL) * 100, 100);
+
+  animateBar(fill2, pct2, 500);
+  animateCounter(label2, CLEANUP_RAISED, "$", 0, 1800);
+}
+
+
+/* ── FETCH + INIT ───────────────────────────────────────── */
+
+function loadRaisedAmountFromSheet() {
+  if (USE_TEMP_TOTAL) {
+    updateDonationCards(TEMP_RAISED);
+    updateMobileFooter(TEMP_RAISED, 1000);
+    return;
+  }
+
+  fetch(SHEET_API_URL)
+    .then(r => r.json())
+    .then(data => {
+      const raised = parseFloat(data.values?.[0]?.[0]) || 0;
+      updateDonationCards(raised);
+
+      // Determine goal from the first donate-card's data-goal attribute
+      const firstCard = document.querySelector(".donate-card");
+      const goal = firstCard ? Math.round(parseFloat(firstCard.dataset.goal) || 1000) : 1000;
+      updateMobileFooter(raised, goal);
+    })
+    .catch(err => console.error("Google Sheets fetch failed:", err));
+}
+
+document.addEventListener("DOMContentLoaded", () => {
   loadRaisedAmountFromSheet();
-
-  // Run every 5 minutes (300,000 ms)
   setInterval(loadRaisedAmountFromSheet, 300000);
 });
-
-

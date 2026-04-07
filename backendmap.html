@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vital Earth Network – Cleanup Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background: #0f1115; font-family: Arial, sans-serif; }
+    #mapRoot { position: relative; width: 100%; height: 100%; }
+    #cleanupMap { width: 100%; height: 100%; }
+
+    .top-bar {
+      position: absolute; top: 14px; left: 14px; z-index: 1000;
+      display: flex; gap: 8px; flex-wrap: wrap;
+      background: rgba(23,27,34,.92); border: 1px solid #2b313c;
+      padding: 8px 10px; border-radius: 12px; backdrop-filter: blur(6px);
+    }
+    .top-bar button {
+      background: #2b313c; color: #fff; border: none;
+      padding: 5px 12px; border-radius: 8px; font-weight: 600;
+      font-size: 13px; cursor: pointer;
+    }
+    .top-bar button.active { background: #4ea1ff; }
+    .top-bar button:hover:not(.active) { background: #3b4351; }
+
+    .legend {
+      position: absolute; bottom: 18px; left: 14px; z-index: 1000;
+      background: rgba(23,27,34,.92); border: 1px solid #2b313c;
+      padding: 8px 12px; border-radius: 12px; backdrop-filter: blur(6px);
+    }
+    .legend h4 { color: #fff; font-size: 13px; margin-bottom: 5px; }
+    .legend-item { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #d5dbea; margin-bottom: 3px; }
+    .legend-line { width: 22px; height: 0; border-top: 7px solid #4ea1ff; border-radius: 999px; }
+    .legend-circle { width: 14px; height: 14px; border-radius: 50%; background: rgba(46,204,113,.3); border: 3px solid #2ecc71; }
+
+    .loading-badge {
+      position: absolute; top: 14px; right: 14px; z-index: 1000;
+      background: rgba(23,27,34,.92); border: 1px solid #2b313c;
+      padding: 8px 14px; border-radius: 10px; font-size: 13px;
+      color: #d7e3ff; display: none;
+    }
+    .loading-badge.show { display: block; }
+
+    /* ── Sidebar – base (full-screen map.html) ── */
+    .sidebar {
+      position: absolute; right: 0; top: 0; height: 100%;
+      width: 370px; max-width: 100%;
+      background: #171b22; border-left: 1px solid #2b313c;
+      padding: 16px; overflow-y: auto;
+      transition: transform 0.25s ease;
+      z-index: 1200; box-shadow: -8px 0 30px rgba(0,0,0,.28);
+    }
+    .sidebar.hidden { transform: translateX(100%); }
+
+    .sidebar-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .sidebar-title { color: #fff; font-size: 1.1rem; font-weight: 700; margin: 0; }
+    .close-btn { border: none; background: #2b313c; color: #fff; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; font-size: 1rem; }
+    .close-btn:hover { background: #3b4351; }
+
+    .info-card { background: #202632; border: 1px solid #2d3646; border-radius: 12px; padding: 14px; margin-bottom: 12px; }
+    .info-title { color: #fff; font-size: 1.1rem; font-weight: 800; margin: 0 0 10px; }
+    .summary-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+    .summary-box { background: #171d27; border: 1px solid #2c3646; border-radius: 12px; padding: 12px; text-align: center; }
+    .summary-label { font-size: 0.8rem; color: #9eb0ca; margin-bottom: 5px; text-transform: uppercase; letter-spacing: .4px; }
+    .summary-value { font-size: 1rem; font-weight: 800; color: #fff; }
+    .summary-value.big-trash { font-size: 1.25rem; color: #ffd166; }
+
+    .timeline-list { display: flex; flex-direction: column; gap: 8px; }
+    .timeline-item { border: 1px solid #344055; background: #1b212b; border-radius: 10px; overflow: hidden; }
+    .timeline-trigger { width: 100%; border: none; background: transparent; color: #fff; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; cursor: pointer; text-align: left; }
+    .timeline-trigger:hover { background: rgba(255,255,255,.03); }
+    .timeline-date { font-weight: 800; font-size: 1rem; color: #fff; }
+    .timeline-arrow { font-size: 0.9rem; color: #b8c7db; transition: transform .2s; }
+    .timeline-item.open .timeline-arrow { transform: rotate(180deg); }
+    .timeline-content { display: none; padding: 0 14px 14px; border-top: 1px solid #2c3646; }
+    .timeline-item.open .timeline-content { display: block; }
+
+    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 10px 0; }
+    .detail-box { background: #161c25; border: 1px solid #2c3646; border-radius: 8px; padding: 10px; }
+    .detail-label { font-size: 0.8rem; color: #9fb0c8; margin-bottom: 3px; }
+    .detail-value { font-size: .85rem; font-weight: 700; color: #fff; }
+    .timeline-notes { color: #b0bfd4; font-size: 0.85rem; margin-top: 6px; line-height: 1.5; }
+
+    .gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; }
+    .gallery img { width: 100%; height: 110px; object-fit: cover; border-radius: 8px; border: 1px solid #364055; cursor: pointer; display: block; }
+
+    .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.88); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 20px; }
+    .lightbox.open { display: flex; }
+    .lightbox img { max-width: 92vw; max-height: 88vh; border-radius: 10px; }
+    .lightbox-close { position: absolute; top: 16px; right: 16px; border: none; background: rgba(255,255,255,.15); color: #fff; width: 40px; height: 40px; border-radius: 10px; font-size: 1.1rem; cursor: pointer; }
+
+    .leaflet-popup-content-wrapper, .leaflet-popup-tip { background: #1b212b; color: #fff; }
+    .popup-sub { font-size: .82rem; color: #cad5e6; }
+
+    .cleanup-trash-label-wrapper {
+      background: rgba(20,26,36,.88); border: 1.5px solid #4ea1ff;
+      border-radius: 5px; color: #ffd166; font-size: 11px; font-weight: 800;
+      padding: 2px 6px; white-space: nowrap; pointer-events: none;
+      box-shadow: 0 1px 5px rgba(0,0,0,.4);
+    }
+
+    /* ── Sidebar – embedded (iframe) ──
+       Narrower panel so the map stays visible beside it.
+       On very small embeds (<= 500px wide) it falls back to a bottom drawer.
+    ── */
+    body.is-embedded .sidebar {
+      width: 240px;           /* narrow enough to leave map visible */
+      font-size: 0.82rem;
+    }
+
+    /* Scale down inner text/padding so it fits the narrow panel */
+    body.is-embedded .info-title       { font-size: 0.9rem; }
+    body.is-embedded .summary-label    { font-size: 0.7rem; }
+    body.is-embedded .summary-value    { font-size: 0.85rem; }
+    body.is-embedded .summary-value.big-trash { font-size: 1rem; }
+    body.is-embedded .timeline-date    { font-size: 0.85rem; }
+    body.is-embedded .detail-grid      { grid-template-columns: 1fr; }
+    body.is-embedded .detail-label     { font-size: 0.72rem; }
+    body.is-embedded .detail-value     { font-size: 0.78rem; }
+    body.is-embedded .sidebar          { padding: 12px; }
+    body.is-embedded .info-card        { padding: 10px; }
+    body.is-embedded .summary-box      { padding: 8px; }
+    body.is-embedded .gallery img      { height: 70px; }
+
+    /* Bottom-drawer fallback for very small embeds */
+    body.is-embedded.is-narrow .sidebar {
+      width: 100%;
+      top: auto;
+      bottom: 0;
+      height: 52%;
+      border-left: none;
+      border-top: 1px solid #2b313c;
+      border-radius: 14px 14px 0 0;
+      box-shadow: 0 -8px 30px rgba(0,0,0,.4);
+      transform: translateY(100%);
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    body.is-embedded.is-narrow .sidebar.hidden  { transform: translateY(100%); }
+    body.is-embedded.is-narrow .sidebar:not(.hidden) { transform: translateY(0); }
+
+    /* Drag-handle on bottom drawer */
+    body.is-embedded.is-narrow .sidebar-header {
+      position: relative;
+      padding-top: 20px;
+    }
+    body.is-embedded.is-narrow .sidebar-header::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 8px; left: 50%;
+      transform: translateX(-50%);
+      width: 36px; height: 4px;
+      border-radius: 2px;
+      background: rgba(255,255,255,0.18);
+    }
+
+    /* Full-screen fallback for non-embedded mobile (map.html on phone) */
+    @media (max-width: 700px) {
+      body:not(.is-embedded) .sidebar { width: 100vw; max-width: 100vw; }
+      .detail-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <script>
+  (function () {
+    // Check URL param first — if fullscreen=1, never apply embedded styles
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("fullscreen") === "1") return;
+
+    // Only apply embedded styles if inside an iframe
+    if (window.self !== window.top) {
+      document.body.classList.add("is-embedded");
+      if (window.innerWidth <= 480) document.body.classList.add("is-narrow");
+      window.addEventListener("resize", function () {
+        if (window.innerWidth <= 480) document.body.classList.add("is-narrow");
+        else document.body.classList.remove("is-narrow");
+      });
+    }
+  })();
+</script>
+
+
+
+<div id="mapRoot">
+  <div id="cleanupMap"></div>
+  <div class="top-bar">
+    <button id="showAllBtn" class="active">Show All</button>
+    <button id="showRoutesBtn">Routes</button>
+    <button id="showAreasBtn">Areas</button>
+    <button id="fitBtn">Fit Map</button>
+  </div>
+  <div id="loadingBadge" class="loading-badge">Loading cleanups…</div>
+  <div class="legend">
+    <h4>Cleanup Map</h4>
+    <div class="legend-item"><span class="legend-line"></span><span>Roads cleaned</span></div>
+    <div class="legend-item"><span class="legend-circle"></span><span>Cleanup areas</span></div>
+  </div>
+  <aside id="sidebar" class="sidebar hidden">
+    <div class="sidebar-header">
+      <h2 class="sidebar-title">Cleanup History</h2>
+      <button class="close-btn" id="closeSidebar">✕</button>
+    </div>
+    <div id="sidebarContent"></div>
+  </aside>
+  <div id="lightbox" class="lightbox">
+    <button class="lightbox-close" id="lightboxClose">✕</button>
+    <img id="lightboxImg" src="" alt="Cleanup photo" />
+  </div>
+</div>
+
+<script>
+(function () {
+  const SUPABASE_URL = "https://rgnthnpusmzsdjksxcns.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJnbnRobnB1c216c2Rqa3N4Y25zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5NjYwODcsImV4cCI6MjA4ODU0MjA4N30.R7gyp_D51Nhs16TMUDhu43mNChjDi7fLw0aZUVkh02s";
+  const OSRM_BASE = "https://osrm.vitalearthnetwork.org";
+  const LABEL_MIN_ZOOM = 15;
+
+  const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const mapEl = document.getElementById("cleanupMap");
+  const sidebar = document.getElementById("sidebar");
+  const sidebarContent = document.getElementById("sidebarContent");
+  const closeSidebarBtn = document.getElementById("closeSidebar");
+  const loadingBadge = document.getElementById("loadingBadge");
+  const showAllBtn = document.getElementById("showAllBtn");
+  const showRoutesBtn = document.getElementById("showRoutesBtn");
+  const showAreasBtn = document.getElementById("showAreasBtn");
+  const fitBtn = document.getElementById("fitBtn");
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightboxImg");
+  const lightboxClose = document.getElementById("lightboxClose");
+
+  const map = L.map(mapEl, { zoomControl: true }).setView([42.9770, -78.8000], 14);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", { maxZoom: 19, attribution: "&copy; OpenStreetMap contributors" }).addTo(map);
+
+  const routeLayerGroup = L.layerGroup().addTo(map);
+  const areaLayerGroup = L.layerGroup().addTo(map);
+  const trashLabelGroup = L.layerGroup().addTo(map);
+  const allLayers = [];
+  const trashLabels = [];
+  const routeCoordCache = new Map();
+  let preparedCleanupData = [];
+  let groupedCleanupData = [];
+  let selectedGroupKey = null;
+  let selectedVisuals = [];
+
+  function geometryFingerprint(g) {
+    const pts = [g.start, ...(Array.isArray(g.via) ? g.via : []), g.end];
+    return pts.map(p => `${parseFloat(p[0]).toFixed(6)},${parseFloat(p[1]).toFixed(6)}`).join("|");
+  }
+
+  function getRouteWeight(zoom) {
+    const z = zoom !== undefined ? zoom : map.getZoom();
+    if (z >= 19) return 26; if (z >= 18) return 22; if (z >= 17) return 18;
+    if (z >= 16) return 14; if (z >= 15) return 11; if (z >= 14) return 8;
+    if (z >= 13) return 6; return 5;
+  }
+
+  function updateAllWeights() {
+    const z = map.getZoom(), rw = getRouteWeight(z);
+    allLayers.forEach(e => { if (e.type === "route") { e.style.weight = rw; e.layer.setStyle({ weight: rw }); } });
+    trashLabels.forEach(({ label }) => { const el = label.getElement(); if (el) el.style.display = z >= LABEL_MIN_ZOOM ? "" : "none"; });
+  }
+
+  async function getRoadRouteCoords(points) {
+    if (!points || points.length < 2) return points.map(p => [parseFloat(p[0]), parseFloat(p[1])]);
+    const coordString = points.map(p => `${parseFloat(p[1])},${parseFloat(p[0])}`).join(";");
+    const fallback = points.map(p => [parseFloat(p[0]), parseFloat(p[1])]);
+    for (const server of [OSRM_BASE, "https://router.project-osrm.org"]) {
+      try {
+        const r = await fetch(`${server}/route/v1/driving/${coordString}?overview=full&geometries=geojson`);
+        if (!r.ok) throw new Error();
+        const d = await r.json();
+        const coords = d?.routes?.[0]?.geometry?.coordinates;
+        if (!coords?.length) throw new Error();
+        return coords.map(([lng, lat]) => [lat, lng]);
+      } catch { /* try next */ }
+    }
+    return fallback;
+  }
+
+  function normalizePhotos(v) {
+    if (Array.isArray(v)) return v; if (!v) return [];
+    try { const p = typeof v === "string" ? JSON.parse(v) : v; return Array.isArray(p) ? p : []; } catch { return []; }
+  }
+  function parseTrashAmount(v) { if (v === null || v === undefined || v === "") return 0; if (typeof v === "number") return v; const n = parseFloat(String(v).replace(/,/g, "").trim()); return Number.isFinite(n) ? n : 0; }
+  function formatTrashAmount(v) { const n = parseTrashAmount(v); return Number.isFinite(n) ? String(n) : "-"; }
+  function getComparableTimestamp(item) { const d = new Date(item.time ? `${item.date || "1900-01-01"} ${item.time}` : `${item.date || "1900-01-01"}T00:00:00`); if (!Number.isNaN(d.getTime())) return d.getTime(); const c = item.createdAt ? new Date(item.createdAt).getTime() : 0; return Number.isNaN(c) ? 0 : c; }
+  function formatDisplayTimestamp(item) {
+    let d = null;
+    if (item.date && item.time) d = new Date(`${item.date} ${item.time}`);
+    else if (item.date) d = new Date(`${item.date}T00:00:00`);
+    else if (item.createdAt) d = new Date(item.createdAt);
+    if (!d || Number.isNaN(d.getTime())) return "No timestamp";
+    const mm = String(d.getMonth()+1).padStart(2,"0"), dd = String(d.getDate()).padStart(2,"0"), yy = String(d.getFullYear()).slice(-2);
+    let h = d.getHours(); const min = String(d.getMinutes()).padStart(2,"0"), ampm = h >= 12 ? "PM" : "AM";
+    h = h % 12; if (h === 0) h = 12;
+    return `${mm}/${dd}/${yy} ${String(h).padStart(2,"0")}:${min} ${ampm}`;
+  }
+  function getGroupKey(item) { return `${(item.type||"unknown").trim().toLowerCase()}__${(item.areaName||"").trim().toLowerCase()||"untitled"}`; }
+  function getGroupDisplayName(g) { return g.areaName || g.title || "Cleanup"; }
+
+  async function fetchCleanupsFromDb() {
+    const { data, error } = await supabaseClient.from("cleanups").select("*").order("cleanup_date", { ascending: false, nullsFirst: false }).order("created_at", { ascending: false });
+    if (error) throw error;
+    return data || [];
+  }
+
+  async function prepareCleanupData(rawRows) {
+    const routeRows = rawRows.filter(r => r.cleanup_type === "route" && r.geometry?.type === "route");
+    const areaRows = rawRows.filter(r => r.cleanup_type === "area" && r.geometry?.type === "area");
+    const uniqueGeoms = new Map();
+    routeRows.forEach(r => { const k = geometryFingerprint(r.geometry); if (!uniqueGeoms.has(k)) uniqueGeoms.set(k, r.geometry); });
+    await Promise.all(Array.from(uniqueGeoms.entries()).map(async ([key, geom]) => {
+      if (routeCoordCache.has(key)) return;
+      const pts = [geom.start, ...(Array.isArray(geom.via) ? geom.via : []), geom.end];
+      routeCoordCache.set(key, await getRoadRouteCoords(pts));
+    }));
+    const prepared = [];
+    for (const row of routeRows) prepared.push({ id: row.id, title: row.title, type: row.cleanup_type, date: row.cleanup_date, time: row.cleanup_time, duration: row.duration, people: row.people_count, amount: row.amount_collected, areaName: row.area_name, notes: row.notes, photos: normalizePhotos(row.photos), createdAt: row.created_at, geometry: row.geometry, coords: routeCoordCache.get(geometryFingerprint(row.geometry)) || [] });
+    for (const row of areaRows) prepared.push({ id: row.id, title: row.title, type: row.cleanup_type, date: row.cleanup_date, time: row.cleanup_time, duration: row.duration, people: row.people_count, amount: row.amount_collected, areaName: row.area_name, notes: row.notes, photos: normalizePhotos(row.photos), createdAt: row.created_at, geometry: row.geometry, center: row.geometry.center, radius: row.geometry.radius });
+    return prepared;
+  }
+
+  function buildGroupedCleanupData(items) {
+    const groupMap = new Map();
+    items.forEach(item => {
+      const gk = getGroupKey(item);
+      if (!groupMap.has(gk)) groupMap.set(gk, { key: gk, title: item.title||item.areaName||"Cleanup", areaName: item.areaName||"-", type: item.type, items: [], totalTrash: 0, lastCleanedText: "-", latestGeometry: item.geometry||null });
+      const g = groupMap.get(gk); g.items.push(item); g.totalTrash += parseTrashAmount(item.amount);
+    });
+    return Array.from(groupMap.values()).map(g => {
+      g.items.sort((a,b) => getComparableTimestamp(b)-getComparableTimestamp(a));
+      const latest = g.items[0]||null;
+      g.lastCleanedText = latest ? formatDisplayTimestamp(latest) : "-";
+      if (latest?.geometry) g.latestGeometry = latest.geometry;
+      if ((!g.title||g.title==="Cleanup")&&latest) g.title = latest.title||latest.areaName||"Cleanup";
+      return g;
+    });
+  }
+
+  function buildTrashLabels(data, grouped) {
+    trashLabelGroup.clearLayers(); trashLabels.length = 0;
+    grouped.forEach(group => {
+      const firstItem = group.items[0]; if (!firstItem) return;
+      let latlng = null;
+      if (group.type === "route") { const fi = data.find(d => d.id === firstItem.id); if (fi?.coords?.length >= 2) { const mid = fi.coords[Math.floor(fi.coords.length / 2)]; latlng = L.latLng(mid[0], mid[1]); } }
+      else if (group.type === "area") { const fi = data.find(d => d.id === firstItem.id); if (fi?.center?.length === 2) latlng = L.latLng(fi.center[0], fi.center[1]); }
+      if (!latlng) return;
+      const icon = L.divIcon({ className: "cleanup-trash-label-wrapper", html: String(group.totalTrash), iconAnchor: [22, 14], iconSize: null });
+      const marker = L.marker(latlng, { icon, interactive: false, zIndexOffset: 500 });
+      trashLabels.push({ label: marker, groupKey: group.key });
+      trashLabelGroup.addLayer(marker);
+    });
+    const z = map.getZoom();
+    trashLabels.forEach(({ label }) => { const el = label.getElement(); if (el) el.style.display = z >= LABEL_MIN_ZOOM ? "" : "none"; });
+  }
+
+  function resetSelectedVisuals() { selectedVisuals.forEach(e => { if (e.layer && e.originalStyle) e.layer.setStyle(e.originalStyle); }); selectedVisuals = []; }
+  function clearSelection() { selectedGroupKey = null; resetSelectedVisuals(); sidebar.classList.add("hidden"); }
+
+  function applySelection(groupKey) {
+    resetSelectedVisuals(); selectedGroupKey = groupKey;
+    const rw = getRouteWeight();
+    allLayers.forEach(entry => {
+      if (entry.groupKey !== groupKey) return;
+      const orig = { ...entry.style };
+      if (entry.type === "route") entry.layer.setStyle({ color: "#ff9f43", weight: rw, opacity: 1 });
+      else entry.layer.setStyle({ color: "#ff9f43", fillColor: "#ff9f43", weight: entry.style.weight, fillOpacity: 0.28, opacity: 1 });
+      selectedVisuals.push({ layer: entry.layer, originalStyle: orig });
+    });
+  }
+
+  function openGroupSidebar(groupKey) {
+    const group = groupedCleanupData.find(g => g.key === groupKey); if (!group) return;
+    applySelection(groupKey);
+    sidebar.classList.remove("hidden");
+    sidebarContent.innerHTML = `
+      <div class="info-card">
+        <h3 class="info-title">${getGroupDisplayName(group)}</h3>
+        <div class="summary-grid">
+          <div class="summary-box"><div class="summary-label">Total Trash Collected</div><div class="summary-value big-trash">${String(group.totalTrash)} pieces</div></div>
+          <div class="summary-box"><div class="summary-label">Last Cleaned</div><div class="summary-value">${group.lastCleanedText}</div></div>
+          <div class="summary-box"><div class="summary-label">Total Cleanups</div><div class="summary-value">${group.items.length}</div></div>
+        </div>
+      </div>
+      <div id="timelineList" class="timeline-list"></div>`;
+    const timelineList = sidebarContent.querySelector("#timelineList");
+    group.items.forEach((item, index) => {
+      const itemEl = document.createElement("div");
+      itemEl.className = `timeline-item${index === 0 ? " open" : ""}`;
+      const photosHtml = Array.isArray(item.photos) && item.photos.length
+        ? `<div class="gallery">${item.photos.map((src,i) => `<img src="${src}" alt="Cleanup photo ${i+1}" data-photo-src="${src}">`).join("")}</div>`
+        : `<p style="color:#aab6c9;font-size:0.85rem;margin-top:6px;">No photos yet.</p>`;
+      itemEl.innerHTML = `
+        <button class="timeline-trigger" type="button">
+          <div class="timeline-date">${formatDisplayTimestamp(item)}</div>
+          <div class="timeline-arrow">⌄</div>
+        </button>
+        <div class="timeline-content">
+          <div class="detail-grid">
+            <div class="detail-box"><div class="detail-label">Trash Collected</div><div class="detail-value">${formatTrashAmount(item.amount)} lbs</div></div>
+            <div class="detail-box"><div class="detail-label">Duration</div><div class="detail-value">${item.duration||"-"}</div></div>
+            <div class="detail-box"><div class="detail-label">People</div><div class="detail-value">${item.people??"-"}</div></div>
+            <div class="detail-box"><div class="detail-label">Date</div><div class="detail-value">${formatDisplayTimestamp(item)}</div></div>
+          </div>
+          <div class="timeline-notes">${item.notes||"No notes added."}</div>
+          ${photosHtml}
+        </div>`;
+      timelineList.appendChild(itemEl);
+    });
+    timelineList.querySelectorAll(".timeline-trigger").forEach(trigger => {
+      trigger.addEventListener("click", () => {
+        const it = trigger.closest(".timeline-item"), isOpen = it.classList.contains("open");
+        timelineList.querySelectorAll(".timeline-item").forEach(el => el.classList.remove("open"));
+        if (!isOpen) it.classList.add("open");
+      });
+    });
+    timelineList.querySelectorAll("[data-photo-src]").forEach(img => img.addEventListener("click", () => { lightboxImg.src = img.getAttribute("data-photo-src"); lightbox.classList.add("open"); }));
+  }
+
+  function clearAllFeatures() { routeLayerGroup.clearLayers(); areaLayerGroup.clearLayers(); trashLabelGroup.clearLayers(); trashLabels.length = 0; allLayers.length = 0; selectedVisuals = []; }
+
+  function addCleanupFeatures(data) {
+    clearAllFeatures();
+    const rw = getRouteWeight();
+    data.forEach(item => {
+      let layer = null;
+      const groupKey = getGroupKey(item);
+      if (item.type === "route" && Array.isArray(item.coords) && item.coords.length >= 2) {
+        layer = L.polyline(item.coords, { color: "#4ea1ff", weight: rw, opacity: 0.9, lineCap: "round", lineJoin: "round" });
+        layer.on("click", (e) => { L.DomEvent.stopPropagation(e); openGroupSidebar(groupKey); });
+        layer.addTo(routeLayerGroup);
+      }
+      if (item.type === "area" && Array.isArray(item.center) && item.center.length === 2 && Number(item.radius) > 0) {
+        layer = L.circle(item.center, { radius: Number(item.radius), color: "#2ecc71", weight: 4, fillColor: "#2ecc71", fillOpacity: 0.22 });
+        layer.on("click", (e) => { L.DomEvent.stopPropagation(e); openGroupSidebar(groupKey); });
+        layer.addTo(areaLayerGroup);
+      }
+      if (layer) allLayers.push({ layer, type: item.type, groupKey, style: item.type === "route" ? { color: "#4ea1ff", weight: rw, opacity: 0.9 } : { color: "#2ecc71", fillColor: "#2ecc71", weight: 4, fillOpacity: 0.22, opacity: 1 } });
+    });
+  }
+
+  function fitAllFeatures() { if (!allLayers.length) return; map.fitBounds(L.featureGroup(allLayers.map(e => e.layer)).getBounds().pad(0.15)); }
+
+  function setLayerMode(mode) {
+    [showAllBtn, showRoutesBtn, showAreasBtn].forEach(b => b.classList.remove("active"));
+    if (mode === "all") { if (!map.hasLayer(routeLayerGroup)) map.addLayer(routeLayerGroup); if (!map.hasLayer(areaLayerGroup)) map.addLayer(areaLayerGroup); if (!map.hasLayer(trashLabelGroup)) map.addLayer(trashLabelGroup); showAllBtn.classList.add("active"); }
+    else if (mode === "routes") { if (!map.hasLayer(routeLayerGroup)) map.addLayer(routeLayerGroup); if (map.hasLayer(areaLayerGroup)) map.removeLayer(areaLayerGroup); if (!map.hasLayer(trashLabelGroup)) map.addLayer(trashLabelGroup); showRoutesBtn.classList.add("active"); }
+    else if (mode === "areas") { if (map.hasLayer(routeLayerGroup)) map.removeLayer(routeLayerGroup); if (!map.hasLayer(areaLayerGroup)) map.addLayer(areaLayerGroup); if (!map.hasLayer(trashLabelGroup)) map.addLayer(trashLabelGroup); showAreasBtn.classList.add("active"); }
+  }
+
+  async function loadAndRender() {
+    loadingBadge.classList.add("show");
+    try {
+      const rawRows = await fetchCleanupsFromDb();
+      preparedCleanupData = await prepareCleanupData(rawRows);
+      groupedCleanupData = buildGroupedCleanupData(preparedCleanupData);
+      addCleanupFeatures(preparedCleanupData);
+      buildTrashLabels(preparedCleanupData, groupedCleanupData);
+      if (preparedCleanupData.length) fitAllFeatures();
+    } catch (err) { console.error("Failed to load cleanups:", err); }
+    finally { loadingBadge.classList.remove("show"); setTimeout(() => map.invalidateSize(), 200); }
+  }
+
+  closeSidebarBtn.addEventListener("click", clearSelection);
+  fitBtn.addEventListener("click", fitAllFeatures);
+  showAllBtn.addEventListener("click", () => setLayerMode("all"));
+  showRoutesBtn.addEventListener("click", () => setLayerMode("routes"));
+  showAreasBtn.addEventListener("click", () => setLayerMode("areas"));
+  map.on("click", () => { map.closePopup(); clearSelection(); });
+  map.on("zoomend", updateAllWeights);
+  lightboxClose.addEventListener("click", () => { lightbox.classList.remove("open"); lightboxImg.src = ""; });
+  lightbox.addEventListener("click", (e) => { if (e.target === lightbox) { lightbox.classList.remove("open"); lightboxImg.src = ""; } });
+  window.addEventListener("resize", () => setTimeout(() => map.invalidateSize(), 50));
+
+  loadAndRender();
+})();
+</script>
+</body>
+</html>

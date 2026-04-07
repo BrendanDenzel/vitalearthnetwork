@@ -400,6 +400,443 @@
 
 
 
+
+
+
+<!-- ============================================================
+     CLEANUP MAP SECTION
+     Paste this block BEFORE the #PARTNER / "Our Trusted Charities" section
+     i.e. right before:  <section class="section partner" id="charities">
+     ============================================================ -->
+
+<!-- 
+  Also paste the CSS block below into your ./assets/css/style.css
+  (or in a <style> tag in the <head> of index.html)
+-->
+
+<!-- ─── MAP SECTION HTML ──────────────────────────────────────── -->
+<section class="section cleanup-map-section" id="cleanup-map">
+  <div class="cleanup-map-inner">
+
+    <!-- Left: text content -->
+    <div class="cleanup-map-text">
+      <p class="section-subtitle cleanup-map-subtitle">
+        <img src="./assets/images/subtitle-img-green.png" width="32" height="7" alt="Wavy line">
+        <span>On The Ground</span>
+      </p>
+
+      <h2 class="h2 cleanup-map-heading">
+        Every Street We've <strong>Cleaned</strong>
+      </h2>
+
+      <p class="cleanup-map-desc">
+        Every route walked, every bag filled. Our interactive cleanup map tracks every location
+        our volunteers have worked — click any route or area to see the full history.
+      </p>
+
+      <!-- Stats row -->
+      <div class="cleanup-stats-row">
+        <div class="cleanup-stat">
+          <span class="cleanup-stat-value" id="statRoutes">—</span>
+          <span class="cleanup-stat-label">Routes Cleaned</span>
+        </div>
+        <div class="cleanup-stat-divider"></div>
+        <div class="cleanup-stat">
+          <span class="cleanup-stat-value" id="statPieces">—</span>
+          <span class="cleanup-stat-label">Pieces Collected</span>
+        </div>
+        <div class="cleanup-stat-divider"></div>
+        <div class="cleanup-stat">
+          <span class="cleanup-stat-value" id="statSessions">—</span>
+          <span class="cleanup-stat-label">Total Sessions</span>
+        </div>
+      </div>
+
+      <a href="map.html" class="cleanup-fullscreen-btn">
+        <span>View Full Screen</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+      </a>
+    </div>
+
+    <!-- Right: map iframe -->
+    <div class="cleanup-map-frame-wrap">
+      <div class="cleanup-map-frame-border">
+        <iframe
+          src="backendmap.html"
+          title="Vital Earth Network Cleanup Map"
+          class="cleanup-map-frame"
+          loading="lazy"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- ─── END MAP SECTION HTML ──────────────────────────────────── -->
+
+
+
+
+<!-- ─── MAP SECTION CSS ───────────────────────────────────────── -->
+<!--
+  Paste everything between the <style> tags into your style.css file,
+  OR add a <style> block in the <head> of index.html
+-->
+<style id="cleanup-map-styles-paste-into-css">
+
+/* ── Cleanup Map Section ─────────────────────────────────────── */
+
+.cleanup-map-section {
+  background-color: #0f1115;
+  padding-block: 90px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Subtle grain/noise overlay for depth */
+.cleanup-map-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 60% 50%, rgba(78,161,255,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 10% 80%, rgba(46,204,113,0.05) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cleanup-map-inner {
+  max-width: 1400px;
+  margin-inline: auto;
+  padding-inline: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 60px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Left text column ──────────────────────────────────────────── */
+
+.cleanup-map-subtitle {
+  --color: var(--pistachio);
+  --ff: var(--ff-roboto);
+  --fs: var(--fs-9);
+  margin-bottom: 14px;
+}
+
+.cleanup-map-heading {
+  color: #fff;
+  font-size: clamp(2.4rem, 3.5vw, 4rem);
+  line-height: 1.2;
+  margin-bottom: 18px;
+  font-weight: 300;
+}
+
+.cleanup-map-heading strong {
+  color: var(--pistachio);
+  font-weight: 700;
+}
+
+.cleanup-map-desc {
+  color: #b0bfd6;
+  font-size: 1.5rem;
+  line-height: 1.8;
+  max-width: 42ch;
+  margin-bottom: 36px;
+  font-family: var(--ff-inter);
+}
+
+/* Stats */
+.cleanup-stats-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 40px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 20px 24px;
+  width: fit-content;
+}
+
+.cleanup-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-inline: 24px;
+  gap: 4px;
+}
+
+.cleanup-stat-value {
+  font-size: 2.6rem;
+  font-weight: 800;
+  color: #fff;
+  font-family: var(--ff-oswald);
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.cleanup-stat-label {
+  font-size: 1.1rem;
+  color: #7a8fa8;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.cleanup-stat-divider {
+  width: 1px;
+  height: 40px;
+  background: rgba(255,255,255,0.1);
+  flex-shrink: 0;
+}
+
+/* Full screen button */
+.cleanup-fullscreen-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: 1.5px solid var(--pistachio);
+  color: var(--pistachio);
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  position: relative;
+}
+
+.cleanup-fullscreen-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--pistachio);
+  transform: translate(4px, 4px);
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+}
+
+.cleanup-fullscreen-btn:hover {
+  background: var(--pistachio);
+  color: #fff;
+}
+
+.cleanup-fullscreen-btn:hover::after {
+  transform: translate(0, 0);
+}
+
+.cleanup-fullscreen-btn svg {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.cleanup-fullscreen-btn:hover svg {
+  transform: scale(1.1);
+}
+
+/* ── Right map column ──────────────────────────────────────────── */
+
+.cleanup-map-frame-wrap {
+  position: relative;
+}
+
+/* Decorative glow behind the map */
+.cleanup-map-frame-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(ellipse at center, rgba(78,161,255,0.12) 0%, transparent 70%);
+  border-radius: 24px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cleanup-map-frame-border {
+  position: relative;
+  z-index: 1;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(78,161,255,0.25);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.04),
+    0 24px 60px rgba(0,0,0,0.5),
+    0 0 40px rgba(78,161,255,0.1);
+  /* Notched corner effect */
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+}
+
+.cleanup-map-frame {
+  width: 100%;
+  height: 480px;
+  border: none;
+  display: block;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+
+@media (max-width: 1024px) {
+  .cleanup-map-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .cleanup-map-desc {
+    max-width: 100%;
+  }
+  .cleanup-map-frame {
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .cleanup-map-section {
+    padding-block: 60px;
+  }
+  .cleanup-map-inner {
+    padding-inline: 16px;
+    gap: 32px;
+  }
+  .cleanup-stats-row {
+    width: 100%;
+    justify-content: space-around;
+    padding: 16px 12px;
+  }
+  .cleanup-stat {
+    padding-inline: 12px;
+  }
+  .cleanup-stat-value {
+    font-size: 2rem;
+  }
+  .cleanup-map-frame {
+    height: 320px;
+  }
+  .cleanup-map-frame-border {
+    border-radius: 12px;
+    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  }
+}
+
+/* ── Stat counter animation ──────────────────────────────────── */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.cleanup-stat-value.animate {
+  animation: countUp 0.5s ease forwards;
+}
+
+</style>
+<!-- ─── END MAP SECTION CSS ──────────────────────────────────── -->
+
+
+
+
+<!-- ─── MAP STATS SCRIPT ──────────────────────────────────────── -->
+<script id="cleanup-stats-script-paste-before-body">
+(function () {
+  const SUPABASE_URL = "https://rgnthnpusmzsdjksxcns.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJnbnRobnB1c216c2Rqa3N4Y25zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5NjYwODcsImV4cCI6MjA4ODU0MjA4N30.R7gyp_D51Nhs16TMUDhu43mNChjDi7fLw0aZUVkh02s";
+
+  function animateCount(el, target) {
+    if (!el) return;
+    el.classList.add("animate");
+    const duration = 1200;
+    const start = performance.now();
+    const from = 0;
+    function step(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      const val = Math.round(from + (target - from) * ease);
+      el.textContent = val.toLocaleString();
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = target.toLocaleString();
+    }
+    requestAnimationFrame(step);
+  }
+
+  async function loadStats() {
+    try {
+      // Load Supabase only if not already loaded
+      if (!window.supabase) {
+        await new Promise((resolve, reject) => {
+          const s = document.createElement("script");
+          s.src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js";
+          s.onload = resolve; s.onerror = reject;
+          document.head.appendChild(s);
+        });
+      }
+
+      const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      const { data, error } = await client.from("cleanups").select("cleanup_type, amount_collected, area_name");
+      if (error || !data) return;
+
+      const routes = new Set();
+      let totalPieces = 0;
+      data.forEach(row => {
+        if (row.cleanup_type === "route" && row.area_name) routes.add(row.area_name.trim().toLowerCase());
+        const v = parseFloat(String(row.amount_collected || "0").replace(/,/g, "").trim());
+        if (Number.isFinite(v)) totalPieces += v;
+      });
+
+      // Use IntersectionObserver to trigger animation when section is in view
+      const section = document.getElementById("cleanup-map");
+      const statRoutes = document.getElementById("statRoutes");
+      const statPieces = document.getElementById("statPieces");
+      const statSessions = document.getElementById("statSessions");
+
+      const targets = { routes: routes.size, pieces: Math.round(totalPieces), sessions: data.length };
+
+      if (!section) {
+        // Fallback: just set values
+        if (statRoutes) statRoutes.textContent = targets.routes;
+        if (statPieces) statPieces.textContent = targets.pieces.toLocaleString();
+        if (statSessions) statSessions.textContent = targets.sessions;
+        return;
+      }
+
+      let animated = false;
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && !animated) {
+          animated = true;
+          animateCount(statRoutes, targets.routes);
+          animateCount(statPieces, targets.pieces);
+          animateCount(statSessions, targets.sessions);
+          observer.disconnect();
+        }
+      }, { threshold: 0.3 });
+      observer.observe(section);
+
+      // Set fallback text until animated
+      if (statRoutes) statRoutes.textContent = targets.routes;
+      if (statPieces) statPieces.textContent = targets.pieces.toLocaleString();
+      if (statSessions) statSessions.textContent = targets.sessions;
+
+    } catch (err) {
+      console.warn("Cleanup stats failed to load:", err);
+    }
+  }
+
+  // Wait for DOM
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", loadStats);
+  else loadStats();
+})();
+</script>
+<!-- ─── END MAP STATS SCRIPT ──────────────────────────────────── -->
+
+
+
+
+
+
+
+
+
       <!-- 
         - #CTA
       -->
@@ -888,17 +1325,48 @@
   <div class="footer-separator"></div>
 
 
+<!-- ============================================================
+  REPLACE your existing .mobile-donation-footer3 div in index.html
+  with this block (paste it in exactly the same location)
+  ============================================================ -->
+
 <div class="mobile-donation-footer3">
-  <div class="progress-container3">
-    <div class="progress-bar3">
-      <div class="progress-fill3"></div>
-      <div class="progress-text3">$0 / $0</div>
+
+  <!-- ── Bar 1: Wildlife fundraise ── -->
+  <div class="mf-bar-row">
+    <div class="mf-bar-meta">
+      <span class="mf-bar-title">
+        <ion-icon name="leaf-outline"></ion-icon>
+        Wildlife Fund
+      </span>
+      <span class="mf-bar1-label mf-bar-amount">$0.00</span>
     </div>
+    <div class="mf-bar-track">
+      <div class="mf-bar1-fill mf-bar-fill mf-fill-wildlife"></div>
+    </div>
+    <div class="mf-bar-goal">Goal: $1,000</div>
   </div>
-  <a href="https://fundraise.worldwildlife.org/p2p/site/NZSo9/page/17SoNj#/" 
-     target="_blank" rel="noopener noreferrer" class="donate-button">
-     Donate
-  </a>
+
+  <!-- ── Divider ── -->
+  <div class="mf-divider"></div>
+
+  <!-- ── Bar 2: Cleanup / garbage ── -->
+  <div class="mf-bar-row">
+    <div class="mf-bar-meta">
+      <span class="mf-bar-title">
+        <ion-icon name="trash-outline"></ion-icon>
+        Cleanup Goal
+      </span>
+      <span class="mf-bar2-label mf-bar-amount">$0</span>
+    </div>
+    <div class="mf-bar-track">
+      <div class="mf-bar2-fill mf-bar-fill mf-fill-cleanup"></div>
+    </div>
+    <div class="mf-bar-goal">Goal: $100,000</div>
+  </div>
+
+
+
 </div>
 
 
