@@ -483,6 +483,12 @@
   Paste everything between the <style> tags into your style.css file,
   OR add a <style> block in the <head> of index.html
 -->
+<!-- 
+  index.html — FIND the <style id="cleanup-map-styles-paste-into-css"> block
+  and REPLACE the ENTIRE thing (opening <style> tag to closing </style> tag)
+  with this block below.
+-->
+
 <style id="cleanup-map-styles-paste-into-css">
 
 /* ── Cleanup Map Section ─────────────────────────────────────── */
@@ -494,7 +500,6 @@
   position: relative;
 }
 
-/* Subtle grain/noise overlay for depth */
 .cleanup-map-section::before {
   content: "";
   position: absolute;
@@ -646,7 +651,6 @@
   position: relative;
 }
 
-/* Decorative glow behind the map */
 .cleanup-map-frame-wrap::before {
   content: "";
   position: absolute;
@@ -667,7 +671,6 @@
     0 0 0 1px rgba(255,255,255,0.04),
     0 24px 60px rgba(0,0,0,0.5),
     0 0 40px rgba(78,161,255,0.1);
-  /* Notched corner effect */
   clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
 }
 
@@ -694,30 +697,122 @@
 }
 
 @media (max-width: 768px) {
+
   .cleanup-map-section {
-    padding-block: 60px;
+    padding-block: 40px 28px;
+    overflow: hidden;
   }
+
   .cleanup-map-inner {
-    padding-inline: 16px;
-    gap: 32px;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding-inline: 20px;
+    max-width: 100%;
+    box-sizing: border-box;
   }
+
+  /* Stack and center all left-column content */
+  .cleanup-map-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .cleanup-map-subtitle {
+    justify-content: center;
+  }
+
+  .cleanup-map-heading {
+    font-size: clamp(2rem, 7vw, 3rem);
+    width: 100%;
+  }
+
+  /* Key fix: remove 42ch max-width, allow full width */
+  .cleanup-map-desc {
+    font-size: 1.4rem;
+    max-width: 100%;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 24px;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+  }
+
+  /* Stats pill: full width, no fit-content */
   .cleanup-stats-row {
     width: 100%;
-    justify-content: space-around;
-    padding: 16px 12px;
+    max-width: 100%;
+    box-sizing: border-box;
+    justify-content: space-between;
+    margin-inline: 0;
+    padding: 14px 8px;
+    border-radius: 12px;
+    margin-bottom: 28px;
   }
+
   .cleanup-stat {
-    padding-inline: 12px;
+    flex: 1;
+    padding-inline: 4px;
+    min-width: 0;
   }
+
   .cleanup-stat-value {
-    font-size: 2rem;
+    font-size: 1.8rem;
+  }
+
+  .cleanup-stat-label {
+    font-size: 0.85rem;
+    letter-spacing: 0.2px;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .cleanup-stat-divider {
+    height: 28px;
+  }
+
+  /* Button centered */
+  .cleanup-fullscreen-btn {
+    align-self: center;
+    margin-inline: auto;
+    font-size: 1.3rem;
+    padding: 10px 20px;
+  }
+
+  /* Map full width */
+  .cleanup-map-frame-wrap {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .cleanup-map-frame-border {
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 12px;
+    clip-path: polygon(
+      0 0, calc(100% - 10px) 0, 100% 10px,
+      100% 100%, 10px 100%, 0 calc(100% - 10px)
+    );
+  }
+
+  .cleanup-map-frame {
+    height: 280px;
+  }
+
+}
+
+@media (max-width: 390px) {
+  .cleanup-stat-value {
+    font-size: 1.5rem;
+  }
+  .cleanup-stat-label {
+    font-size: 0.75rem;
   }
   .cleanup-map-frame {
-    height: 320px;
-  }
-  .cleanup-map-frame-border {
-    border-radius: 12px;
-    clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+    height: 240px;
   }
 }
 
