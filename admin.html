@@ -10,7 +10,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
     <link rel="stylesheet" href="./assets/css/contact.css">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -719,7 +718,7 @@ async function deleteGroup(groupKey) {
         </button>
         <div class="timeline-content">
           <div class="detail-grid">
-            <div class="detail-box"><div class="detail-label">Trash Collected</div><div class="detail-value">${formatTrashAmount(item.amount)} lbs</div></div>
+            <div class="detail-box"><div class="detail-label">Trash Collected</div><div class="detail-value">${formatTrashAmount(item.amount)}</div></div>
             <div class="detail-box"><div class="detail-label">Time Spent</div><div class="detail-value">${item.duration||"-"}</div></div>
             <div class="detail-box"><div class="detail-label">People</div><div class="detail-value">${item.people??"-"}</div></div>
             <div class="detail-box"><div class="detail-label">Timestamp</div><div class="detail-value">${formatDisplayTimestamp(item)}</div></div>

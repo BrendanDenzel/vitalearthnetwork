@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volunteer Hours | Vital Earth Network</title>
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/contact.css">
+  <link rel="stylesheet" href="./assets/css/need2.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Roboto:wght@300;400;500;700&family=Oswald:wght@600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── Page-level overrides ── */
+    .volunteer-page .header {
+      background-color: var(--eerie-black-1) !important;
+      box-shadow: 0 0 10px hsla(0,0%,0%,0.8) !important;
+    }
+    .volunteer-page .header.active {
+      background-color: var(--eerie-black-1) !important;
+    }
+
+    /* ── Main layout ── */
+    .vol-main {
+      min-height: 100vh;
+      background: #0c0f0c;
+      padding-top: 105px;
+      padding-bottom: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vol-main::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(ellipse 70% 50% at 50% 20%, rgba(105,187,27,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 40% at 80% 80%, rgba(78,161,255,0.04) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* ── Login card ── */
+    .vol-login-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: calc(100vh - 100px);
+      padding-inline: 20px;
+    }
+
+    .vol-login-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(105,187,27,0.2);
+      border-radius: 20px;
+      padding: 56px 48px;
+      width: 100%;
+      max-width: 460px;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.04),
+        0 32px 80px rgba(0,0,0,0.6),
+        0 0 60px rgba(105,187,27,0.05);
+      animation: cardIn 0.6s cubic-bezier(0.22,1,0.36,1) forwards;
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    @keyframes cardIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .vol-login-icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(105,187,27,0.12);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+      border: 1px solid rgba(105,187,27,0.25);
+    }
+
+    .vol-login-icon ion-icon {
+      font-size: 2.8rem;
+      color: var(--pistachio);
+    }
+
+    .vol-login-card h2 {
+      color: #fff;
+      font-family: var(--ff-oswald);
+      font-size: 2.8rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .vol-login-card p {
+      color: #7a8fa8;
+      font-size: 1.4rem;
+      font-family: var(--ff-inter);
+      margin-bottom: 36px;
+      line-height: 1.6;
+    }
+
+    .vol-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .vol-field label {
+      color: rgba(255,255,255,0.6);
+      font-size: 1.15rem;
+      font-weight: 600;
+      font-family: var(--ff-inter);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .vol-field input {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 14px 18px;
+      color: #fff;
+      font-size: 1.5rem;
+      font-family: var(--ff-inter);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .vol-field input:focus {
+      outline: none;
+      border-color: var(--pistachio);
+      box-shadow: 0 0 0 3px rgba(105,187,27,0.15);
+    }
+
+    .vol-field input::placeholder {
+      color: rgba(255,255,255,0.2);
+    }
+
+    .vol-login-btn {
+      width: 100%;
+      background: var(--pistachio);
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      padding: 15px;
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: var(--ff-inter);
+      cursor: pointer;
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: background 0.2s, transform 0.15s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .vol-login-btn:hover { background: #7ac84b; }
+    .vol-login-btn:active { transform: scale(0.98); }
+
+    .vol-login-btn.loading {
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    .vol-spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: none;
+    }
+
+    .vol-login-btn.loading .vol-spinner { display: block; }
+    .vol-login-btn.loading .vol-btn-text { display: none; }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .vol-error {
+      display: none;
+      background: rgba(231,76,60,0.12);
+      border: 1px solid rgba(231,76,60,0.35);
+      border-radius: 10px;
+      padding: 14px 18px;
+      color: #e74c3c;
+      font-size: 1.35rem;
+      font-family: var(--ff-inter);
+      margin-top: 16px;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .vol-error.show { display: flex; }
+
+    /* ── Dashboard ── */
+    .vol-dashboard {
+      display: none;
+      max-width: 960px;
+      margin-inline: auto;
+      padding-inline: 20px;
+      animation: cardIn 0.5s cubic-bezier(0.22,1,0.36,1) forwards;
+      opacity: 0;
+    }
+
+    .vol-dashboard.show { display: block; }
+
+    /* Top greeting bar */
+    .vol-greeting {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .vol-greeting-left h2 {
+      color: #fff;
+      font-family: var(--ff-oswald);
+      font-size: 3rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .vol-greeting-left p {
+      color: #7a8fa8;
+      font-size: 1.35rem;
+      font-family: var(--ff-inter);
+    }
+
+    .vol-greeting-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .vol-logout-btn {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.6);
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 1.3rem;
+      font-family: var(--ff-inter);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .vol-logout-btn:hover {
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+    }
+
+    /* Leaderboard button */
+    .vol-leaderboard-btn {
+      background: rgba(105,187,27,0.12);
+      border: 1px solid rgba(105,187,27,0.35);
+      color: var(--pistachio);
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 1.3rem;
+      font-family: var(--ff-inter);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      font-weight: 600;
+    }
+
+    .vol-leaderboard-btn:hover {
+      background: rgba(105,187,27,0.22);
+      color: #8fd43a;
+    }
+
+    /* Stats row */
+    .vol-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .vol-stat-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      padding: 24px 20px;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+
+    .vol-stat-card:hover { border-color: rgba(105,187,27,0.3); }
+
+    .vol-stat-card .stat-num {
+      font-family: var(--ff-oswald);
+      font-size: 3.2rem;
+      font-weight: 600;
+      color: var(--pistachio);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .vol-stat-card .stat-label {
+      font-size: 1.15rem;
+      color: #7a8fa8;
+      font-family: var(--ff-inter);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      font-weight: 600;
+    }
+
+    /* Table */
+    .vol-table-wrap {
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .vol-table-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .vol-table-header h3 {
+      color: #fff;
+      font-family: var(--ff-oswald);
+      font-size: 1.8rem;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .vol-table-header ion-icon {
+      color: var(--pistachio);
+      font-size: 2rem;
+    }
+
+    table.vol-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .vol-table thead tr {
+      background: rgba(255,255,255,0.04);
+    }
+
+    .vol-table th {
+      padding: 14px 24px;
+      text-align: left;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.4);
+      font-family: var(--ff-inter);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .vol-table td {
+      padding: 16px 24px;
+      font-size: 1.4rem;
+      color: rgba(255,255,255,0.85);
+      font-family: var(--ff-inter);
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .vol-table tbody tr:hover td {
+      background: rgba(105,187,27,0.04);
+    }
+
+    .vol-table td .hours-badge {
+      display: inline-flex;
+      align-items: center;
+      background: rgba(105,187,27,0.12);
+      color: var(--pistachio);
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      gap: 4px;
+    }
+
+    .vol-table td .trash-count-badge {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(78,161,255,0.12);
+  color: #4ea1ff;
+  border-radius: 6px;
+  padding: 4px 12px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  gap: 4px;
+  border: 1px solid rgba(78,161,255,0.2); /* ← adds box feel like hours badge */
+}
+
+    .vol-empty {
+      text-align: center;
+      padding: 48px 24px;
+      color: #7a8fa8;
+      font-family: var(--ff-inter);
+      font-size: 1.4rem;
+    }
+
+    .vol-empty ion-icon {
+      font-size: 4rem;
+      display: block;
+      margin-inline: auto;
+      margin-bottom: 12px;
+      color: rgba(255,255,255,0.1);
+    }
+
+    /* ── Footer match ── */
+    .site-footer {
+      background: #111;
+    }
+
+    /* ── Leaderboard Modal ── */
+    .lb-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(4px);
+    }
+
+    .lb-overlay.active { display: flex; }
+
+    .lb-modal {
+      background: #141a14;
+      border: 1px solid rgba(105,187,27,0.25);
+      border-radius: 20px;
+      width: 100%;
+      max-width: 560px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.7), 0 0 60px rgba(105,187,27,0.06);
+      animation: cardIn 0.4s cubic-bezier(0.22,1,0.36,1) forwards;
+      opacity: 0;
+    }
+
+    .lb-overlay.active .lb-modal { opacity: 1; }
+
+    .lb-modal-header {
+      padding: 28px 32px 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .lb-modal-header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .lb-modal-header-left ion-icon {
+      font-size: 2.4rem;
+      color: var(--pistachio);
+    }
+
+    .lb-modal-header h3 {
+      color: #fff;
+      font-family: var(--ff-oswald);
+      font-size: 2.2rem;
+      font-weight: 600;
+    }
+
+    .lb-modal-header p {
+      color: #7a8fa8;
+      font-size: 1.2rem;
+      font-family: var(--ff-inter);
+      margin-top: 2px;
+    }
+
+    .lb-close-btn {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.5);
+      border-radius: 8px;
+      width: 36px;
+      height: 36px;
+      font-size: 2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+
+    .lb-close-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
+
+    .lb-modal-body {
+      overflow-y: auto;
+      padding: 20px 32px 32px;
+      flex: 1;
+    }
+
+    .lb-loading {
+      text-align: center;
+      padding: 40px;
+      color: #7a8fa8;
+      font-family: var(--ff-inter);
+      font-size: 1.4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .lb-spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid rgba(105,187,27,0.2);
+      border-top-color: var(--pistachio);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+    }
+
+    .lb-entry {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .lb-entry:last-child { border-bottom: none; }
+
+    .lb-rank {
+      font-family: var(--ff-oswald);
+      font-size: 1.8rem;
+      font-weight: 600;
+      min-width: 48px;
+      text-align: center;
+    }
+
+    .lb-rank.rank-1 { color: #ffd700; }
+    .lb-rank.rank-2 { color: #c0c0c0; }
+    .lb-rank.rank-3 { color: #cd7f32; }
+    .lb-rank.rank-other { color: rgba(255,255,255,0.35); }
+
+    .lb-medal {
+      font-size: 2rem;
+      min-width: 32px;
+      text-align: center;
+    }
+
+    .lb-name {
+      flex: 1;
+      color: #fff;
+      font-family: var(--ff-inter);
+      font-size: 1.45rem;
+      font-weight: 500;
+    }
+
+    .lb-trash-val {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(78,161,255,0.12);
+      color: #4ea1ff;
+      border-radius: 8px;
+      padding: 6px 14px;
+      font-size: 1.35rem;
+      font-weight: 700;
+      font-family: var(--ff-inter);
+      white-space: nowrap;
+    }
+
+    .lb-trash-val ion-icon { font-size: 1.4rem; }
+
+    .lb-empty {
+      text-align: center;
+      padding: 40px 0;
+      color: #7a8fa8;
+      font-family: var(--ff-inter);
+      font-size: 1.4rem;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 700px) {
+      .vol-stats { grid-template-columns: 1fr 1fr; }
+
+          /* ── Main layout ── */
+    .vol-main {
+      padding-top: 60px;
+    }
+    }
+
+    @media (max-width: 600px) {
+      .vol-login-card { padding: 36px 24px; }
+      .vol-table th, .vol-table td { padding: 12px 14px; font-size: 1.25rem; }
+      .vol-greeting-left h2 { font-size: 2.2rem; }
+      .lb-modal-header { padding: 20px 20px 16px; }
+      .lb-modal-body { padding: 16px 20px 24px; }
+    }
+
+    /* ── MOBILE IMPROVEMENTS ── */
+@media (max-width: 480px) {
+
+  /* Login card */
+  .vol-login-card {
+    padding: 32px 20px;
+    border-radius: 16px;
+  }
+
+  .vol-login-card h2 {
+    font-size: 2.2rem;
+  }
+
+  .vol-login-card p {
+    font-size: 1.3rem;
+    margin-bottom: 28px;
+  }
+
+  .vol-login-icon {
+    width: 52px;
+    height: 52px;
+    margin-bottom: 20px;
+  }
+
+  .vol-field input {
+    font-size: 1.6rem; /* prevents iOS auto-zoom on focus (needs ≥16px) */
+    padding: 13px 14px;
+  }
+
+  .vol-field label {
+    font-size: 1.05rem;
+  }
+
+  .vol-login-btn {
+    font-size: 1.45rem;
+    padding: 14px;
+  }
+
+  /* Dashboard greeting — stack vertically */
+  .vol-greeting {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .vol-greeting-left h2 {
+    font-size: 2rem;
+  }
+
+  .vol-greeting-right {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .vol-leaderboard-btn,
+  .vol-logout-btn {
+    font-size: 1.2rem;
+    padding: 9px 14px;
+  }
+
+  /* Stats grid — 2x2 on small screens */
+  .vol-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .vol-stat-card {
+    padding: 18px 12px;
+  }
+
+  .vol-stat-card .stat-num {
+    font-size: 2.4rem;
+  }
+
+  .vol-stat-card .stat-label {
+    font-size: 1rem;
+  }
+
+  /* Table — horizontal scroll so it doesn't squish */
+  .vol-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 14px;
+  }
+
+  table.vol-table {
+    min-width: 480px; /* forces scroll before columns collapse */
+  }
+
+  .vol-table th,
+  .vol-table td {
+    padding: 12px 14px;
+    font-size: 1.2rem;
+    white-space: nowrap;
+  }
+
+  .vol-table-header {
+    padding: 16px 18px;
+  }
+
+  .vol-table-header h3 {
+    font-size: 1.5rem;
+  }
+
+  /* Leaderboard modal */
+  .lb-modal {
+    border-radius: 16px;
+    max-height: 90vh;
+  }
+
+  .lb-modal-header {
+    padding: 18px 18px 14px;
+  }
+
+  .lb-modal-header h3 {
+    font-size: 1.8rem;
+  }
+
+  .lb-modal-body {
+    padding: 12px 18px 24px;
+  }
+
+  .lb-name {
+    font-size: 1.3rem;
+  }
+
+  .lb-rank {
+    font-size: 1.5rem;
+    min-width: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .vol-dashboard {
+    padding-top: 50px; /* pushes content below the fixed header */
+    padding-inline: 16px;
+  }
+}
+  </style>
+</head>
+
+<body class="volunteer-page">
+
+  <!-- ── HEADER ── -->
+  <header class="header" data-header>
+    <div class="container">
+      <h1><a href="index.html" class="logo">Vital Earth Network</a></h1>
+
+      <button class="nav-open-btn" aria-label="Open Menu" data-nav-open-btn>
+        <ion-icon name="menu-outline"></ion-icon>
+      </button>
+
+      <nav class="navbar" data-navbar>
+        <button class="nav-close-btn" aria-label="Close Menu" data-nav-close-btn>
+          <ion-icon name="close-outline"></ion-icon>
+        </button>
+        <a href="index.html" class="logo">Vital Earth Network</a>
+        <ul class="navbar-list">
+          <li><a href="index.html#home" class="navbar-link" data-nav-link><span>Home</span><ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></a></li>
+          <li><a href="index.html#about" class="navbar-link" data-nav-link><span>About</span><ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></a></li>
+          <li><a href="index.html#service" class="navbar-link" data-nav-link><span>Service</span><ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></a></li>
+          <li><a href="index.html#donate" class="navbar-link" data-nav-link><span>Donate</span><ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></a></li>
+          <li><a onclick="openContactModal()" class="navbar-link" style="cursor:pointer;" data-nav-link><span>Contact</span><ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></a></li>
+          <li><a href="volunteer-hours.html" class="navbar-link navbar-link--login" data-nav-link><span>Login</span><ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></a></li>
+        </ul>
+      </nav>
+
+      <div class="header-action">
+        <div class="social-icons">
+          <a href="https://www.tiktok.com/@vitalearthnetwork" target="_blank" rel="noopener noreferrer">
+            <ion-icon name="logo-tiktok" size="large" color="light"></ion-icon>
+          </a>
+          <a href="https://www.instagram.com/vitalearthnetwork/" target="_blank" rel="noopener noreferrer">
+            <ion-icon name="logo-instagram" size="large" color="light"></ion-icon>
+          </a>
+          <a href="https://fundraise.worldwildlife.org/p2p/site/NZSo9/page/17SoNj#/" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <span>Donate</span>
+            <ion-icon name="heart-outline" aria-hidden="true"></ion-icon>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── CONTACT MODAL ── -->
+  <div id="contactOverlay" class="modal-overlay">
+    <div class="modal-box">
+      <button class="modal-close" aria-label="Close">&times;</button>
+      <h2>Contact Us</h2>
+      <p>Have a question or want to get involved? Send us a message.</p>
+      <form action="https://formsubmit.co/vitalearthnetwork@gmail.com" method="POST" class="contact-form">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_subject" value="New message from Vital Earth Network">
+        <input type="hidden" name="_next" value="http://127.0.0.1:5500/thank-you.html">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn btn-primary">Send Message</button>
+      </form>
+    </div>
+    <script>
+      const overlay = document.getElementById("contactOverlay");
+      const closeBtn = document.querySelector(".modal-close");
+      function openContactModal() { document.body.classList.add("modal-open"); overlay.classList.add("active"); }
+      function closeContactModal() { document.body.classList.remove("modal-open"); overlay.classList.remove("active"); }
+      closeBtn.addEventListener("click", closeContactModal);
+      let mouseDownOnOverlay = false;
+      overlay.addEventListener("mousedown", (e) => { mouseDownOnOverlay = e.target === overlay; });
+      overlay.addEventListener("mouseup", () => { if (mouseDownOnOverlay) closeContactModal(); mouseDownOnOverlay = false; });
+      const form = document.querySelector(".contact-form");
+      form.addEventListener("submit", () => {
+        localStorage.setItem("contact_name", form.name.value);
+        localStorage.setItem("contact_email", form.email.value);
+        localStorage.setItem("contact_message", form.message.value);
+      });
+      document.addEventListener("keydown", (e) => { if (e.key === "Escape" && overlay.classList.contains("active")) closeContactModal(); });
+    </script>
+  </div>
+
+  <!-- ── LEADERBOARD MODAL ── -->
+  <div id="lbOverlay" class="lb-overlay">
+    <div class="lb-modal">
+      <div class="lb-modal-header">
+        <div class="lb-modal-header-left">
+          <ion-icon name="trophy-outline"></ion-icon>
+          <div>
+            <h3>Trash Leaderboard</h3>
+            <p>Total trash collected per volunteer</p>
+          </div>
+        </div>
+        <button class="lb-close-btn" onclick="closeLeaderboard()">&times;</button>
+      </div>
+      <div class="lb-modal-body" id="lbBody">
+        <div class="lb-loading">
+          <div class="lb-spinner"></div>
+          Loading leaderboard…
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── MAIN ── -->
+  <main class="vol-main">
+
+    <!-- LOGIN VIEW -->
+    <div class="vol-login-wrap" id="loginView">
+      <div class="vol-login-card">
+        <div class="vol-login-icon">
+          <ion-icon name="leaf-outline"></ion-icon>
+        </div>
+        <h2>Volunteer Portal</h2>
+        <p>Enter your name exactly as registered to view your volunteer hours.</p>
+
+        <div class="vol-field">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" placeholder="e.g. Jane" autocomplete="given-name">
+        </div>
+        <div class="vol-field">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" placeholder="e.g. Smith" autocomplete="family-name">
+        </div>
+
+        <button class="vol-login-btn" id="loginBtn" onclick="lookupVolunteer()">
+          <span class="vol-btn-text" style="display:flex;align-items:center;gap:8px;">
+            <ion-icon name="search-outline"></ion-icon> View My Hours
+          </span>
+          <span class="vol-spinner"></span>
+        </button>
+
+        <div class="vol-error" id="volError">
+          <ion-icon name="alert-circle-outline"></ion-icon>
+          <span id="volErrorMsg">Name not found. Please check your spelling or contact us.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- DASHBOARD VIEW -->
+    <div class="vol-dashboard" id="dashboardView">
+      <div class="vol-greeting">
+        <div class="vol-greeting-left">
+          <h2 id="greetingName">Welcome back!</h2>
+          <p>Here's a summary of your volunteer contributions</p>
+        </div>
+        <div class="vol-greeting-right">
+          <button class="vol-leaderboard-btn" onclick="openLeaderboard()">
+            <ion-icon name="trophy-outline"></ion-icon> Trash Leaderboard
+          </button>
+          <button class="vol-logout-btn" onclick="logout()">
+            <ion-icon name="log-out-outline"></ion-icon> Sign Out
+          </button>
+        </div>
+      </div>
+
+      <!-- Stats — 4 cards -->
+      <div class="vol-stats">
+        <div class="vol-stat-card">
+          <div class="stat-num" id="statTotalHours">0</div>
+          <div class="stat-label">Total Hours</div>
+        </div>
+        <div class="vol-stat-card">
+          <div class="stat-num" id="statSessions">0</div>
+          <div class="stat-label">Sessions</div>
+        </div>
+        <div class="vol-stat-card">
+          <div class="stat-num" id="statTrashTotal">0</div>
+          <div class="stat-label">Trash Collected</div>
+        </div>
+        <div class="vol-stat-card">
+          <div class="stat-num" id="statLastDate">—</div>
+          <div class="stat-label">Last Session</div>
+        </div>
+      </div>
+
+      <!-- Trash Cleanup Section -->
+      <div class="vol-table-wrap" id="trashSection">
+        <div class="vol-table-header">
+          <ion-icon name="trash-outline"></ion-icon>
+          <h3>Trash Cleanup</h3>
+        </div>
+        <div id="trashBody"></div>
+      </div>
+
+      <!-- Other Activities Section -->
+      <div class="vol-table-wrap" id="otherSection" style="margin-top:24px;">
+        <div class="vol-table-header">
+          <ion-icon name="leaf-outline"></ion-icon>
+          <h3>Other Activities</h3>
+        </div>
+        <div id="otherBody"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── FOOTER ── -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <h2 class="footer-logo">Vital Earth Network</h2>
+        <div class="footer-socials">
+          <a href="https://www.tiktok.com/@vitalearthnetwork" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-tiktok"></ion-icon></a>
+          <a href="https://www.instagram.com/vitalearthnetwork/" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-instagram"></ion-icon></a>
+        </div>
+        <button class="back-to-top">↑ Back to top</button>
+      </div>
+      <div class="footer-links-row">
+        <div class="footer-links">
+          <strong>Message or Email us at</strong>
+          <a href="/cdn-cgi/l/email-protection#e1978895808d84809395898f8495968e938aa1868c80888dcf828e8c"><span class="__cf_email__" data-cfemail="0f79667b6e636a6e7d7b67616a7b78607d644f68626e6663216c6062">[email&#160;protected]</span></a>
+          <a href="sms:+17162497659">+1 (716) 249-7650</a>
+        </div>
+        <div class="footer-links">
+          <h4>Legal</h4>
+          <a href="privacy-policy">Privacy Policy</a>
+          <a href="terms-of-service">Terms of Service</a>
+          <a href="return-policy">Return Policy</a>
+        </div>
+      </div>
+    </div>
+    <div class="test5">
+      <div class="footer-socials2">
+        <a href="https://www.tiktok.com/@vitalearthnetwork" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-tiktok"></ion-icon></a>
+        <a href="https://www.instagram.com/vitalearthnetwork/" target="_blank" rel="noopener noreferrer"><ion-icon name="logo-instagram"></ion-icon></a>
+        <h2 class="footer-logo2">Vital Earth Network</h2>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Vital Earth Network. All Rights Reserved.</div>
+  </footer>
+
+  <!-- ── SCRIPTS ── -->
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script src="./assets/js/script.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <script>
+    // ════════════════════════════════════════════════════════
+    //  CONFIGURATION
+    // ════════════════════════════════════════════════════════
+    const SHEET_ID      = "1MsRxjxSeXL6-1SKE64Bp33qR04JPDov4q9i33IxdGU8";
+    const SHEET_NAME    = "Volunteer Hours";
+    const GOOGLE_API_KEY = "AIzaSyB7o0uJQeyrrrk5FCIgH6dQnjV8FUqdsT8";
+
+    // ════════════════════════════════════════════════════════
+    //  Fetch entire sheet (returns array of row objects)
+    // ════════════════════════════════════════════════════════
+    async function fetchSheet() {
+      const range = encodeURIComponent(SHEET_NAME);
+      const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${range}?key=${GOOGLE_API_KEY}`;
+      const res = await fetch(url);
+      if (!res.ok) {
+        const errBody = await res.json().catch(() => ({}));
+        throw new Error(`Sheets API error: ${errBody?.error?.message || `HTTP ${res.status}`}`);
+      }
+      const data = await res.json();
+      const rows = data.values;
+      if (!rows || rows.length < 2) return [];
+      const headers = rows[0].map(h => h.trim());
+      return rows.slice(1).map(row => {
+        const obj = {};
+        headers.forEach((h, i) => { obj[h] = (row[i] || "").trim(); });
+        return obj;
+      });
+    }
+
+    // ════════════════════════════════════════════════════════
+    //  Helpers
+    // ════════════════════════════════════════════════════════
+    const getField = (r, ...keys) => {
+      for (const k of keys) {
+        const v = r[k] ?? r[k.toLowerCase()] ?? r[k.toUpperCase()];
+        if (v !== undefined && v !== "") return v;
+      }
+      return "";
+    };
+
+    const isTrashRow = r => {
+      const val = getField(r, "Trash Cleanup", "trash cleanup", "Trash", "trash").toLowerCase();
+      return val === "true" || val === "1" || val === "yes" || val === "✓";
+    };
+
+    const getTrashCount = r => {
+  const raw = getField(
+    r,
+    "Trash Collected",   // ← add your exact column header here
+    "Trash Count",
+    "trash collected",
+    "TrashCollected",
+    "Trash"
+  );
+  const n = parseFloat(raw);
+  return isNaN(n) ? 0 : n;
+};
+
+    function sortByDate(rows) {
+  return [...rows].sort((a, b) => {
+    const da = getField(a, "Date") || "";
+    const db = getField(b, "Date") || "";
+    return da > db ? -1 : da < db ? 1 : 0; // ← flipped
+  });
+}
+
+    // Format hours: show decimals only when needed (e.g. 2.5 → "2.5", 3.0 → "3")
+    function fmtHours(num) {
+      if (num === Math.floor(num)) return String(num);
+      // Keep up to 2 decimal places, strip trailing zeros
+      return parseFloat(num.toFixed(2)).toString();
+    }
+
+    // ════════════════════════════════════════════════════════
+    //  Lookup
+    // ════════════════════════════════════════════════════════
+    async function lookupVolunteer() {
+      const firstName = document.getElementById("firstName").value.trim();
+      const lastName  = document.getElementById("lastName").value.trim();
+      const errorEl   = document.getElementById("volError");
+      const errMsg    = document.getElementById("volErrorMsg");
+      const btn       = document.getElementById("loginBtn");
+
+      errorEl.classList.remove("show");
+
+      if (!firstName || !lastName) {
+        errMsg.textContent = "Please enter both your first and last name.";
+        errorEl.classList.add("show");
+        return;
+      }
+
+      btn.classList.add("loading");
+
+      try {
+        const rows = await fetchSheet();
+        const fullName = `${firstName} ${lastName}`.toLowerCase();
+
+        const matched = rows.filter(r => {
+          const fn = getField(r, "First Name", "first name", "firstname");
+          const ln = getField(r, "Last Name",  "last name",  "lastname");
+          return `${fn} ${ln}`.toLowerCase() === fullName;
+        });
+
+        if (matched.length === 0) {
+          errMsg.textContent = "Name not found. Make sure you're registered as a volunteer and check your spelling.";
+          errorEl.classList.add("show");
+          btn.classList.remove("loading");
+          return;
+        }
+
+        showDashboard(firstName, lastName, matched);
+
+      } catch (err) {
+        console.error(err);
+        errMsg.textContent = "Could not load data. Please try again later.";
+        errorEl.classList.add("show");
+        btn.classList.remove("loading");
+      }
+    }
+
+    // ════════════════════════════════════════════════════════
+    //  Build table HTML
+    //  isTrash = true  → show Trash Collected column after Hours
+    //  isTrash = false → no trash column
+    // ════════════════════════════════════════════════════════
+    function buildTable(rows, isTrash) {
+      if (rows.length === 0) {
+        return `<div class="vol-empty"><ion-icon name="calendar-outline"></ion-icon>No sessions logged yet.</div>`;
+      }
+
+      const trashHeader = isTrash ? `<th>Trash Collected</th>` : "";
+
+      const rowsHTML = rows.map(r => {
+        const date     = getField(r, "Date")     || "—";
+        const activity = getField(r, "Activity", "Event") || "—";
+        const hours    = getField(r, "Hours")    || "—";
+        const notes    = getField(r, "Notes")    || "";
+        const trashNum = isTrash ? getTrashCount(r) : null;
+
+        const trashCell = isTrash
+  ? `<td><span class="trash-count-badge">
+       <ion-icon name="trash-outline"></ion-icon>${trashNum}
+     </span></td>`
+  : "";
+
+        return `
+          <tr>
+            <td>${date}</td>
+            <td>${activity}</td>
+            <td><span class="hours-badge"><ion-icon name="time-outline"></ion-icon>${hours} hrs</span></td>
+            ${trashCell}
+            <td style="color:#7a8fa8;font-size:1.25rem;">${notes}</td>
+          </tr>`;
+      }).join("");
+
+      return `
+        <table class="vol-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Activity</th>
+              <th>Hours</th>
+              ${trashHeader}
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>${rowsHTML}</tbody>
+        </table>`;
+    }
+
+    // ════════════════════════════════════════════════════════
+    //  Show dashboard
+    // ════════════════════════════════════════════════════════
+    function showDashboard(firstName, lastName, rows) {
+      const trashRows = sortByDate(rows.filter(r =>  isTrashRow(r)));
+      const otherRows = sortByDate(rows.filter(r => !isTrashRow(r)));
+
+      // Total hours — exact, no rounding
+      const totalHours = rows.reduce((sum, r) => {
+        const h = parseFloat(getField(r, "Hours") || 0);
+        return sum + (isNaN(h) ? 0 : h);
+      }, 0);
+
+      // Total trash collected
+      const totalTrash = trashRows.reduce((sum, r) => sum + getTrashCount(r), 0);
+
+      // Last session date
+      const allDates = rows.map(r => getField(r, "Date")).filter(Boolean).sort();
+      const lastDate = allDates.length ? allDates[allDates.length - 1] : "—";
+
+      document.getElementById("greetingName").textContent = `Welcome, ${firstName}!`;
+
+      // Hours — animate but display exactly (no rounding)
+      animateCountExact("statTotalHours", totalHours);
+      animateCount("statSessions", rows.length);
+      animateCount("statTrashTotal", totalTrash);
+      document.getElementById("statLastDate").textContent = lastDate || "—";
+
+      document.getElementById("trashBody").innerHTML = buildTable(trashRows, true);
+      document.getElementById("otherBody").innerHTML = buildTable(otherRows, false);
+
+      document.getElementById("trashSection").style.display = trashRows.length === 0 ? "none" : "";
+      document.getElementById("otherSection").style.display = otherRows.length === 0 ? "none" : "";
+
+      document.getElementById("loginView").style.display = "none";
+      const dash = document.getElementById("dashboardView");
+      dash.classList.add("show");
+      document.getElementById("loginBtn").classList.remove("loading");
+    }
+
+    // ════════════════════════════════════════════════════════
+    //  Leaderboard
+    // ════════════════════════════════════════════════════════
+    async function openLeaderboard() {
+      document.getElementById("lbOverlay").classList.add("active");
+      document.body.classList.add("modal-open");
+
+      const bodyEl = document.getElementById("lbBody");
+      bodyEl.innerHTML = `<div class="lb-loading"><div class="lb-spinner"></div>Loading leaderboard…</div>`;
+
+      try {
+        const rows = await fetchSheet();
+
+        // Build map: "First Last" → total trash
+        const map = {};
+        rows.forEach(r => {
+          if (!isTrashRow(r)) return;
+          const fn = getField(r, "First Name", "first name", "firstname");
+          const ln = getField(r, "Last Name",  "last name",  "lastname");
+          if (!fn && !ln) return;
+          const name = `${fn} ${ln}`.trim();
+          const tc = getTrashCount(r);
+          map[name] = (map[name] || 0) + tc;
+        });
+
+        const sorted = Object.entries(map)
+          .sort((a, b) => b[1] - a[1]);
+
+        if (sorted.length === 0) {
+          bodyEl.innerHTML = `<div class="lb-empty">No trash cleanup data found yet.</div>`;
+          return;
+        }
+
+        const medals = ["🥇","🥈","🥉"];
+
+        const html = sorted.map(([name, total], i) => {
+          const rank = i + 1;
+          const rankClass = rank <= 3 ? `rank-${rank}` : "rank-other";
+          const medal = rank <= 3 ? medals[i] : "";
+          const suffix = rank === 1 ? "st" : rank === 2 ? "nd" : rank === 3 ? "rd" : "th";
+          return `
+            <div class="lb-entry">
+              <div class="lb-rank ${rankClass}">${rank}<sup style="font-size:1rem;">${suffix}</sup></div>
+              <div class="lb-medal">${medal}</div>
+              <div class="lb-name">${name}</div>
+              <div class="lb-trash-val"><ion-icon name="trash-outline"></ion-icon>${total}</div>
+            </div>`;
+        }).join("");
+
+        bodyEl.innerHTML = html;
+
+      } catch (err) {
+        console.error(err);
+        bodyEl.innerHTML = `<div class="lb-empty">Could not load leaderboard. Please try again.</div>`;
+      }
+    }
+
+    function closeLeaderboard() {
+      document.getElementById("lbOverlay").classList.remove("active");
+      document.body.classList.remove("modal-open");
+    }
+
+    // Close leaderboard on overlay click
+    document.getElementById("lbOverlay").addEventListener("click", function(e) {
+      if (e.target === this) closeLeaderboard();
+    });
+
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape" && document.getElementById("lbOverlay").classList.contains("active")) {
+        closeLeaderboard();
+      }
+    });
+
+    // ════════════════════════════════════════════════════════
+    //  Logout
+    // ════════════════════════════════════════════════════════
+    function logout() {
+      document.getElementById("dashboardView").classList.remove("show");
+      document.getElementById("dashboardView").style.display = "";
+      document.getElementById("loginView").style.display = "";
+      document.getElementById("firstName").value = "";
+      document.getElementById("lastName").value = "";
+      document.getElementById("volError").classList.remove("show");
+    }
+
+    // ════════════════════════════════════════════════════════
+    //  Animate counters
+    // ════════════════════════════════════════════════════════
+
+    // Integer counter (sessions, trash total)
+    function animateCount(id, target) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const duration = 900;
+      const start = performance.now();
+      function step(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(target * ease);
+        if (p < 1) requestAnimationFrame(step);
+        else el.textContent = target;
+      }
+      requestAnimationFrame(step);
+    }
+
+    // Hours counter — animates then shows exact value (no rounding)
+    function animateCountExact(id, target) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const duration = 900;
+      const start = performance.now();
+      const displayFinal = fmtHours(target);
+      function step(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        const current = target * ease;
+        el.textContent = p < 1 ? fmtHours(current) : displayFinal;
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    // ════════════════════════════════════════════════════════
+    //  Enter key on login fields
+    // ════════════════════════════════════════════════════════
+    document.addEventListener("DOMContentLoaded", () => {
+      ["firstName","lastName"].forEach(id => {
+        document.getElementById(id).addEventListener("keydown", e => {
+          if (e.key === "Enter") lookupVolunteer();
+        });
+      });
+
+      const btn = document.querySelector(".back-to-top");
+      if (btn) btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+    });
+  </script>
+
+</body>
+</html>
