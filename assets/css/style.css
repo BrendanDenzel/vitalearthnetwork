@@ -2402,3 +2402,21 @@ body {
 }
 
 
+/* Login nav item box */
+.navbar-link--login {
+  border: 1.5px solid var(--pistachio);
+  border-radius: 4px;
+  color: var(--white);
+  padding-inline: 10px;
+  padding-block: 0px;
+  align-self: center;
+  background-color: var(--pistachio);
+  color: var(--white);
+  margin-block-start: 7px; /* nudge down — try 2px–6px */
+}
+
+.navbar-link--login:is(:hover, :focus) {
+  background-color: green;
+  color: var(--white);
+}
+
