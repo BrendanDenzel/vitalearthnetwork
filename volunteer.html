@@ -26,9 +26,14 @@
       background-color: var(--eerie-black-1) !important;
     }
 
+    /* ── Safari / mobile viewport fix ── */
+    html { height: -webkit-fill-available; }
+    body { min-height: -webkit-fill-available; }
+
     /* ── Main layout ── */
     .vol-main {
-      min-height: 100vh;
+      min-height: 100dvh;
+      min-height: -webkit-fill-available;
       background: #0c0f0c;
       padding-top: 105px;
       padding-bottom: 80px;
@@ -51,7 +56,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: calc(100vh - 100px);
+      min-height: calc(100vh - 105px);
       padding-inline: 20px;
     }
 
@@ -131,7 +136,7 @@
       border-radius: 10px;
       padding: 14px 18px;
       color: #fff;
-      font-size: 1.5rem;
+      font-size: 1.6rem; /* ≥16px prevents iOS zoom */
       font-family: var(--ff-inter);
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
@@ -142,9 +147,7 @@
       box-shadow: 0 0 0 3px rgba(105,187,27,0.15);
     }
 
-    .vol-field input::placeholder {
-      color: rgba(255,255,255,0.2);
-    }
+    .vol-field input::placeholder { color: rgba(255,255,255,0.2); }
 
     .vol-login-btn {
       width: 100%;
@@ -169,15 +172,10 @@
 
     .vol-login-btn:hover { background: #7ac84b; }
     .vol-login-btn:active { transform: scale(0.98); }
-
-    .vol-login-btn.loading {
-      pointer-events: none;
-      opacity: 0.7;
-    }
+    .vol-login-btn.loading { pointer-events: none; opacity: 0.7; }
 
     .vol-spinner {
-      width: 18px;
-      height: 18px;
+      width: 18px; height: 18px;
       border: 2px solid rgba(255,255,255,0.3);
       border-top-color: #fff;
       border-radius: 50%;
@@ -203,7 +201,6 @@
       align-items: center;
       gap: 10px;
     }
-
     .vol-error.show { display: flex; }
 
     /* ── Dashboard ── */
@@ -216,7 +213,6 @@
       animation: cardIn 0.5s cubic-bezier(0.22,1,0.36,1) forwards;
       opacity: 0;
     }
-
     .vol-dashboard.show { display: block; }
 
     /* Top greeting bar */
@@ -246,7 +242,7 @@
     .vol-greeting-right {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
@@ -264,19 +260,15 @@
       gap: 8px;
       transition: all 0.2s;
     }
+    .vol-logout-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
 
-    .vol-logout-btn:hover {
-      background: rgba(255,255,255,0.1);
-      color: #fff;
-    }
-
-    /* Leaderboard button */
+    /* Leaderboard buttons */
     .vol-leaderboard-btn {
       background: rgba(105,187,27,0.12);
       border: 1px solid rgba(105,187,27,0.35);
       color: var(--pistachio);
       border-radius: 8px;
-      padding: 10px 20px;
+      padding: 10px 16px;
       font-size: 1.3rem;
       font-family: var(--ff-inter);
       cursor: pointer;
@@ -286,20 +278,51 @@
       transition: all 0.2s;
       font-weight: 600;
     }
+    .vol-leaderboard-btn:hover { background: rgba(105,187,27,0.22); color: #8fd43a; }
 
-    .vol-leaderboard-btn:hover {
-      background: rgba(105,187,27,0.22);
-      color: #8fd43a;
+    /* Admin leaderboard buttons (VEN Hours + Service Hours) */
+    .vol-admin-lb-btn {
+      background: rgba(255,180,0,0.1);
+      border: 1px solid rgba(255,180,0,0.35);
+      color: #ffb400;
+      border-radius: 8px;
+      padding: 10px 16px;
+      font-size: 1.3rem;
+      font-family: var(--ff-inter);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      font-weight: 600;
     }
+    .vol-admin-lb-btn:hover { background: rgba(255,180,0,0.18); color: #ffc933; }
 
-    /* Stats row */
+    /* ── Stats row ── */
+    /* We show two stat groups: service stats + VEN stats.
+       Admin users see all 6. Normal users see 4 (service hidden). */
     .vol-stats {
-      display: grid;
+  display: grid;
+  column-gap: 16px;
+  row-gap: 8px;
+  margin-bottom: 36px;
+  background: transparent;
+  grid-auto-rows: auto;
+  align-items: start;
+}
+
+    /* Default (non-admin): 4-col, only VEN group visible */
+    .vol-stats.normal-user {
       grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin-bottom: 36px;
     }
 
+    /* Admin: 2 rows of 3 */
+    .vol-stats.admin-user {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+
+    
     .vol-stat-card {
       background: rgba(255,255,255,0.03);
       border: 1px solid rgba(255,255,255,0.07);
@@ -307,9 +330,16 @@
       padding: 24px 20px;
       text-align: center;
       transition: border-color 0.2s;
+      position: relative;
+    }
+    .vol-stat-card:hover { 
+        border-color: inherit !important; 
     }
 
-    .vol-stat-card:hover { border-color: rgba(105,187,27,0.3); }
+.vol-dashboard .service {
+  margin-block-start: 0;
+  padding-block-start: 0;
+}
 
     .vol-stat-card .stat-num {
       font-family: var(--ff-oswald);
@@ -329,12 +359,54 @@
       font-weight: 600;
     }
 
-    /* Table */
+    /* Group divider label above stat rows */
+    .vol-stat-group-label {
+  grid-column: 1 / -1;
+  font-family: var(--ff-inter);
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(255,255,255,0.3);
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  margin-top: 4px;
+  background: transparent;
+}
+
+    .vol-stat-group-label.service { color: rgba(105,187,27,0.5); border-color: rgba(105,187,27,0.15); }
+    .vol-stat-group-label.ven     { color: rgba(78,161,255,0.5);  border-color: rgba(78,161,255,0.1); }
+
+    .vol-stat-card.service-card { border-color: rgba(105,187,27,0.12); }
+.vol-stat-card.service-card .stat-num { color: var(--pistachio); }
+/* Service (green) hover */
+.vol-stat-card.service-card:hover {
+  background: rgba(105,187,27,0.2); /* lighter green background */
+  border-color: rgba(105,187,27,0.8); /* stronger border */
+  color: var(--pistachio); /* text color if needed */
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+
+/* VEN (blue) hover */
+.vol-stat-card.ven-card:hover {
+  background: rgba(78,161,255,0.2); /* lighter blue background */
+  border-color: rgba(78,161,255,0.8); /* stronger border */
+  color: #4ea1ff; /* text color if needed */
+  transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+
+/* VEN stat cards get a blue tint */
+.vol-stat-card.ven-card { border-color: rgba(78,161,255,0.12); }
+.vol-stat-card.ven-card .stat-num { color: #4ea1ff; }
+
+    /* ── Table ── */
     .vol-table-wrap {
       background: rgba(255,255,255,0.025);
       border: 1px solid rgba(255,255,255,0.07);
       border-radius: 16px;
       overflow: hidden;
+      margin-bottom: 24px;
     }
 
     .vol-table-header {
@@ -357,15 +429,15 @@
       color: var(--pistachio);
       font-size: 2rem;
     }
+    .vol-table-header ion-icon.blue { color: #4ea1ff; }
+    .vol-table-header ion-icon.amber { color: #ffb400; }
 
     table.vol-table {
       width: 100%;
       border-collapse: collapse;
     }
 
-    .vol-table thead tr {
-      background: rgba(255,255,255,0.04);
-    }
+    .vol-table thead tr { background: rgba(255,255,255,0.04); }
 
     .vol-table th {
       padding: 14px 24px;
@@ -386,9 +458,7 @@
       border-top: 1px solid rgba(255,255,255,0.05);
     }
 
-    .vol-table tbody tr:hover td {
-      background: rgba(105,187,27,0.04);
-    }
+    .vol-table tbody tr:hover td { background: rgba(105,187,27,0.04); }
 
     .vol-table td .hours-badge {
       display: inline-flex;
@@ -400,20 +470,27 @@
       font-size: 1.3rem;
       font-weight: 700;
       gap: 4px;
+      border: 1px solid rgba(105,187,27,0.2);
+    }
+
+    .vol-table td .hours-badge.blue {
+      background: rgba(78,161,255,0.12);
+      color: #4ea1ff;
+      border-color: rgba(78,161,255,0.2);
     }
 
     .vol-table td .trash-count-badge {
-  display: inline-flex;
-  align-items: center;
-  background: rgba(78,161,255,0.12);
-  color: #4ea1ff;
-  border-radius: 6px;
-  padding: 4px 12px;
-  font-size: 1.3rem;
-  font-weight: 700;
-  gap: 4px;
-  border: 1px solid rgba(78,161,255,0.2); /* ← adds box feel like hours badge */
-}
+      display: inline-flex;
+      align-items: center;
+      background: rgba(78,161,255,0.12);
+      color: #4ea1ff;
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: 1.3rem;
+      font-weight: 700;
+      gap: 4px;
+      border: 1px solid rgba(78,161,255,0.2);
+    }
 
     .vol-empty {
       text-align: center;
@@ -422,7 +499,6 @@
       font-family: var(--ff-inter);
       font-size: 1.4rem;
     }
-
     .vol-empty ion-icon {
       font-size: 4rem;
       display: block;
@@ -431,10 +507,8 @@
       color: rgba(255,255,255,0.1);
     }
 
-    /* ── Footer match ── */
-    .site-footer {
-      background: #111;
-    }
+    /* ── Footer ── */
+    .site-footer { background: #111; }
 
     /* ── Leaderboard Modal ── */
     .lb-overlay {
@@ -448,7 +522,6 @@
       padding: 20px;
       backdrop-filter: blur(4px);
     }
-
     .lb-overlay.active { display: flex; }
 
     .lb-modal {
@@ -464,8 +537,28 @@
       animation: cardIn 0.4s cubic-bezier(0.22,1,0.36,1) forwards;
       opacity: 0;
     }
-
     .lb-overlay.active .lb-modal { opacity: 1; }
+
+    /* Admin dual-modal: two side by side */
+    .lb-dual-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.8);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      gap: 20px;
+      backdrop-filter: blur(4px);
+      flex-wrap: wrap;
+    }
+    .lb-dual-overlay.active { display: flex; }
+
+    .lb-dual-overlay .lb-modal {
+      max-width: 440px;
+      flex: 1 1 340px;
+    }
 
     .lb-modal-header {
       padding: 28px 32px 20px;
@@ -482,10 +575,8 @@
       gap: 12px;
     }
 
-    .lb-modal-header-left ion-icon {
-      font-size: 2.4rem;
-      color: var(--pistachio);
-    }
+    .lb-modal-header-left ion-icon { font-size: 2.4rem; color: var(--pistachio); }
+    .lb-modal-header-left ion-icon.amber { color: #ffb400; }
 
     .lb-modal-header h3 {
       color: #fff;
@@ -506,18 +597,15 @@
       border: 1px solid rgba(255,255,255,0.1);
       color: rgba(255,255,255,0.5);
       border-radius: 8px;
-      width: 36px;
-      height: 36px;
+      width: 36px; height: 36px;
       font-size: 2rem;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      line-height: 1;
       transition: all 0.2s;
       flex-shrink: 0;
     }
-
     .lb-close-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
 
     .lb-modal-body {
@@ -539,8 +627,7 @@
     }
 
     .lb-spinner {
-      width: 32px;
-      height: 32px;
+      width: 32px; height: 32px;
       border: 3px solid rgba(105,187,27,0.2);
       border-top-color: var(--pistachio);
       border-radius: 50%;
@@ -554,7 +641,6 @@
       padding: 14px 0;
       border-bottom: 1px solid rgba(255,255,255,0.05);
     }
-
     .lb-entry:last-child { border-bottom: none; }
 
     .lb-rank {
@@ -564,17 +650,12 @@
       min-width: 48px;
       text-align: center;
     }
-
     .lb-rank.rank-1 { color: #ffd700; }
     .lb-rank.rank-2 { color: #c0c0c0; }
     .lb-rank.rank-3 { color: #cd7f32; }
     .lb-rank.rank-other { color: rgba(255,255,255,0.35); }
 
-    .lb-medal {
-      font-size: 2rem;
-      min-width: 32px;
-      text-align: center;
-    }
+    .lb-medal { font-size: 2rem; min-width: 32px; text-align: center; }
 
     .lb-name {
       flex: 1;
@@ -584,12 +665,10 @@
       font-weight: 500;
     }
 
-    .lb-trash-val {
+    .lb-val {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(78,161,255,0.12);
-      color: #4ea1ff;
       border-radius: 8px;
       padding: 6px 14px;
       font-size: 1.35rem;
@@ -597,8 +676,10 @@
       font-family: var(--ff-inter);
       white-space: nowrap;
     }
-
-    .lb-trash-val ion-icon { font-size: 1.4rem; }
+    .lb-val.trash  { background: rgba(78,161,255,0.12); color: #4ea1ff; }
+    .lb-val.hours  { background: rgba(105,187,27,0.12); color: var(--pistachio); }
+    .lb-val.ven    { background: rgba(255,180,0,0.1);   color: #ffb400; }
+    .lb-val ion-icon { font-size: 1.4rem; }
 
     .lb-empty {
       text-align: center;
@@ -609,13 +690,16 @@
     }
 
     /* ── Responsive ── */
-    @media (max-width: 700px) {
-      .vol-stats { grid-template-columns: 1fr 1fr; }
-
-          /* ── Main layout ── */
-    .vol-main {
-      padding-top: 60px;
+    @media (max-width: 900px) {
+      .lb-dual-overlay { flex-direction: column; align-items: center; overflow-y: auto; }
+      .lb-dual-overlay .lb-modal { max-width: 560px; flex: 0 0 auto; width: 100%; }
     }
+
+    @media (max-width: 700px) {
+      .vol-main { padding-top: 60px; }
+
+      .vol-stats.normal-user { grid-template-columns: 1fr 1fr; }
+      .vol-stats.admin-user  { grid-template-columns: 1fr 1fr; }
     }
 
     @media (max-width: 600px) {
@@ -626,146 +710,90 @@
       .lb-modal-body { padding: 16px 20px 24px; }
     }
 
-    /* ── MOBILE IMPROVEMENTS ── */
-@media (max-width: 480px) {
+    @media (max-width: 480px) {
+      .vol-login-card { padding: 32px 20px; border-radius: 16px; }
+      .vol-login-card h2 { font-size: 2.2rem; }
+      .vol-login-card p  { font-size: 1.3rem; margin-bottom: 28px; }
+      .vol-login-icon { width: 52px; height: 52px; margin-bottom: 20px; }
+      .vol-field input { font-size: 1.6rem; padding: 13px 14px; }
+      .vol-field label { font-size: 1.05rem; }
+      .vol-login-btn { font-size: 1.45rem; padding: 14px; }
 
-  /* Login card */
-  .vol-login-card {
-    padding: 32px 20px;
-    border-radius: 16px;
+      .vol-greeting { flex-direction: column; align-items: flex-start; gap: 12px; margin-bottom: 28px; }
+      .vol-greeting-left h2 { font-size: 2rem; }
+      .vol-greeting-right { width: 100%; justify-content: flex-start; flex-wrap: wrap; }
+
+      .vol-leaderboard-btn, .vol-logout-btn, .vol-admin-lb-btn {
+        font-size: 1.15rem;
+        padding: 9px 12px;
+      }
+
+      .vol-stats.normal-user { grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+      .vol-stats.admin-user  { grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+
+      .vol-stat-card { padding: 18px 12px; }
+      .vol-stat-card .stat-num { font-size: 2.4rem; }
+      .vol-stat-card .stat-label { font-size: 1rem; }
+
+      .vol-table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 14px; }
+      table.vol-table { min-width: 480px; }
+      .vol-table th, .vol-table td { padding: 12px 14px; font-size: 1.2rem; white-space: nowrap; }
+      .vol-table-header { padding: 16px 18px; }
+      .vol-table-header h3 { font-size: 1.5rem; }
+
+      .lb-modal { border-radius: 16px; max-height: 90vh; }
+      .lb-modal-header { padding: 18px 18px 14px; }
+      .lb-modal-header h3 { font-size: 1.8rem; }
+      .lb-modal-body { padding: 12px 18px 24px; }
+      .lb-name { font-size: 1.3rem; }
+      .lb-rank { font-size: 1.5rem; min-width: 36px; }
+
+      .vol-dashboard { padding-top: 50px; padding-inline: 16px; }
+    }
+
+    
+    
+
+/* REPLACE WITH */
+.lb-dual-close-btn {
+  display: none;          /* hidden by default */
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  border-radius: 10px;
+  width: 44px; height: 44px;
+  font-size: 2.2rem;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  z-index: 10000;
+  line-height: 1;
+}
+.lb-dual-close-btn:hover { background: rgba(255,255,255,0.2); }
+
+@media (max-width: 700px) {
+  .lb-dual-overlay {
+    display: none;
+    flex-direction: column !important;
+    flex-wrap: nowrap !important;
+    align-items: stretch !important;
+    gap: 14px;
+    overflow-y: auto;
+    padding-top: 70px;   /* ← room for the close button + breathing space */
   }
 
-  .vol-login-card h2 {
-    font-size: 2.2rem;
-  }
-
-  .vol-login-card p {
-    font-size: 1.3rem;
-    margin-bottom: 28px;
-  }
-
-  .vol-login-icon {
-    width: 52px;
-    height: 52px;
-    margin-bottom: 20px;
-  }
-
-  .vol-field input {
-    font-size: 1.6rem; /* prevents iOS auto-zoom on focus (needs ≥16px) */
-    padding: 13px 14px;
-  }
-
-  .vol-field label {
-    font-size: 1.05rem;
-  }
-
-  .vol-login-btn {
-    font-size: 1.45rem;
-    padding: 14px;
-  }
-
-  /* Dashboard greeting — stack vertically */
-  .vol-greeting {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 28px;
-  }
-
-  .vol-greeting-left h2 {
-    font-size: 2rem;
-  }
-
-  .vol-greeting-right {
-    width: 100%;
-    justify-content: flex-start;
-  }
-
-  .vol-leaderboard-btn,
-  .vol-logout-btn {
-    font-size: 1.2rem;
-    padding: 9px 14px;
-  }
-
-  /* Stats grid — 2x2 on small screens */
-  .vol-stats {
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 24px;
-  }
-
-  .vol-stat-card {
-    padding: 18px 12px;
-  }
-
-  .vol-stat-card .stat-num {
-    font-size: 2.4rem;
-  }
-
-  .vol-stat-card .stat-label {
-    font-size: 1rem;
-  }
-
-  /* Table — horizontal scroll so it doesn't squish */
-  .vol-table-wrap {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    border-radius: 14px;
-  }
-
-  table.vol-table {
-    min-width: 480px; /* forces scroll before columns collapse */
-  }
-
-  .vol-table th,
-  .vol-table td {
-    padding: 12px 14px;
-    font-size: 1.2rem;
-    white-space: nowrap;
-  }
-
-  .vol-table-header {
-    padding: 16px 18px;
-  }
-
-  .vol-table-header h3 {
-    font-size: 1.5rem;
-  }
-
-  /* Leaderboard modal */
-  .lb-modal {
-    border-radius: 16px;
-    max-height: 90vh;
-  }
-
-  .lb-modal-header {
-    padding: 18px 18px 14px;
-  }
-
-  .lb-modal-header h3 {
-    font-size: 1.8rem;
-  }
-
-  .lb-modal-body {
-    padding: 12px 18px 24px;
-  }
-
-  .lb-name {
-    font-size: 1.3rem;
-  }
-
-  .lb-rank {
-    font-size: 1.5rem;
-    min-width: 36px;
+  .lb-dual-overlay .lb-modal {
+    flex: 0 0 auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 }
 
-@media (max-width: 480px) {
-  .vol-dashboard {
-    padding-top: 50px; /* pushes content below the fixed header */
-    padding-inline: 16px;
-  }
-}
+
   </style>
 </head>
 
@@ -786,10 +814,10 @@
         </button>
         <a href="index.html" class="logo">Vital Earth Network</a>
         <ul class="navbar-list">
-          <li><a href="index.html#home" class="navbar-link" data-nav-link><span>Home</span><ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></a></li>
-          <li><a href="index.html#about" class="navbar-link" data-nav-link><span>About</span><ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></a></li>
+          <li><a href="index.html#home"    class="navbar-link" data-nav-link><span>Home</span><ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></a></li>
+          <li><a href="index.html#about"   class="navbar-link" data-nav-link><span>About</span><ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></a></li>
           <li><a href="index.html#service" class="navbar-link" data-nav-link><span>Service</span><ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></a></li>
-          <li><a href="index.html#donate" class="navbar-link" data-nav-link><span>Donate</span><ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></a></li>
+          <li><a href="index.html#donate"  class="navbar-link" data-nav-link><span>Donate</span><ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></a></li>
           <li><a onclick="openContactModal()" class="navbar-link" style="cursor:pointer;" data-nav-link><span>Contact</span><ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></a></li>
           <li><a href="volunteer" class="navbar-link navbar-link--login" data-nav-link><span>Login</span><ion-icon name="chevron-forward-outline" aria-hidden="true"></ion-icon></a></li>
         </ul>
@@ -822,32 +850,32 @@
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_subject" value="New message from Vital Earth Network">
         <input type="hidden" name="_next" value="http://127.0.0.1:5500/thank-you.html">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email" required>
-        <textarea name="message" placeholder="Your Message" required></textarea>
+        <input type="text"  name="name"    placeholder="Your Name"    required>
+        <input type="email" name="email"   placeholder="Your Email"   required>
+        <textarea           name="message" placeholder="Your Message" required></textarea>
         <button type="submit" class="btn btn-primary">Send Message</button>
       </form>
     </div>
     <script>
-      const overlay = document.getElementById("contactOverlay");
+      const overlay  = document.getElementById("contactOverlay");
       const closeBtn = document.querySelector(".modal-close");
-      function openContactModal() { document.body.classList.add("modal-open"); overlay.classList.add("active"); }
+      function openContactModal()  { document.body.classList.add("modal-open");    overlay.classList.add("active"); }
       function closeContactModal() { document.body.classList.remove("modal-open"); overlay.classList.remove("active"); }
       closeBtn.addEventListener("click", closeContactModal);
       let mouseDownOnOverlay = false;
-      overlay.addEventListener("mousedown", (e) => { mouseDownOnOverlay = e.target === overlay; });
-      overlay.addEventListener("mouseup", () => { if (mouseDownOnOverlay) closeContactModal(); mouseDownOnOverlay = false; });
+      overlay.addEventListener("mousedown", e => { mouseDownOnOverlay = e.target === overlay; });
+      overlay.addEventListener("mouseup",   () => { if (mouseDownOnOverlay) closeContactModal(); mouseDownOnOverlay = false; });
       const form = document.querySelector(".contact-form");
       form.addEventListener("submit", () => {
-        localStorage.setItem("contact_name", form.name.value);
-        localStorage.setItem("contact_email", form.email.value);
+        localStorage.setItem("contact_name",    form.name.value);
+        localStorage.setItem("contact_email",   form.email.value);
         localStorage.setItem("contact_message", form.message.value);
       });
-      document.addEventListener("keydown", (e) => { if (e.key === "Escape" && overlay.classList.contains("active")) closeContactModal(); });
+      document.addEventListener("keydown", e => { if (e.key === "Escape" && overlay.classList.contains("active")) closeContactModal(); });
     </script>
   </div>
 
-  <!-- ── LEADERBOARD MODAL ── -->
+  <!-- ── TRASH LEADERBOARD MODAL (everyone) ── -->
   <div id="lbOverlay" class="lb-overlay">
     <div class="lb-modal">
       <div class="lb-modal-header">
@@ -858,16 +886,48 @@
             <p>Total trash collected per volunteer</p>
           </div>
         </div>
-        <button class="lb-close-btn" onclick="closeLeaderboard()">&times;</button>
+        <button class="lb-close-btn" onclick="closeLeaderboard('lbOverlay')">&times;</button>
       </div>
       <div class="lb-modal-body" id="lbBody">
-        <div class="lb-loading">
-          <div class="lb-spinner"></div>
-          Loading leaderboard…
-        </div>
+        <div class="lb-loading"><div class="lb-spinner"></div>Loading leaderboard…</div>
       </div>
     </div>
   </div>
+
+  <!-- ── ADMIN DUAL LEADERBOARD MODAL ── -->
+<button class="lb-dual-close-btn" id="lbAdminCloseBtn" onclick="closeLeaderboard('lbAdminOverlay')" aria-label="Close">&times;</button>
+<div id="lbAdminOverlay" class="lb-dual-overlay">
+  <!-- Service Hours modal -->
+  <div class="lb-modal" style="border-color: rgba(105,187,27,0.25);">
+    <div class="lb-modal-header">
+      <div class="lb-modal-header-left">
+        <ion-icon name="ribbon-outline"></ion-icon>
+        <div>
+          <h3>Service Hours</h3>
+          <p>VEN FOUNDERS ONLY LEADERBOARD</p>
+        </div>
+      </div>
+    </div>
+    <div class="lb-modal-body" id="lbServiceBody">
+      <div class="lb-loading"><div class="lb-spinner"></div>Loading…</div>
+    </div>
+  </div>
+  <!-- VEN Hours modal -->
+  <div class="lb-modal" style="border-color: rgba(255,180,0,0.3);">
+    <div class="lb-modal-header">
+      <div class="lb-modal-header-left">
+        <ion-icon name="leaf-outline" class="amber"></ion-icon>
+        <div>
+          <h3>VEN Hours</h3>
+          <p>VEN FOUNDERS ONLY LEADERBOARD</p>
+        </div>
+      </div>
+    </div>
+    <div class="lb-modal-body" id="lbVenBody">
+      <div class="lb-loading"><div class="lb-spinner"></div>Loading…</div>
+    </div>
+  </div>
+</div>
 
   <!-- ── MAIN ── -->
   <main class="vol-main">
@@ -911,35 +971,13 @@
           <h2 id="greetingName">Welcome back!</h2>
           <p>Here's a summary of your volunteer contributions</p>
         </div>
-        <div class="vol-greeting-right">
-          <button class="vol-leaderboard-btn" onclick="openLeaderboard()">
-            <ion-icon name="trophy-outline"></ion-icon> Trash Leaderboard
-          </button>
-          <button class="vol-logout-btn" onclick="logout()">
-            <ion-icon name="log-out-outline"></ion-icon> Sign Out
-          </button>
+        <div class="vol-greeting-right" id="greetingButtons">
+          <!-- Buttons injected by JS based on role -->
         </div>
       </div>
 
-      <!-- Stats — 4 cards -->
-      <div class="vol-stats">
-        <div class="vol-stat-card">
-          <div class="stat-num" id="statTotalHours">0</div>
-          <div class="stat-label">Total Hours</div>
-        </div>
-        <div class="vol-stat-card">
-          <div class="stat-num" id="statSessions">0</div>
-          <div class="stat-label">Sessions</div>
-        </div>
-        <div class="vol-stat-card">
-          <div class="stat-num" id="statTrashTotal">0</div>
-          <div class="stat-label">Trash Collected</div>
-        </div>
-        <div class="vol-stat-card">
-          <div class="stat-num" id="statLastDate">—</div>
-          <div class="stat-label">Last Session</div>
-        </div>
-      </div>
+      <!-- Stats grid — populated by JS -->
+      <div class="vol-stats" id="volStats"></div>
 
       <!-- Trash Cleanup Section -->
       <div class="vol-table-wrap" id="trashSection">
@@ -950,11 +988,20 @@
         <div id="trashBody"></div>
       </div>
 
-      <!-- Other Activities Section -->
-      <div class="vol-table-wrap" id="otherSection" style="margin-top:24px;">
+      <!-- Other Service Activities Section (Volunteer checked, not Trash) -->
+      <div class="vol-table-wrap" id="serviceSection">
         <div class="vol-table-header">
-          <ion-icon name="leaf-outline"></ion-icon>
-          <h3>Other Activities</h3>
+          <ion-icon name="ribbon-outline"></ion-icon>
+          <h3>Other Service Activities</h3>
+        </div>
+        <div id="serviceBody"></div>
+      </div>
+
+      <!-- VEN Hours Section (neither checkbox) -->
+      <div class="vol-table-wrap" id="otherSection">
+        <div class="vol-table-header">
+          <ion-icon name="leaf-outline" class="blue"></ion-icon>
+          <h3>Vital Earth Network Hours</h3>
         </div>
         <div id="otherBody"></div>
       </div>
@@ -1005,19 +1052,28 @@
 
   <script>
     // ════════════════════════════════════════════════════════
-    //  CONFIGURATION
+    //  CONFIG
     // ════════════════════════════════════════════════════════
-    const SHEET_ID      = "1MsRxjxSeXL6-1SKE64Bp33qR04JPDov4q9i33IxdGU8";
-    const SHEET_NAME    = "Volunteer Hours";
+    const SHEET_ID       = "1MsRxjxSeXL6-1SKE64Bp33qR04JPDov4q9i33IxdGU8";
+    const SHEET_NAME     = "Volunteer Hours";
     const GOOGLE_API_KEY = "AIzaSyB7o0uJQeyrrrk5FCIgH6dQnjV8FUqdsT8";
 
+    // People who can see admin leaderboards (case-insensitive full name match)
+    const ADMIN_NAMES = [
+      "brendan denzel",
+      "yash sharma",
+      "tristan zimolong",
+      "adam sarfraz",
+      "gautham nadarajah"
+    ];
+
     // ════════════════════════════════════════════════════════
-    //  Fetch entire sheet (returns array of row objects)
+    //  FETCH SHEET
     // ════════════════════════════════════════════════════════
     async function fetchSheet() {
       const range = encodeURIComponent(SHEET_NAME);
-      const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${range}?key=${GOOGLE_API_KEY}`;
-      const res = await fetch(url);
+      const url   = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${range}?key=${GOOGLE_API_KEY}`;
+      const res   = await fetch(url);
       if (!res.ok) {
         const errBody = await res.json().catch(() => ({}));
         throw new Error(`Sheets API error: ${errBody?.error?.message || `HTTP ${res.status}`}`);
@@ -1034,7 +1090,7 @@
     }
 
     // ════════════════════════════════════════════════════════
-    //  Helpers
+    //  HELPERS
     // ════════════════════════════════════════════════════════
     const getField = (r, ...keys) => {
       for (const k of keys) {
@@ -1044,41 +1100,54 @@
       return "";
     };
 
+    // Column 1 (col A): "Trash Cleanup" checkbox
     const isTrashRow = r => {
       const val = getField(r, "Trash Cleanup", "trash cleanup", "Trash", "trash").toLowerCase();
       return val === "true" || val === "1" || val === "yes" || val === "✓";
     };
 
+    // Column 2 (col B): "Volunteer" checkbox
+    // Trash takes priority — if trash is checked, treat as trash regardless of volunteer col.
+    const isVolunteerRow = r => {
+      if (isTrashRow(r)) return false; // Trash has priority; don't double-count
+      const val = getField(r, "Volunteer", "volunteer").toLowerCase();
+      return val === "true" || val === "1" || val === "yes" || val === "✓";
+    };
+
+    // Neither trash nor volunteer → VEN hours row
+    const isVenRow = r => !isTrashRow(r) && !isVolunteerRow(r);
+
+    // Service hours = trash rows + volunteer rows
+    const isServiceRow = r => isTrashRow(r) || isVolunteerRow(r);
+
     const getTrashCount = r => {
-  const raw = getField(
-    r,
-    "Trash Collected",   // ← add your exact column header here
-    "Trash Count",
-    "trash collected",
-    "TrashCollected",
-    "Trash"
-  );
-  const n = parseFloat(raw);
-  return isNaN(n) ? 0 : n;
-};
+      const raw = getField(r, "Trash Collected", "Trash Count", "trash collected", "TrashCollected", "Trash Count");
+      const n   = parseFloat(raw);
+      return isNaN(n) ? 0 : n;
+    };
 
     function sortByDate(rows) {
-  return [...rows].sort((a, b) => {
-    const da = getField(a, "Date") || "";
-    const db = getField(b, "Date") || "";
-    return da > db ? -1 : da < db ? 1 : 0; // ← flipped
-  });
-}
+      return [...rows].sort((a, b) => {
+        const da = getField(a, "Date") || "";
+        const db = getField(b, "Date") || "";
+        return da > db ? -1 : da < db ? 1 : 0; // newest first
+      });
+    }
 
-    // Format hours: show decimals only when needed (e.g. 2.5 → "2.5", 3.0 → "3")
     function fmtHours(num) {
       if (num === Math.floor(num)) return String(num);
-      // Keep up to 2 decimal places, strip trailing zeros
       return parseFloat(num.toFixed(2)).toString();
     }
 
+    function sumHours(rows) {
+      return rows.reduce((sum, r) => {
+        const h = parseFloat(getField(r, "Hours") || 0);
+        return sum + (isNaN(h) ? 0 : h);
+      }, 0);
+    }
+
     // ════════════════════════════════════════════════════════
-    //  Lookup
+    //  LOOKUP
     // ════════════════════════════════════════════════════════
     async function lookupVolunteer() {
       const firstName = document.getElementById("firstName").value.trim();
@@ -1098,7 +1167,7 @@
       btn.classList.add("loading");
 
       try {
-        const rows = await fetchSheet();
+        const rows     = await fetchSheet();
         const fullName = `${firstName} ${lastName}`.toLowerCase();
 
         const matched = rows.filter(r => {
@@ -1114,7 +1183,8 @@
           return;
         }
 
-        showDashboard(firstName, lastName, matched);
+        const isAdmin = ADMIN_NAMES.includes(fullName);
+        showDashboard(firstName, lastName, matched, isAdmin);
 
       } catch (err) {
         console.error(err);
@@ -1125,35 +1195,34 @@
     }
 
     // ════════════════════════════════════════════════════════
-    //  Build table HTML
-    //  isTrash = true  → show Trash Collected column after Hours
-    //  isTrash = false → no trash column
+    //  BUILD TABLE HTML
+    //  type: "trash" | "service" | "ven"
     // ════════════════════════════════════════════════════════
-    function buildTable(rows, isTrash) {
+    function buildTable(rows, type) {
       if (rows.length === 0) {
         return `<div class="vol-empty"><ion-icon name="calendar-outline"></ion-icon>No sessions logged yet.</div>`;
       }
 
-      const trashHeader = isTrash ? `<th>Trash Collected</th>` : "";
+      const showTrash  = type === "trash";
+      const badgeClass = type === "ven" ? "hours-badge blue" : "hours-badge";
+      const trashHeader = showTrash ? `<th>Trash Collected</th>` : "";
 
       const rowsHTML = rows.map(r => {
-        const date     = getField(r, "Date")     || "—";
-        const activity = getField(r, "Activity", "Event") || "—";
-        const hours    = getField(r, "Hours")    || "—";
-        const notes    = getField(r, "Notes")    || "";
-        const trashNum = isTrash ? getTrashCount(r) : null;
+        const date     = getField(r, "Date")            || "—";
+        const activity = getField(r, "Activity","Event") || "—";
+        const hours    = getField(r, "Hours")            || "—";
+        const notes    = getField(r, "Notes")            || "";
+        const trashNum = showTrash ? getTrashCount(r) : null;
 
-        const trashCell = isTrash
-  ? `<td><span class="trash-count-badge">
-       <ion-icon name="trash-outline"></ion-icon>${trashNum}
-     </span></td>`
-  : "";
+        const trashCell = showTrash
+          ? `<td><span class="trash-count-badge"><ion-icon name="trash-outline"></ion-icon>${trashNum}</span></td>`
+          : "";
 
         return `
           <tr>
             <td>${date}</td>
             <td>${activity}</td>
-            <td><span class="hours-badge"><ion-icon name="time-outline"></ion-icon>${hours} hrs</span></td>
+            <td><span class="${badgeClass}"><ion-icon name="time-outline"></ion-icon>${hours} hrs</span></td>
             ${trashCell}
             <td style="color:#7a8fa8;font-size:1.25rem;">${notes}</td>
           </tr>`;
@@ -1163,9 +1232,7 @@
         <table class="vol-table">
           <thead>
             <tr>
-              <th>Date</th>
-              <th>Activity</th>
-              <th>Hours</th>
+              <th>Date</th><th>Activity</th><th>Hours</th>
               ${trashHeader}
               <th>Notes</th>
             </tr>
@@ -1175,39 +1242,127 @@
     }
 
     // ════════════════════════════════════════════════════════
-    //  Show dashboard
+    //  SHOW DASHBOARD
     // ════════════════════════════════════════════════════════
-    function showDashboard(firstName, lastName, rows) {
-      const trashRows = sortByDate(rows.filter(r =>  isTrashRow(r)));
-      const otherRows = sortByDate(rows.filter(r => !isTrashRow(r)));
+    function showDashboard(firstName, lastName, rows, isAdmin) {
+      const trashRows   = sortByDate(rows.filter(isTrashRow));
+      const serviceRows = sortByDate(rows.filter(isVolunteerRow)); // non-trash volunteer rows
+      const venRows     = sortByDate(rows.filter(isVenRow));
 
-      // Total hours — exact, no rounding
-      const totalHours = rows.reduce((sum, r) => {
-        const h = parseFloat(getField(r, "Hours") || 0);
-        return sum + (isNaN(h) ? 0 : h);
-      }, 0);
+      // Hour totals
+      const serviceHours = sumHours([...trashRows, ...serviceRows]); // trash + volunteer
+      const venHours     = sumHours(venRows);
 
-      // Total trash collected
-      const totalTrash = trashRows.reduce((sum, r) => sum + getTrashCount(r), 0);
+      // Trash total
+      const totalTrash = trashRows.reduce((s, r) => s + getTrashCount(r), 0);
 
-      // Last session date
+      // Sessions
+      const serviceSessions = trashRows.length + serviceRows.length;
+      const venSessions     = venRows.length;
+
+      // Last session (across all rows)
       const allDates = rows.map(r => getField(r, "Date")).filter(Boolean).sort();
       const lastDate = allDates.length ? allDates[allDates.length - 1] : "—";
 
+      // ── Greeting ──
       document.getElementById("greetingName").textContent = `Welcome, ${firstName}!`;
 
-      // Hours — animate but display exactly (no rounding)
-      animateCountExact("statTotalHours", totalHours);
-      animateCount("statSessions", rows.length);
-      animateCount("statTrashTotal", totalTrash);
-      document.getElementById("statLastDate").textContent = lastDate || "—";
+      // ── Buttons ──
+      const btnsEl = document.getElementById("greetingButtons");
+      btnsEl.innerHTML = `
+        <button class="vol-leaderboard-btn" onclick="openTrashLeaderboard()">
+          <ion-icon name="trophy-outline"></ion-icon> Trash Leaderboard
+        </button>
+        ${isAdmin ? `
+        <button class="vol-admin-lb-btn" onclick="openAdminLeaderboard()">
+          <ion-icon name="stats-chart-outline"></ion-icon> Hours Leaderboards
+        </button>` : ""}
+        <button class="vol-logout-btn" onclick="logout()">
+          <ion-icon name="log-out-outline"></ion-icon> Sign Out
+        </button>
+      `;
 
-      document.getElementById("trashBody").innerHTML = buildTable(trashRows, true);
-      document.getElementById("otherBody").innerHTML = buildTable(otherRows, false);
+      // ── Stats grid ──
+      const statsEl = document.getElementById("volStats");
 
-      document.getElementById("trashSection").style.display = trashRows.length === 0 ? "none" : "";
-      document.getElementById("otherSection").style.display = otherRows.length === 0 ? "none" : "";
+      if (isAdmin) {
+        // Admin sees 2 groups: Service (3 cards) + VEN (3 cards)
+        statsEl.className = "vol-stats admin-user";
+        statsEl.innerHTML = `
+          <div class="vol-stat-group-label service">⚡ Service Hours</div>
+          <div class="vol-stat-card service-card">
+            <div class="stat-num" id="statServiceHours">0</div>
+            <div class="stat-label">Service Hours</div>
+          </div>
+          <div class="vol-stat-card service-card">
+            <div class="stat-num" id="statServiceSessions">0</div>
+            <div class="stat-label">Service Sessions</div>
+          </div>
+          <div class="vol-stat-card service-card">
+            <div class="stat-num" id="statTrashTotal">0</div>
+            <div class="stat-label">Trash Collected</div>
+          </div>
 
+          <div class="vol-stat-group-label ven">🌿 VEN Hours</div>
+          <div class="vol-stat-card ven-card">
+            <div class="stat-num" id="statVenHours">0</div>
+            <div class="stat-label">VEN Hours</div>
+          </div>
+          <div class="vol-stat-card ven-card">
+            <div class="stat-num" id="statVenSessions">0</div>
+            <div class="stat-label">VEN Sessions</div>
+          </div>
+          <div class="vol-stat-card ven-card">
+            <div class="stat-num" id="statLastDate">—</div>
+            <div class="stat-label">Last Session</div>
+          </div>
+        `;
+
+        animateCountExact("statServiceHours",   serviceHours);
+        animateCount("statServiceSessions", serviceSessions);
+        animateCount("statTrashTotal",      totalTrash);
+        animateCountExact("statVenHours",       venHours);
+        animateCount("statVenSessions",     venSessions);
+        document.getElementById("statLastDate").textContent = lastDate;
+
+      } else {
+        // Normal user: 4 cards — Service Hours, Service Sessions, Trash, Last Session
+        statsEl.className = "vol-stats normal-user";
+        statsEl.innerHTML = `
+          <div class="vol-stat-card">
+            <div class="stat-num" id="statServiceHours">0</div>
+            <div class="stat-label">Service Hours</div>
+          </div>
+          <div class="vol-stat-card">
+            <div class="stat-num" id="statServiceSessions">0</div>
+            <div class="stat-label">Sessions</div>
+          </div>
+          <div class="vol-stat-card">
+            <div class="stat-num" id="statTrashTotal">0</div>
+            <div class="stat-label">Trash Collected</div>
+          </div>
+          <div class="vol-stat-card">
+            <div class="stat-num" id="statLastDate">—</div>
+            <div class="stat-label">Last Session</div>
+          </div>
+        `;
+
+        animateCountExact("statServiceHours",   serviceHours);
+        animateCount("statServiceSessions", serviceSessions);
+        animateCount("statTrashTotal",      totalTrash);
+        document.getElementById("statLastDate").textContent = lastDate;
+      }
+
+      // ── Tables ──
+      document.getElementById("trashBody").innerHTML   = buildTable(trashRows,   "trash");
+      document.getElementById("serviceBody").innerHTML = buildTable(serviceRows,  "service");
+      document.getElementById("otherBody").innerHTML   = buildTable(venRows,      "ven");
+
+      document.getElementById("trashSection").style.display   = trashRows.length   === 0 ? "none" : "";
+      document.getElementById("serviceSection").style.display = serviceRows.length  === 0 ? "none" : "";
+      document.getElementById("otherSection").style.display   = venRows.length      === 0 ? "none" : "";
+
+      // ── Switch views ──
       document.getElementById("loginView").style.display = "none";
       const dash = document.getElementById("dashboardView");
       dash.classList.add("show");
@@ -1215,102 +1370,144 @@
     }
 
     // ════════════════════════════════════════════════════════
-    //  Leaderboard
+    //  LEADERBOARDS
     // ════════════════════════════════════════════════════════
-    async function openLeaderboard() {
+
+    // Helper: build leaderboard HTML from a name→value map
+    function buildLbHtml(map, valClass, iconName) {
+      const sorted = Object.entries(map).sort((a, b) => b[1] - a[1]);
+      if (sorted.length === 0) return `<div class="lb-empty">No data found yet.</div>`;
+
+      const medals  = ["🥇","🥈","🥉"];
+      const suffixes = ["st","nd","rd"];
+
+      return sorted.map(([name, total], i) => {
+        const rank      = i + 1;
+        const rankClass = rank <= 3 ? `rank-${rank}` : "rank-other";
+        const medal     = rank <= 3 ? medals[i] : "";
+        const suffix    = rank <= 3 ? suffixes[i] : "th";
+        const display   = Number.isInteger(total) ? total : parseFloat(total.toFixed(2));
+        return `
+          <div class="lb-entry">
+            <div class="lb-rank ${rankClass}">${rank}<sup style="font-size:1rem;">${suffix}</sup></div>
+            <div class="lb-medal">${medal}</div>
+            <div class="lb-name">${name}</div>
+            <div class="lb-val ${valClass}"><ion-icon name="${iconName}"></ion-icon>${display}</div>
+          </div>`;
+      }).join("");
+    }
+
+    // Trash leaderboard (everyone)
+    async function openTrashLeaderboard() {
       document.getElementById("lbOverlay").classList.add("active");
       document.body.classList.add("modal-open");
-
       const bodyEl = document.getElementById("lbBody");
       bodyEl.innerHTML = `<div class="lb-loading"><div class="lb-spinner"></div>Loading leaderboard…</div>`;
 
       try {
         const rows = await fetchSheet();
-
-        // Build map: "First Last" → total trash
-        const map = {};
+        const map  = {};
         rows.forEach(r => {
-          if (!isTrashRow(r)) return;
-          const fn = getField(r, "First Name", "first name", "firstname");
-          const ln = getField(r, "Last Name",  "last name",  "lastname");
-          if (!fn && !ln) return;
-          const name = `${fn} ${ln}`.trim();
-          const tc = getTrashCount(r);
-          map[name] = (map[name] || 0) + tc;
-        });
-
-        const sorted = Object.entries(map)
-          .sort((a, b) => b[1] - a[1]);
-
-        if (sorted.length === 0) {
-          bodyEl.innerHTML = `<div class="lb-empty">No trash cleanup data found yet.</div>`;
-          return;
-        }
-
-        const medals = ["🥇","🥈","🥉"];
-
-        const html = sorted.map(([name, total], i) => {
-          const rank = i + 1;
-          const rankClass = rank <= 3 ? `rank-${rank}` : "rank-other";
-          const medal = rank <= 3 ? medals[i] : "";
-          const suffix = rank === 1 ? "st" : rank === 2 ? "nd" : rank === 3 ? "rd" : "th";
-          return `
-            <div class="lb-entry">
-              <div class="lb-rank ${rankClass}">${rank}<sup style="font-size:1rem;">${suffix}</sup></div>
-              <div class="lb-medal">${medal}</div>
-              <div class="lb-name">${name}</div>
-              <div class="lb-trash-val"><ion-icon name="trash-outline"></ion-icon>${total}</div>
-            </div>`;
-        }).join("");
-
-        bodyEl.innerHTML = html;
-
+  if (!isTrashRow(r)) return;
+  const fn = getField(r, "First Name","first name","firstname");
+  const ln = getField(r, "Last Name", "last name", "lastname");
+  if (!fn && !ln) return;
+  const name = `${fn} ${ln}`.trim();
+  if (!ADMIN_NAMES.includes(name.toLowerCase())) return;
+  map[name]  = (map[name] || 0) + getTrashCount(r);
+});
+        bodyEl.innerHTML = buildLbHtml(map, "trash", "trash-outline");
       } catch (err) {
         console.error(err);
         bodyEl.innerHTML = `<div class="lb-empty">Could not load leaderboard. Please try again.</div>`;
       }
     }
 
-    function closeLeaderboard() {
-      document.getElementById("lbOverlay").classList.remove("active");
-      document.body.classList.remove("modal-open");
+    // Admin dual leaderboard (Service Hours + VEN Hours)
+    async function openAdminLeaderboard() {
+      document.getElementById("lbAdminOverlay").classList.add("active");
+      document.getElementById("lbAdminCloseBtn").style.display = "flex";
+      document.body.classList.add("modal-open");
+
+      const svcEl = document.getElementById("lbServiceBody");
+      const venEl = document.getElementById("lbVenBody");
+      svcEl.innerHTML = `<div class="lb-loading"><div class="lb-spinner"></div>Loading…</div>`;
+      venEl.innerHTML = `<div class="lb-loading"><div class="lb-spinner"></div>Loading…</div>`;
+
+      try {
+        const rows   = await fetchSheet();
+        const svcMap = {}; // service hours (trash + volunteer)
+        const venMap = {}; // VEN hours (neither)
+
+        rows.forEach(r => {
+  const fn = getField(r, "First Name","first name","firstname");
+  const ln = getField(r, "Last Name", "last name", "lastname");
+  if (!fn && !ln) return;
+  const name  = `${fn} ${ln}`.trim();
+  if (!ADMIN_NAMES.includes(name.toLowerCase())) return;
+  const hours = parseFloat(getField(r, "Hours") || 0) || 0;
+
+          if (isServiceRow(r)) {
+            svcMap[name] = (svcMap[name] || 0) + hours;
+          } else {
+            venMap[name] = (venMap[name] || 0) + hours;
+          }
+        });
+
+        svcEl.innerHTML = buildLbHtml(svcMap, "hours",  "ribbon-outline");
+        venEl.innerHTML = buildLbHtml(venMap, "ven",    "leaf-outline");
+      } catch (err) {
+        console.error(err);
+        svcEl.innerHTML = `<div class="lb-empty">Could not load leaderboard.</div>`;
+        venEl.innerHTML = `<div class="lb-empty">Could not load leaderboard.</div>`;
+      }
     }
 
-    // Close leaderboard on overlay click
-    document.getElementById("lbOverlay").addEventListener("click", function(e) {
-      if (e.target === this) closeLeaderboard();
+    function closeLeaderboard(id) {
+      document.getElementById(id).classList.remove("active");
+      document.body.classList.remove("modal-open");
+      if (id === "lbAdminOverlay") {
+        document.getElementById("lbAdminCloseBtn").style.display = "none";
+      }
+    }
+
+    // Close on overlay backdrop click
+    ["lbOverlay","lbAdminOverlay"].forEach(id => {
+      document.getElementById(id).addEventListener("click", function(e) {
+        if (e.target === this) closeLeaderboard(id);
+      });
     });
 
     document.addEventListener("keydown", e => {
-      if (e.key === "Escape" && document.getElementById("lbOverlay").classList.contains("active")) {
-        closeLeaderboard();
+      if (e.key === "Escape") {
+        ["lbOverlay","lbAdminOverlay"].forEach(id => {
+          if (document.getElementById(id).classList.contains("active")) closeLeaderboard(id);
+        });
       }
     });
 
     // ════════════════════════════════════════════════════════
-    //  Logout
+    //  LOGOUT
     // ════════════════════════════════════════════════════════
     function logout() {
-      document.getElementById("dashboardView").classList.remove("show");
-      document.getElementById("dashboardView").style.display = "";
+      const dash = document.getElementById("dashboardView");
+      dash.classList.remove("show");
+      dash.style.display = "";
       document.getElementById("loginView").style.display = "";
       document.getElementById("firstName").value = "";
-      document.getElementById("lastName").value = "";
+      document.getElementById("lastName").value  = "";
       document.getElementById("volError").classList.remove("show");
     }
 
     // ════════════════════════════════════════════════════════
-    //  Animate counters
+    //  ANIMATED COUNTERS
     // ════════════════════════════════════════════════════════
-
-    // Integer counter (sessions, trash total)
     function animateCount(id, target) {
       const el = document.getElementById(id);
       if (!el) return;
-      const duration = 900;
-      const start = performance.now();
+      const duration = 900, start = performance.now();
       function step(now) {
-        const p = Math.min((now - start) / duration, 1);
+        const p    = Math.min((now - start) / duration, 1);
         const ease = 1 - Math.pow(1 - p, 3);
         el.textContent = Math.round(target * ease);
         if (p < 1) requestAnimationFrame(step);
@@ -1319,25 +1516,22 @@
       requestAnimationFrame(step);
     }
 
-    // Hours counter — animates then shows exact value (no rounding)
     function animateCountExact(id, target) {
       const el = document.getElementById(id);
       if (!el) return;
-      const duration = 900;
-      const start = performance.now();
+      const duration = 900, start = performance.now();
       const displayFinal = fmtHours(target);
       function step(now) {
-        const p = Math.min((now - start) / duration, 1);
+        const p    = Math.min((now - start) / duration, 1);
         const ease = 1 - Math.pow(1 - p, 3);
-        const current = target * ease;
-        el.textContent = p < 1 ? fmtHours(current) : displayFinal;
+        el.textContent = p < 1 ? fmtHours(target * ease) : displayFinal;
         if (p < 1) requestAnimationFrame(step);
       }
       requestAnimationFrame(step);
     }
 
     // ════════════════════════════════════════════════════════
-    //  Enter key on login fields
+    //  ENTER KEY + BACK TO TOP
     // ════════════════════════════════════════════════════════
     document.addEventListener("DOMContentLoaded", () => {
       ["firstName","lastName"].forEach(id => {
@@ -1345,10 +1539,10 @@
           if (e.key === "Enter") lookupVolunteer();
         });
       });
-
       const btn = document.querySelector(".back-to-top");
       if (btn) btn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
     });
+
   </script>
 
 </body>
