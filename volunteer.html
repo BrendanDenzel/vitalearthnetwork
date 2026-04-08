@@ -1413,7 +1413,6 @@
   const ln = getField(r, "Last Name", "last name", "lastname");
   if (!fn && !ln) return;
   const name = `${fn} ${ln}`.trim();
-  if (!ADMIN_NAMES.includes(name.toLowerCase())) return;
   map[name]  = (map[name] || 0) + getTrashCount(r);
 });
         bodyEl.innerHTML = buildLbHtml(map, "trash", "trash-outline");
