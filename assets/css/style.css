@@ -1007,7 +1007,7 @@ body {
   transition: var(--transition-2);
 }
 
-.service-card:is(:hover, :focus-within) {
+.service .service-card:is(:hover, :focus-within) {
   outline-color: var(--pistachio);
 }
 
