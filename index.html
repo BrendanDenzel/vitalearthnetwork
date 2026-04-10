@@ -435,21 +435,21 @@
 
       <!-- Stats row -->
       <div class="cleanup-stats-row">
-        <div class="cleanup-stat">
-          <span class="cleanup-stat-value" id="statRoutes">—</span>
-          <span class="cleanup-stat-label">Routes Cleaned</span>
-        </div>
-        <div class="cleanup-stat-divider"></div>
-        <div class="cleanup-stat">
-          <span class="cleanup-stat-value" id="statPieces">—</span>
-          <span class="cleanup-stat-label">Pieces Collected</span>
-        </div>
-        <div class="cleanup-stat-divider"></div>
-        <div class="cleanup-stat">
-          <span class="cleanup-stat-value" id="statSessions">—</span>
-          <span class="cleanup-stat-label">Total Sessions</span>
-        </div>
-      </div>
+  <div class="cleanup-stat">
+    <span class="cleanup-stat-value" id="statPieces">—</span>
+    <span class="cleanup-stat-label">Pieces Collected</span>
+  </div>
+  <div class="cleanup-stat-divider"></div>
+  <div class="cleanup-stat">
+    <span class="cleanup-stat-value" id="statSessions">—</span>
+    <span class="cleanup-stat-label">Total Sessions</span>
+  </div>
+  <div class="cleanup-stat-divider"></div>
+  <div class="cleanup-stat">
+    <span class="cleanup-stat-value" id="statHours">—</span>
+    <span class="cleanup-stat-label">Hours Spent</span>
+  </div>
+</div>
 
       <a href="map.html" class="cleanup-fullscreen-btn">
         <span>View Full Screen</span>
@@ -837,26 +837,35 @@
   const SUPABASE_URL = "https://rgnthnpusmzsdjksxcns.supabase.co";
   const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJnbnRobnB1c216c2Rqa3N4Y25zIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5NjYwODcsImV4cCI6MjA4ODU0MjA4N30.R7gyp_D51Nhs16TMUDhu43mNChjDi7fLw0aZUVkh02s";
 
-  function animateCount(el, target) {
+  function parseDurationToHours(str) {
+    if (!str) return 0;
+    const s = String(str).toLowerCase();
+    let hours = 0;
+    const hrMatch  = s.match(/(\d+(?:\.\d+)?)\s*hr/);
+    const minMatch = s.match(/(\d+(?:\.\d+)?)\s*min/);
+    if (hrMatch)  hours += parseFloat(hrMatch[1]);
+    if (minMatch) hours += parseFloat(minMatch[1]) / 60;
+    return hours;
+  }
+
+  function animateCount(el, target, isDecimal) {
     if (!el) return;
     el.classList.add("animate");
     const duration = 1200;
     const start = performance.now();
-    const from = 0;
     function step(now) {
       const progress = Math.min((now - start) / duration, 1);
       const ease = 1 - Math.pow(1 - progress, 3);
-      const val = Math.round(from + (target - from) * ease);
-      el.textContent = val.toLocaleString();
+      const val = (target * ease);
+      el.textContent = isDecimal ? val.toFixed(2) : Math.round(val).toLocaleString();
       if (progress < 1) requestAnimationFrame(step);
-      else el.textContent = target.toLocaleString();
+      else el.textContent = isDecimal ? target.toFixed(2) : target.toLocaleString();
     }
     requestAnimationFrame(step);
   }
 
   async function loadStats() {
     try {
-      // Load Supabase only if not already loaded
       if (!window.supabase) {
         await new Promise((resolve, reject) => {
           const s = document.createElement("script");
@@ -867,56 +876,55 @@
       }
 
       const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-      const { data, error } = await client.from("cleanups").select("cleanup_type, amount_collected, area_name");
+      const { data, error } = await client.from("cleanups").select("amount_collected, duration");
       if (error || !data) return;
 
-      const routes = new Set();
       let totalPieces = 0;
+      let totalHours  = 0;
+
       data.forEach(row => {
-        if (row.cleanup_type === "route" && row.area_name) routes.add(row.area_name.trim().toLowerCase());
         const v = parseFloat(String(row.amount_collected || "0").replace(/,/g, "").trim());
         if (Number.isFinite(v)) totalPieces += v;
+        totalHours += parseDurationToHours(row.duration);
       });
 
-      // Use IntersectionObserver to trigger animation when section is in view
-      const section = document.getElementById("cleanup-map");
-      const statRoutes = document.getElementById("statRoutes");
-      const statPieces = document.getElementById("statPieces");
-      const statSessions = document.getElementById("statSessions");
+      totalHours = Math.round(totalHours * 100) / 100;
 
-      const targets = { routes: routes.size, pieces: Math.round(totalPieces), sessions: data.length };
+      const section     = document.getElementById("cleanup-map");
+      const statPieces  = document.getElementById("statPieces");
+      const statSessions= document.getElementById("statSessions");
+      const statHours   = document.getElementById("statHours");
 
-      if (!section) {
-        // Fallback: just set values
-        if (statRoutes) statRoutes.textContent = targets.routes;
-        if (statPieces) statPieces.textContent = targets.pieces.toLocaleString();
-        if (statSessions) statSessions.textContent = targets.sessions;
-        return;
-      }
+      const targets = {
+        pieces:   Math.round(totalPieces),
+        sessions: data.length,
+        hours:    totalHours
+      };
+
+      // Set fallback text immediately
+      if (statPieces)   statPieces.textContent   = targets.pieces.toLocaleString();
+      if (statSessions) statSessions.textContent  = targets.sessions;
+      if (statHours)    statHours.textContent     = targets.hours.toFixed(2);
+
+      if (!section) return;
 
       let animated = false;
       const observer = new IntersectionObserver((entries) => {
         if (entries[0].isIntersecting && !animated) {
           animated = true;
-          animateCount(statRoutes, targets.routes);
-          animateCount(statPieces, targets.pieces);
-          animateCount(statSessions, targets.sessions);
+          animateCount(statPieces,   targets.pieces,   false);
+          animateCount(statSessions, targets.sessions, false);
+          animateCount(statHours,    targets.hours,    true);
           observer.disconnect();
         }
       }, { threshold: 0.3 });
       observer.observe(section);
-
-      // Set fallback text until animated
-      if (statRoutes) statRoutes.textContent = targets.routes;
-      if (statPieces) statPieces.textContent = targets.pieces.toLocaleString();
-      if (statSessions) statSessions.textContent = targets.sessions;
 
     } catch (err) {
       console.warn("Cleanup stats failed to load:", err);
     }
   }
 
-  // Wait for DOM
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", loadStats);
   else loadStats();
 })();
