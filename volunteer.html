@@ -468,6 +468,23 @@
       letter-spacing: 1px;
     }
 
+    .vol-purple-btn {
+  background: rgba(139,92,246,0.12);
+  border: 1px solid rgba(139,92,246,0.35);
+  color: #a78bfa;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 1.3rem;
+  font-family: var(--ff-inter);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+  font-weight: 600;
+}
+.vol-purple-btn:hover { background: rgba(139,92,246,0.22); color: #c4b5fd; }
+
     .vol-table td {
       padding: 16px 24px;
       font-size: 1.4rem;
@@ -556,27 +573,6 @@
       opacity: 0;
     }
     .lb-overlay.active .lb-modal { opacity: 1; }
-
-    /* Admin dual-modal: two side by side */
-    .lb-dual-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.8);
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      gap: 20px;
-      backdrop-filter: blur(4px);
-      flex-wrap: wrap;
-    }
-    .lb-dual-overlay.active { display: flex; }
-
-    .lb-dual-overlay .lb-modal {
-      max-width: 440px;
-      flex: 1 1 340px;
-    }
 
     .lb-modal-header {
       padding: 28px 32px 20px;
@@ -683,6 +679,23 @@
       font-weight: 500;
     }
 
+    .vol-blue-lb-btn {
+  background: rgba(78,161,255,0.12);
+  border: 1px solid rgba(78,161,255,0.35);
+  color: #4ea1ff;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-size: 1.3rem;
+  font-family: var(--ff-inter);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+  font-weight: 600;
+}
+.vol-blue-lb-btn:hover { background: rgba(78,161,255,0.22); color: #74b8ff; }
+
     .lb-val {
       display: inline-flex;
       align-items: center;
@@ -707,12 +720,6 @@
       font-size: 1.4rem;
     }
 
-    /* ── Responsive ── */
-    @media (max-width: 900px) {
-      .lb-dual-overlay { flex-direction: column; align-items: center; overflow-y: auto; }
-      .lb-dual-overlay .lb-modal { max-width: 560px; flex: 0 0 auto; width: 100%; }
-    }
-
     @media (max-width: 700px) {
       .vol-main { padding-top: 60px; }
 
@@ -726,6 +733,10 @@
       .vol-greeting-left h2 { font-size: 2.2rem; }
       .lb-modal-header { padding: 20px 20px 16px; }
       .lb-modal-body { padding: 16px 20px 24px; }
+      .vol-blue-lb-btn {
+  font-size: 1.15rem;
+  padding: 9px 12px;
+}
     }
 
     @media (max-width: 480px) {
@@ -745,6 +756,8 @@
         font-size: 1.15rem;
         padding: 9px 12px;
       }
+      
+      .vol-purple-btn { font-size: 1.15rem; padding: 9px 12px; }
 
       .vol-stats.normal-user { grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
       .vol-stats.admin-user  { grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
@@ -769,47 +782,6 @@
       .vol-dashboard { padding-top: 50px; padding-inline: 16px; }
     }
 
-    
-    
-
-/* REPLACE WITH */
-.lb-dual-close-btn {
-  display: none;          /* hidden by default */
-  position: fixed;
-  top: 20px;
-  right: 24px;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.2);
-  color: #fff;
-  border-radius: 10px;
-  width: 44px; height: 44px;
-  font-size: 2.2rem;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-  z-index: 10000;
-  line-height: 1;
-}
-.lb-dual-close-btn:hover { background: rgba(255,255,255,0.2); }
-
-@media (max-width: 700px) {
-  .lb-dual-overlay {
-    display: none;
-    flex-direction: column !important;
-    flex-wrap: nowrap !important;
-    align-items: stretch !important;
-    gap: 14px;
-    overflow-y: auto;
-    padding-top: 70px;   /* ← room for the close button + breathing space */
-  }
-
-  .lb-dual-overlay .lb-modal {
-    flex: 0 0 auto !important;
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-}
 
 
   </style>
@@ -893,56 +865,59 @@
     </script>
   </div>
 
-  <!-- ── TRASH LEADERBOARD MODAL (everyone) ── -->
-  <div id="lbOverlay" class="lb-overlay">
-    <div class="lb-modal">
-      <div class="lb-modal-header">
-        <div class="lb-modal-header-left">
-          <ion-icon name="trophy-outline"></ion-icon>
-          <div>
-            <h3>Trash Leaderboard</h3>
-            <p>Total trash collected per volunteer</p>
-          </div>
+  <!-- TRASH LEADERBOARD -->
+<div id="lbOverlay" class="lb-overlay">
+  <div class="lb-modal">
+    <div class="lb-modal-header">
+      <div class="lb-modal-header-left">
+        <ion-icon name="trophy-outline"></ion-icon>
+        <div>
+          <h3>Trash Leaderboard</h3>
+          <p>Total trash collected per volunteer</p>
         </div>
-        <button class="lb-close-btn" onclick="closeLeaderboard('lbOverlay')">&times;</button>
       </div>
-      <div class="lb-modal-body" id="lbBody">
-        <div class="lb-loading"><div class="lb-spinner"></div>Loading leaderboard…</div>
-      </div>
+      <button class="lb-close-btn" onclick="closeLeaderboard('lbOverlay')">&times;</button>
+    </div>
+    <div class="lb-modal-body" id="lbBody">
+      <div class="lb-loading"><div class="lb-spinner"></div>Loading leaderboard…</div>
     </div>
   </div>
+</div>
 
-  <!-- ── ADMIN DUAL LEADERBOARD MODAL ── -->
-<button class="lb-dual-close-btn" id="lbAdminCloseBtn" onclick="closeLeaderboard('lbAdminOverlay')" aria-label="Close">&times;</button>
-<div id="lbAdminOverlay" class="lb-dual-overlay">
-  <!-- Service Hours modal -->
-  <div class="lb-modal" style="border-color: rgba(105,187,27,0.25);">
+<!-- SERVICE HOURS LEADERBOARD (everyone) -->
+<div id="lbServiceOverlay" class="lb-overlay">
+  <div class="lb-modal">
     <div class="lb-modal-header">
       <div class="lb-modal-header-left">
         <ion-icon name="ribbon-outline"></ion-icon>
         <div>
           <h3>Service Hours</h3>
-          <p>VEN FOUNDERS ONLY LEADERBOARD</p>
+          <p>Total service hours per volunteer</p>
         </div>
       </div>
+      <button class="lb-close-btn" onclick="closeLeaderboard('lbServiceOverlay')">&times;</button>
     </div>
     <div class="lb-modal-body" id="lbServiceBody">
-      <div class="lb-loading"><div class="lb-spinner"></div>Loading…</div>
+      <div class="lb-loading"><div class="lb-spinner"></div>Loading leaderboard…</div>
     </div>
   </div>
-  <!-- VEN Hours modal -->
+</div>
+
+<!-- VEN HOURS LEADERBOARD (admin only) -->
+<div id="lbVenOverlay" class="lb-overlay">
   <div class="lb-modal" style="border-color: rgba(255,180,0,0.3);">
     <div class="lb-modal-header">
       <div class="lb-modal-header-left">
         <ion-icon name="leaf-outline" class="amber"></ion-icon>
         <div>
           <h3>VEN Hours</h3>
-          <p>VEN FOUNDERS ONLY LEADERBOARD</p>
+          <p>VEN Founders leaderboard</p>
         </div>
       </div>
+      <button class="lb-close-btn" onclick="closeLeaderboard('lbVenOverlay')">&times;</button>
     </div>
     <div class="lb-modal-body" id="lbVenBody">
-      <div class="lb-loading"><div class="lb-spinner"></div>Loading…</div>
+      <div class="lb-loading"><div class="lb-spinner"></div>Loading leaderboard…</div>
     </div>
   </div>
 </div>
@@ -1266,6 +1241,7 @@
     //  SHOW DASHBOARD
     // ════════════════════════════════════════════════════════
     function showDashboard(firstName, lastName, rows, isAdmin) {
+      window._isAdmin = isAdmin;  // ← add this line
       const trashRows   = sortByDate(rows.filter(isTrashRow));
       const serviceRows = sortByDate(rows.filter(isVolunteerRow)); // non-trash volunteer rows
       const venRows     = sortByDate(rows.filter(isVenRow));
@@ -1294,9 +1270,12 @@
   <button class="vol-leaderboard-btn" onclick="openTrashLeaderboard()">
     <ion-icon name="trophy-outline"></ion-icon> Trash Leaderboard
   </button>
+  <button class="vol-blue-lb-btn" onclick="openServiceLeaderboard()">
+    <ion-icon name="ribbon-outline"></ion-icon> Service Hours
+  </button>
   ${isAdmin ? `
-  <button class="vol-admin-lb-btn" onclick="openAdminLeaderboard()">
-    <ion-icon name="stats-chart-outline"></ion-icon> Hours Leaderboards
+  <button class="vol-admin-lb-btn" onclick="openVenLeaderboard()">
+    <ion-icon name="leaf-outline"></ion-icon> VEN Hours
   </button>` : ""}
   <button class="vol-print-btn" onclick="printVolunteerPDF('${firstName}', '${lastName}', window._currentRows)">
     <ion-icon name="print-outline"></ion-icon> Download Your PDF
@@ -1393,121 +1372,121 @@
       document.getElementById("loginBtn").classList.remove("loading");
     }
 
-    // ════════════════════════════════════════════════════════
-    //  LEADERBOARDS
-    // ════════════════════════════════════════════════════════
+// ════════════════════════════════════════════════════════
+//  LEADERBOARDS
+// ════════════════════════════════════════════════════════
 
-    // Helper: build leaderboard HTML from a name→value map
-    function buildLbHtml(map, valClass, iconName) {
-      const sorted = Object.entries(map).sort((a, b) => b[1] - a[1]);
-      if (sorted.length === 0) return `<div class="lb-empty">No data found yet.</div>`;
+function buildLbHtml(map, valClass, iconName) {
+  const sorted = Object.entries(map).sort((a, b) => b[1] - a[1]);
+  if (sorted.length === 0) return `<div class="lb-empty">No data found yet.</div>`;
+  const medals  = ["🥇","🥈","🥉"];
+  const suffixes = ["st","nd","rd"];
+  return sorted.map(([name, total], i) => {
+    const rank      = i + 1;
+    const rankClass = rank <= 3 ? `rank-${rank}` : "rank-other";
+    const medal     = rank <= 3 ? medals[i] : "";
+    const suffix    = rank <= 3 ? suffixes[i] : "th";
+    const display   = Number.isInteger(total) ? total : parseFloat(total.toFixed(2));
+    return `
+      <div class="lb-entry">
+        <div class="lb-rank ${rankClass}">${rank}<sup style="font-size:1rem;">${suffix}</sup></div>
+        <div class="lb-medal">${medal}</div>
+        <div class="lb-name">${name}</div>
+        <div class="lb-val ${valClass}"><ion-icon name="${iconName}"></ion-icon>${display}</div>
+      </div>`;
+  }).join("");
+}
 
-      const medals  = ["🥇","🥈","🥉"];
-      const suffixes = ["st","nd","rd"];
+async function openTrashLeaderboard() {
+  document.getElementById("lbOverlay").classList.add("active");
+  document.body.classList.add("modal-open");
+  const bodyEl = document.getElementById("lbBody");
+  bodyEl.innerHTML = `<div class="lb-loading"><div class="lb-spinner"></div>Loading leaderboard…</div>`;
+  try {
+    const rows = await fetchSheet();
+    const map  = {};
+    rows.forEach(r => {
+      if (!isTrashRow(r)) return;
+      const fn = getField(r, "First Name","first name","firstname");
+      const ln = getField(r, "Last Name", "last name", "lastname");
+      if (!fn && !ln) return;
+      const name = `${fn} ${ln}`.trim();
+      map[name]  = (map[name] || 0) + getTrashCount(r);
+    });
+    bodyEl.innerHTML = buildLbHtml(map, "trash", "trash-outline");
+  } catch (err) {
+    console.error(err);
+    bodyEl.innerHTML = `<div class="lb-empty">Could not load leaderboard. Please try again.</div>`;
+  }
+}
 
-      return sorted.map(([name, total], i) => {
-        const rank      = i + 1;
-        const rankClass = rank <= 3 ? `rank-${rank}` : "rank-other";
-        const medal     = rank <= 3 ? medals[i] : "";
-        const suffix    = rank <= 3 ? suffixes[i] : "th";
-        const display   = Number.isInteger(total) ? total : parseFloat(total.toFixed(2));
-        return `
-          <div class="lb-entry">
-            <div class="lb-rank ${rankClass}">${rank}<sup style="font-size:1rem;">${suffix}</sup></div>
-            <div class="lb-medal">${medal}</div>
-            <div class="lb-name">${name}</div>
-            <div class="lb-val ${valClass}"><ion-icon name="${iconName}"></ion-icon>${display}</div>
-          </div>`;
-      }).join("");
-    }
+async function openServiceLeaderboard() {
+  document.getElementById("lbServiceOverlay").classList.add("active");
+  document.body.classList.add("modal-open");
+  const bodyEl = document.getElementById("lbServiceBody");
+  bodyEl.innerHTML = `<div class="lb-loading"><div class="lb-spinner"></div>Loading leaderboard…</div>`;
+  try {
+    const rows   = await fetchSheet();
+    const svcMap = {};
+    rows.forEach(r => {
+      if (!isServiceRow(r)) return;
+      const fn = getField(r, "First Name","first name","firstname");
+      const ln = getField(r, "Last Name", "last name", "lastname");
+      if (!fn && !ln) return;
+      const name  = `${fn} ${ln}`.trim();
+      const hours = parseFloat(getField(r, "Hours") || 0) || 0;
+      svcMap[name] = (svcMap[name] || 0) + hours;
+    });
+    bodyEl.innerHTML = buildLbHtml(svcMap, "hours", "ribbon-outline");
+  } catch (err) {
+    console.error(err);
+    bodyEl.innerHTML = `<div class="lb-empty">Could not load leaderboard. Please try again.</div>`;
+  }
+}
 
-    // Trash leaderboard (everyone)
-    async function openTrashLeaderboard() {
-      document.getElementById("lbOverlay").classList.add("active");
-      document.body.classList.add("modal-open");
-      const bodyEl = document.getElementById("lbBody");
-      bodyEl.innerHTML = `<div class="lb-loading"><div class="lb-spinner"></div>Loading leaderboard…</div>`;
+async function openVenLeaderboard() {
+  document.getElementById("lbVenOverlay").classList.add("active");
+  document.body.classList.add("modal-open");
+  const bodyEl = document.getElementById("lbVenBody");
+  bodyEl.innerHTML = `<div class="lb-loading"><div class="lb-spinner"></div>Loading leaderboard…</div>`;
+  try {
+    const rows   = await fetchSheet();
+    const venMap = {};
+    rows.forEach(r => {
+      const fn = getField(r, "First Name","first name","firstname");
+      const ln = getField(r, "Last Name", "last name", "lastname");
+      if (!fn && !ln) return;
+      const name = `${fn} ${ln}`.trim();
+      if (!ADMIN_NAMES.includes(name.toLowerCase())) return;
+      if (!isVenRow(r)) return;
+      const hours = parseFloat(getField(r, "Hours") || 0) || 0;
+      venMap[name] = (venMap[name] || 0) + hours;
+    });
+    bodyEl.innerHTML = buildLbHtml(venMap, "ven", "leaf-outline");
+  } catch (err) {
+    console.error(err);
+    bodyEl.innerHTML = `<div class="lb-empty">Could not load leaderboard. Please try again.</div>`;
+  }
+}
 
-      try {
-        const rows = await fetchSheet();
-        const map  = {};
-        rows.forEach(r => {
-  if (!isTrashRow(r)) return;
-  const fn = getField(r, "First Name","first name","firstname");
-  const ln = getField(r, "Last Name", "last name", "lastname");
-  if (!fn && !ln) return;
-  const name = `${fn} ${ln}`.trim();
-  map[name]  = (map[name] || 0) + getTrashCount(r);
+function closeLeaderboard(id) {
+  document.getElementById(id).classList.remove("active");
+  document.body.classList.remove("modal-open");
+}
+
+["lbOverlay","lbServiceOverlay","lbVenOverlay"].forEach(id => {
+  document.getElementById(id).addEventListener("click", function(e) {
+    if (e.target === this) closeLeaderboard(id);
+  });
 });
-        bodyEl.innerHTML = buildLbHtml(map, "trash", "trash-outline");
-      } catch (err) {
-        console.error(err);
-        bodyEl.innerHTML = `<div class="lb-empty">Could not load leaderboard. Please try again.</div>`;
-      }
-    }
 
-    // Admin dual leaderboard (Service Hours + VEN Hours)
-    async function openAdminLeaderboard() {
-      document.getElementById("lbAdminOverlay").classList.add("active");
-      document.getElementById("lbAdminCloseBtn").style.display = "flex";
-      document.body.classList.add("modal-open");
-
-      const svcEl = document.getElementById("lbServiceBody");
-      const venEl = document.getElementById("lbVenBody");
-      svcEl.innerHTML = `<div class="lb-loading"><div class="lb-spinner"></div>Loading…</div>`;
-      venEl.innerHTML = `<div class="lb-loading"><div class="lb-spinner"></div>Loading…</div>`;
-
-      try {
-        const rows   = await fetchSheet();
-        const svcMap = {}; // service hours (trash + volunteer)
-        const venMap = {}; // VEN hours (neither)
-
-        rows.forEach(r => {
-  const fn = getField(r, "First Name","first name","firstname");
-  const ln = getField(r, "Last Name", "last name", "lastname");
-  if (!fn && !ln) return;
-  const name  = `${fn} ${ln}`.trim();
-  if (!ADMIN_NAMES.includes(name.toLowerCase())) return;
-  const hours = parseFloat(getField(r, "Hours") || 0) || 0;
-
-          if (isServiceRow(r)) {
-            svcMap[name] = (svcMap[name] || 0) + hours;
-          } else {
-            venMap[name] = (venMap[name] || 0) + hours;
-          }
-        });
-
-        svcEl.innerHTML = buildLbHtml(svcMap, "hours",  "ribbon-outline");
-        venEl.innerHTML = buildLbHtml(venMap, "ven",    "leaf-outline");
-      } catch (err) {
-        console.error(err);
-        svcEl.innerHTML = `<div class="lb-empty">Could not load leaderboard.</div>`;
-        venEl.innerHTML = `<div class="lb-empty">Could not load leaderboard.</div>`;
-      }
-    }
-
-    function closeLeaderboard(id) {
-      document.getElementById(id).classList.remove("active");
-      document.body.classList.remove("modal-open");
-      if (id === "lbAdminOverlay") {
-        document.getElementById("lbAdminCloseBtn").style.display = "none";
-      }
-    }
-
-    // Close on overlay backdrop click
-    ["lbOverlay","lbAdminOverlay"].forEach(id => {
-      document.getElementById(id).addEventListener("click", function(e) {
-        if (e.target === this) closeLeaderboard(id);
-      });
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") {
+    ["lbOverlay","lbServiceOverlay","lbVenOverlay"].forEach(id => {
+      if (document.getElementById(id).classList.contains("active")) closeLeaderboard(id);
     });
-
-    document.addEventListener("keydown", e => {
-      if (e.key === "Escape") {
-        ["lbOverlay","lbAdminOverlay"].forEach(id => {
-          if (document.getElementById(id).classList.contains("active")) closeLeaderboard(id);
-        });
-      }
-    });
+  }
+});
 
     function loadImageAsBase64(url) {
   return new Promise((resolve, reject) => {
