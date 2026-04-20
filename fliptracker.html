@@ -1572,13 +1572,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 });
 
-async function loadAll() {
-  const { data, error } = await db.from(TABLE).select('*');
-  console.log('Supabase result:', { data, error }); // ← add this
-  if (error) throw error;
-  listings  = (data || []).filter(r => r.status === 'active');
-  completed = (data || []).filter(r => r.status === 'completed');
-}
+
 </script>
 </body>
 </html>
