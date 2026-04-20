@@ -1277,6 +1277,10 @@
   <button class="vol-admin-lb-btn" onclick="openVenLeaderboard()">
     <ion-icon name="leaf-outline"></ion-icon> VEN Hours
   </button>` : ""}
+${["brendan denzel", "tristan zimolong"].includes(`${firstName} ${lastName}`.toLowerCase()) ? `
+  <button class="vol-purple-btn" onclick="window.location.href='/fliptracker'">
+    <ion-icon name="swap-horizontal-outline"></ion-icon> Flip Tracker
+  </button>` : ""}
   <button class="vol-print-btn" onclick="printVolunteerPDF('${firstName}', '${lastName}', window._currentRows)">
     <ion-icon name="print-outline"></ion-icon> Download Your PDF
   </button>
